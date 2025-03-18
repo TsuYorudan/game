@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj74kaevi1j5f"]
+
+[ext_resource type="Script" uid="uid://cyx8h3kpes34t" path="res://Scripts/rhythm_system.gd" id="1_uw86i"]
+
+[node name="RhythmSystem" type="Node"]
+script = ExtResource("1_uw86i")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="MetronomeSound" type="AudioStreamPlayer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

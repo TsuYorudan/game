@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cognliff8vmtt"]
+
+[ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_r150o"]
+[ext_resource type="Script" uid="uid://c51j17gv52hvx" path="res://Scripts/command_manager.gd" id="2_idj7w"]
+
+[node name="Main" type="Node2D"]
+
+[node name="RhythmSystem" parent="." instance=ExtResource("1_r150o")]
+
+[node name="CommandManager" type="Node" parent="."]
+script = ExtResource("2_idj7w")
