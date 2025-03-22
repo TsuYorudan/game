@@ -4,8 +4,7 @@ var command_queue = []
 var max_command_length = 4
 
 var commands = {
-	"": "march",
-	"": "attack"
+
 }
 
 func register_beat(beat_sound):
