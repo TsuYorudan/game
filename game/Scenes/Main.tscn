@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cognliff8vmtt"]
+[gd_scene load_steps=11 format=3 uid="uid://cognliff8vmtt"]
 
 [ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_r150o"]
 [ext_resource type="Script" uid="uid://c51j17gv52hvx" path="res://Scripts/command_manager.gd" id="2_idj7w"]
+[ext_resource type="PackedScene" uid="uid://co8xgbq66u62g" path="res://Scenes/player.tscn" id="3_kln2b"]
+[ext_resource type="Texture2D" uid="uid://dvw8tpj55iegq" path="res://Assets/layers/sky.png" id="4_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://ct0oy3u2sma6k" path="res://Assets/layers/ground_1.png" id="4_v1gob"]
+[ext_resource type="Script" uid="uid://db1xlw6glheqh" path="res://Scenes/player.gd" id="4_vy5pj"]
+[ext_resource type="Texture2D" uid="uid://ckjdtv3me0dps" path="res://Assets/layers/ground_2.png" id="5_jw32o"]
+[ext_resource type="Texture2D" uid="uid://de0lskgxcw23r" path="res://Assets/layers/ground_3.png" id="6_50glp"]
+[ext_resource type="Texture2D" uid="uid://be57v1w7o7swu" path="res://Assets/layers/rocks.png" id="7_jw32o"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vy5pj"]
+distance = -25.0
 
 [node name="Main" type="Node2D"]
 
@@ -9,3 +19,70 @@
 
 [node name="CommandManager" type="Node" parent="."]
 script = ExtResource("2_idj7w")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_kln2b")]
+position = Vector2(-565, 442)
+scale = Vector2(10, 10)
+script = ExtResource("4_vy5pj")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(56.6, -34.7)
+scale = Vector2(0.1, 0.1)
+zoom = Vector2(0.5, 0.5)
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+scale = Vector2(0.8, 0.8)
+transform = Transform2D(0.8, 0, 0, 0.8, 0, 0)
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer5"]
+position = Vector2(576, 324)
+texture = ExtResource("4_rgh2o")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer4"]
+position = Vector2(576, 324)
+texture = ExtResource("7_jw32o")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer"]
+position = Vector2(576, 324)
+texture = ExtResource("4_v1gob")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer2"]
+position = Vector2(576, 324)
+texture = ExtResource("5_jw32o")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer3"]
+position = Vector2(576, 324)
+texture = ExtResource("6_50glp")
+offset = Vector2(0, 0.145)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-2, 671)
+shape = SubResource("WorldBoundaryShape2D_vy5pj")
