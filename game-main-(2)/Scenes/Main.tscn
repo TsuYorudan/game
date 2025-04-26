@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://cognliff8vmtt"]
+
+[ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_r150o"]
+[ext_resource type="Script" uid="uid://c51j17gv52hvx" path="res://Scripts/command_manager.gd" id="2_idj7w"]
+[ext_resource type="PackedScene" uid="uid://co8xgbq66u62g" path="res://Scenes/player.tscn" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://dahsxfj4yr7el" path="res://Scenes/bg.tscn" id="3_pbw6q"]
+[ext_resource type="Script" uid="uid://db1xlw6glheqh" path="res://Scenes/player.gd" id="4_vy5pj"]
+
+[sub_resource type="GDScript" id="GDScript_u0rai"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vy5pj"]
+distance = -25.0
+
+[node name="Main" type="Node2D"]
+script = SubResource("GDScript_u0rai")
+
+[node name="RhythmSystem" parent="." instance=ExtResource("1_r150o")]
+
+[node name="CommandManager" type="Node" parent="."]
+script = ExtResource("2_idj7w")
+
+[node name="BG" parent="." instance=ExtResource("3_pbw6q")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_kln2b")]
+position = Vector2(-98, 769)
+scale = Vector2(10, 10)
+script = ExtResource("4_vy5pj")
+speed = 200.0
+jump_velocity = -300.0
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(56.2, -48.3)
+scale = Vector2(0.1, 0.1)
+zoom = Vector2(0.5, 0.5)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(13, -12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(66, 773)
+shape = SubResource("WorldBoundaryShape2D_vy5pj")
