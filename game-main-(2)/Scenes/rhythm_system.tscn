@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj74kaevi1j5f"]
+
+[ext_resource type="Script" path="res://Scripts/rhythm_system.gd" id="1_uw86i"]
+[ext_resource type="AudioStream" uid="uid://cktvcpbin8355" path="res://Assets/beat.wav" id="2_4h3rh"]
+
+[node name="RhythmSystem" type="Node"]
+script = ExtResource("1_uw86i")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="MetronomeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_4h3rh")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
