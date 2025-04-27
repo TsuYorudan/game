@@ -1,9 +1,3 @@
 res://Scenes/Main.tscn
-res://Scenes/bg.tscn
-res://Scenes/player.gd
-res://Scripts/CombatManager.gd
 res://Scenes/rhythm_system.tscn
 res://Scripts/command_manager.gd
-res://Scripts/rhythm_system.gd
-res://Scripts/battle_node.gd
-res://Scripts/player.gd
