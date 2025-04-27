@@ -1,4 +1,6 @@
 res://Scenes/Main.tscn
-res://Scenes/player.tscn
-res://Scenes/rhythm_system.tscn
 res://Scenes/bg.tscn
+res://Scenes/player.gd
+res://Scripts/CombatManager.gd
+res://Scenes/rhythm_system.tscn
+res://Scripts/command_manager.gd
