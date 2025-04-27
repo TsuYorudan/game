@@ -11,10 +11,14 @@ func _ready():
 	beat_time = 60.0 / bpm
 	$Timer.wait_time = beat_time
 	$Timer.start()
-	print("RhythmSystem started. Beat time:", beat_time)  # Debugging
+	#print("RhythmSystem started. Beat time:", beat_time)  # Debugging
 
 func _on_timer_timeout() -> void:
 	beat_count += 1  # Increment beat count
-	print("BEAT:", beat_count)  # Debugging
+	#print("BEAT:", beat_count)  # Debugging
 	emit_signal("beat")
 	$MetronomeSound.play()
+
+
+func _on_march_timer_timeout() -> void:
+	pass # Replace with function body.
