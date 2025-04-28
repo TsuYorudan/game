@@ -21,7 +21,7 @@ var max_command_length: int = 4
 const BPM: int = 120
 var beat_interval: float = 60.0 / BPM
 var last_beat_time: int
-const BEAT_WINDOW: int = 250  # Wider window (±125ms)
+const BEAT_WINDOW: int = 265  # Wider window (±125ms)
 
 func _ready():
 	last_beat_time = Time.get_ticks_msec()

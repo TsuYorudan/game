@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cognliff8vmtt"]
+[gd_scene load_steps=12 format=3 uid="uid://cognliff8vmtt"]
 
 [ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_r150o"]
 [ext_resource type="Script" uid="uid://buahucf2kyd0q" path="res://Scripts/command_manager.gd" id="2_idj7w"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://du5qih0ee8lr0" path="res://Assets/beats/pon.wav" id="4_50glp"]
 [ext_resource type="Script" uid="uid://db1xlw6glheqh" path="res://Scripts/player.gd" id="4_vy5pj"]
 [ext_resource type="AudioStream" uid="uid://biv0qm56523ma" path="res://Assets/beats/chaka.wav" id="5_vy5pj"]
+[ext_resource type="AudioStream" uid="uid://dw8qnm30yhk6s" path="res://Assets/beats/beat.wav" id="6_bmxlf"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vy5pj"]
 distance = -25.0
@@ -34,6 +35,7 @@ stream = ExtResource("4_50glp")
 stream = ExtResource("5_vy5pj")
 
 [node name="don" type="AudioStreamPlayer" parent="CommandManager"]
+stream = ExtResource("6_bmxlf")
 
 [node name="QueueResetTimer" type="Timer" parent="CommandManager"]
 wait_time = 0.7
