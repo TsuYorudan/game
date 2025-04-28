@@ -1,3 +1,4 @@
 res://Scenes/Main.tscn
 res://Scenes/rhythm_system.tscn
+res://Scenes/bg.tscn
 res://Scripts/command_manager.gd

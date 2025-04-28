@@ -1,2 +1,7 @@
-Timer
+AudioStreamPlayer
+AudioStreamPlayer2D
 Node
+CanvasLayer
+CanvasGroup
+ColorRect
+Timer
