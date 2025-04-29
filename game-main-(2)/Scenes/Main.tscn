@@ -41,11 +41,30 @@ stream = ExtResource("6_bmxlf")
 wait_time = 0.7
 one_shot = true
 
+[node name="BeatEffects" type="CanvasLayer" parent="CommandManager"]
+
+[node name="LeftFlash" type="ColorRect" parent="CommandManager/BeatEffects"]
+anchors_preset = -1
+anchor_right = 0.016
+anchor_bottom = 1.0
+offset_right = -4.48
+
+[node name="RightFlash" type="ColorRect" parent="CommandManager/BeatEffects"]
+anchors_preset = -1
+anchor_left = 0.983
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.76001
+offset_right = -2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
 [node name="battle_node" type="Node" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("2_v1gob")
 character = NodePath("../CharacterBody2D")
 
 [node name="BG" parent="." instance=ExtResource("3_pbw6q")]
+visible = false
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("3_kln2b")]
 position = Vector2(234, 674)

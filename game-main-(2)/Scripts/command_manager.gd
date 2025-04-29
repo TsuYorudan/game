@@ -23,11 +23,15 @@ var beat_interval: float = 60.0 / BPM
 var last_beat_time: int
 const BEAT_WINDOW: int = 265  # Wider window (±125ms)
 
-func _ready():
+func _ready() -> void:
 	last_beat_time = Time.get_ticks_msec()
 	$QueueResetTimer.stop()
 
-func _process(delta):
+	# Ensure flashes start invisible
+	$BeatEffects/LeftFlash.modulate.a = 0.0
+	$BeatEffects/RightFlash.modulate.a = 0.0
+
+func _process(delta: float) -> void:
 	var current_time = Time.get_ticks_msec()
 
 	if Input.is_action_just_pressed("pata"):
@@ -49,8 +53,7 @@ func is_on_beat(current_time: int) -> bool:
 
 func handle_input(beat_sound: String, current_time: int) -> void:
 	var player: AudioStreamPlayer = null
-	
-	# Assign the right AudioStreamPlayer
+
 	match beat_sound:
 		"pata":
 			player = pata_sound
@@ -62,28 +65,49 @@ func handle_input(beat_sound: String, current_time: int) -> void:
 			player = chaka_sound
 
 	if not player:
-		return  # Safety check
+		return
 
-	# Check if on beat
 	if not is_on_beat(current_time):
+		flash_screen(Color.RED)
 		print("❌ Off-beat input detected! Resetting command queue.")
 		command_queue.clear()
 		$QueueResetTimer.stop()
 
-		# 🔥 Modify sound if off-beat
-		player.pitch_scale = randf_range(1.0, 1.05)  # Slight pitch variation
+		player.pitch_scale = randf_range(1.0, 1.05)
 		player.play()
-		
-		# Stop the sound quickly
-		await get_tree().create_timer(0.1).timeout  # Play for 0.1s only
+		await get_tree().create_timer(0.1).timeout
 		player.stop()
 		return
-	
-	# ✅ On-beat: play normally with slight variation in pitch for liveliness
-	player.pitch_scale = randf_range(0.95, 1.05)  # Slight variation for natural feel
-	player.play()
 
+	player.pitch_scale = randf_range(0.95, 1.05)
+	player.play()
+	flash_screen(Color.GREEN)
 	register_beat(beat_sound)
+
+func flash_screen(color: Color) -> void:
+	var left = $BeatEffects/LeftFlash
+	var right = $BeatEffects/RightFlash
+
+	# Safeguard node existence
+	if not left or not right:
+		print("⚠️ LeftFlash or RightFlash nodes not found!")
+		return
+
+	# Set initial color and visibility
+	left.modulate = color
+	right.modulate = color
+	left.modulate.a = 1.0
+	right.modulate.a = 1.0
+
+	# Use SceneTreeTween for animations
+	var left_tween = get_tree().create_tween()
+	var right_tween = get_tree().create_tween()
+
+	# Tween the alpha property
+	left_tween.tween_property(left, "modulate:a", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	right_tween.tween_property(right, "modulate:a", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	print("✅ Tween animations applied.")
 
 func register_beat(beat_sound: String) -> void:
 	command_queue.append(beat_sound)
@@ -91,7 +115,6 @@ func register_beat(beat_sound: String) -> void:
 		command_queue.pop_front()
 
 	print("✅ Registered beat. Current Queue:", command_queue)
-
 	$QueueResetTimer.start()
 	check_command()
 
@@ -108,10 +131,10 @@ func check_command() -> void:
 		command_queue.clear()
 
 func execute_command(action: String) -> void:
-	await get_tree().create_timer(beat_interval).timeout  # Wait for next beat
+	await get_tree().create_timer(beat_interval).timeout
 	var battle_node = get_tree().get_first_node_in_group("battle")
 	if battle_node:
-		battle_node.process_command(action)
+		battle_node.call("process_command", action)
 	else:
 		print("⚠️ No battle node found to process the action.")
 
