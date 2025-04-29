@@ -21,7 +21,7 @@ var max_command_length: int = 4
 const BPM: int = 120
 var beat_interval: float = 60.0 / BPM
 var last_beat_time: int
-const BEAT_WINDOW: int = 265  # Wider window (±125ms)
+const BEAT_WINDOW: int = 275  # Wider window (±125ms)
 
 func _ready() -> void:
 	last_beat_time = Time.get_ticks_msec()
@@ -107,7 +107,7 @@ func flash_screen(color: Color) -> void:
 	left_tween.tween_property(left, "modulate:a", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	right_tween.tween_property(right, "modulate:a", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
-	print("✅ Tween animations applied.")
+	#print("✅ Tween animations applied.")
 
 func register_beat(beat_sound: String) -> void:
 	command_queue.append(beat_sound)

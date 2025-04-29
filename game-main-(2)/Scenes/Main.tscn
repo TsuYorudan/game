@@ -18,6 +18,24 @@ distance = -25.0
 
 [node name="RhythmSystem" parent="." instance=ExtResource("1_r150o")]
 
+[node name="BeatEffects" type="CanvasLayer" parent="RhythmSystem"]
+
+[node name="TopFlash" type="ColorRect" parent="RhythmSystem/BeatEffects"]
+anchors_preset = -1
+anchor_right = 0.993
+anchor_bottom = 1.0
+offset_right = 9.95996
+offset_bottom = -710.0
+
+[node name="BottomFlash" type="ColorRect" parent="RhythmSystem/BeatEffects"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = 710.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
 [node name="CommandManager" type="Node" parent="." node_paths=PackedStringArray("pata_sound", "pon_sound", "don_sound", "chaka_sound")]
 script = ExtResource("2_idj7w")
 pata_sound = NodePath("pata")
@@ -45,16 +63,15 @@ one_shot = true
 
 [node name="LeftFlash" type="ColorRect" parent="CommandManager/BeatEffects"]
 anchors_preset = -1
-anchor_right = 0.016
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -4.48
+offset_right = -1264.0
 
 [node name="RightFlash" type="ColorRect" parent="CommandManager/BeatEffects"]
 anchors_preset = -1
-anchor_left = 0.983
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 3.76001
+offset_left = 1262.0
 offset_right = -2.0
 offset_bottom = 1.0
 grow_horizontal = 2
