@@ -1,0 +1,242 @@
+[gd_scene load_steps=13 format=3 uid="uid://dgya4v7w3eyqb"]
+
+[ext_resource type="Texture2D" uid="uid://daa0nvinwqoif" path="res://Assets/v675-taus-35c-technologyinterface.jpg" id="1_ce3w2"]
+[ext_resource type="Script" uid="uid://d3sw12l2b4wv0" path="res://Scripts/main_menu.gd" id="1_n45e2"]
+[ext_resource type="FontFile" uid="uid://32roxwaec324" path="res://Assets/fonts/DynastyFantasyDemoBlack-lg2p0.ttf" id="2_1ehe0"]
+[ext_resource type="Theme" uid="uid://jlyiwdw1q0ae" path="res://Assets/buttons.tres" id="3_opfnp"]
+[ext_resource type="Theme" uid="uid://b0gcejfk0lxpr" path="res://Assets/test.tres" id="5_opfnp"]
+[ext_resource type="FontFile" uid="uid://bpynnjg67qwx1" path="res://Assets/fonts/MysticGate-0WnMP.ttf" id="6_cp0ys"]
+[ext_resource type="Script" uid="uid://b8acaaw08wv5g" path="res://Scenes/volume.gd" id="7_cp0ys"]
+[ext_resource type="Theme" uid="uid://c87ic0dgqe5vl" path="res://Assets/backButton.tres" id="7_yhxw7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yhxw7"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_opfnp"]
+color = Color(0.385493, 0.385492, 0.385492, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cp0ys"]
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_yhxw7"]
+thickness = 6
+
+[node name="Main menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n45e2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ce3w2")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -211.0
+offset_bottom = -160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0.18359, 0.18359, 0.18359, 1)
+theme_override_colors/font_outline_color = Color(0.194349, 0.194349, 0.194349, 1)
+theme_override_constants/line_spacing = 1000
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_1ehe0")
+theme_override_font_sizes/font_size = 50
+text = "Sonata Resonance"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="mainButtons" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/mainButtons"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/mainButtons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Play" type="Button" parent="MarginContainer/mainButtons/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+theme = ExtResource("3_opfnp")
+text = "PLAY"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/mainButtons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="settings" type="Button" parent="MarginContainer/mainButtons/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+theme = ExtResource("3_opfnp")
+text = "SETTINGS"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/mainButtons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Quit" type="Button" parent="MarginContainer/mainButtons/HBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+theme = ExtResource("3_opfnp")
+text = "QUIT"
+
+[node name="settingsMenu" type="Panel" parent="."]
+material = SubResource("CanvasItemMaterial_yhxw7")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.5
+offset_top = -127.0
+offset_right = 345.5
+offset_bottom = 201.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_opfnp")
+
+[node name="Label" type="Label" parent="settingsMenu"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 62.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.255659, 0.255659, 0.255659, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_cp0ys")
+theme_override_font_sizes/font_size = 20
+text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="back" type="Button" parent="settingsMenu"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -67.0
+offset_right = 100.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("7_yhxw7")
+text = "BACK"
+
+[node name="MarginContainer" type="MarginContainer" parent="settingsMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 62.0
+offset_right = -24.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="settingsMenu/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="settingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="settingsMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
+theme_override_font_sizes/font_size = 20
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="volumecontrol" type="HSlider" parent="settingsMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_opfnp")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_cp0ys")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_yhxw7")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("7_cp0ys")
+audio_bus_name = "Master"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="settingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="settingsMenu/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_font_sizes/font_size = 20
+text = "Resolution"
+
+[node name="OptionButton" type="OptionButton" parent="settingsMenu/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 3
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1680x1050"
+popup/item_1/id = 1
+popup/item_2/text = "1280x720"
+popup/item_2/id = 2
+
+[connection signal="pressed" from="MarginContainer/mainButtons/HBoxContainer3/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/mainButtons/HBoxContainer2/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/mainButtons/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="settingsMenu/back" to="." method="_on_back_pressed"]
+[connection signal="value_changed" from="settingsMenu/MarginContainer/VBoxContainer/HBoxContainer/volumecontrol" to="settingsMenu/MarginContainer/VBoxContainer/HBoxContainer/volumecontrol" method="_on_value_changed"]
