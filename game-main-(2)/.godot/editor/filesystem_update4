@@ -2,4 +2,7 @@ res://Scenes/Main.tscn
 res://Scenes/rhythm_system.tscn
 res://Scenes/bg.tscn
 res://Scripts/command_manager.gd
-res://Scripts/rhythm_system.gd
+res://Scenes/player.tscn
+res://Scenes/starlayer.gd
+res://Scenes/starlayer2.gd
+res://Scenes/starlayer3.gd

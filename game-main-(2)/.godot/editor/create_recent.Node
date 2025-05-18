@@ -1,7 +1,9 @@
-ColorRect
-CanvasLayer
 AudioStreamPlayer
-AudioStreamPlayer2D
+Label
+CanvasLayer
+ColorRect
 Node
+TileMap
+AudioStreamPlayer2D
 CanvasGroup
 Timer

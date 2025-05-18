@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dahsxfj4yr7el"]
+[gd_scene load_steps=12 format=3 uid="uid://dahsxfj4yr7el"]
 
 [ext_resource type="Texture2D" uid="uid://dvw8tpj55iegq" path="res://Assets/layers/sky.png" id="1_h0vxs"]
+[ext_resource type="Texture2D" uid="uid://bdswgalbqqc3" path="res://Assets/stars/Stars-Big_1_1_PC.png" id="1_wh7op"]
+[ext_resource type="Script" uid="uid://bunwljs5bj4ns" path="res://Scripts/starlayer3.gd" id="2_6j0i3"]
+[ext_resource type="Texture2D" uid="uid://dt7w285o0i570" path="res://Assets/stars/Nebula Blue.png" id="2_gtuxm"]
+[ext_resource type="Script" uid="uid://ciyhrstvy25m7" path="res://starlayer2.gd" id="2_hjmtd"]
+[ext_resource type="Script" uid="uid://wwnw3teolp2s" path="res://Scripts/starlayer.gd" id="2_k2fby"]
 [ext_resource type="Texture2D" uid="uid://be57v1w7o7swu" path="res://Assets/layers/rocks.png" id="2_wh7op"]
 [ext_resource type="Texture2D" uid="uid://ct0oy3u2sma6k" path="res://Assets/layers/ground_1.png" id="3_k2fby"]
+[ext_resource type="Texture2D" uid="uid://c8xd5eahbgfg5" path="res://Assets/stars/Stars Small_2.png" id="3_r34lr"]
 [ext_resource type="Texture2D" uid="uid://ckjdtv3me0dps" path="res://Assets/layers/ground_2.png" id="4_gtuxm"]
 [ext_resource type="Texture2D" uid="uid://de0lskgxcw23r" path="res://Assets/layers/ground_3.png" id="5_hjmtd"]
 
@@ -22,6 +28,30 @@ motion_mirroring = Vector2(1920, 0)
 position = Vector2(960, 371.119)
 scale = Vector2(1, 0.687944)
 texture = ExtResource("1_h0vxs")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer8" type="ParallaxLayer" parent="ParallaxBackground2"]
+scale = Vector2(1, 2.0736)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+script = ExtResource("2_6j0i3")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer8"]
+position = Vector2(951.25, 184.015)
+scale = Vector2(0.459595, 0.0894335)
+texture = ExtResource("3_r34lr")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground2"]
+scale = Vector2(1, 1.44)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+script = ExtResource("2_k2fby")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer6"]
+position = Vector2(951.25, 184.015)
+scale = Vector2(0.459595, 0.0894335)
+texture = ExtResource("1_wh7op")
 offset = Vector2(0, 0.145)
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground2"]
@@ -65,4 +95,19 @@ motion_mirroring = Vector2(1920, 0)
 position = Vector2(956.25, 356.476)
 scale = Vector2(1, 0.665606)
 texture = ExtResource("5_hjmtd")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground2"]
+modulate = Color(1, 1, 1, 0.243137)
+self_modulate = Color(0.517647, 0.678431, 1, 1)
+position = Vector2(6.10352e-05, 0)
+scale = Vector2(1, 1.728)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+script = ExtResource("2_hjmtd")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer7"]
+position = Vector2(955, 253.526)
+scale = Vector2(0.46875, 0.12592)
+texture = ExtResource("2_gtuxm")
 offset = Vector2(0, 0.145)

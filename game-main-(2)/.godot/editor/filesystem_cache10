@@ -1,7 +1,8 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1745920444
+::res://::1747557835
 icon.svg::CompressedTexture2D/CompressedTexture2D::1573427857687237665::1745917866::1745919885::1::::<><><>0<>0<>d169af14c4c1437895e29e7ccaf4840a<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
-::res://Assets/::1745919888
+starlayer2.gd::GDScript/GDScript::5384353535792543080::1747557111::0::1::::<>ParallaxLayer<><>0<>0<><>::
+::res://Assets/::1747570871
 Soldier-Idle.png::CompressedTexture2D/CompressedTexture2D::3075832740215219718::1745917866::1745919885::1::::<><><>0<>0<>d6b1d614b1090b2b60d84e11e9d4dd95<>res://.godot/imported/Soldier-Idle.png-8c81113285e08ebcd530bbecdc5c831f.ctex::
 Soldier.png::CompressedTexture2D/CompressedTexture2D::2195802951162942810::1745917866::1745919885::1::::<><><>0<>0<>1cb418397027e2195699833c37528f47<>res://.godot/imported/Soldier.png-a14231170cf49c5149c0ee391a5eb9d5.ctex::
 spritesheet_complete.png::CompressedTexture2D/CompressedTexture2D::575522385209953624::1745917866::1745919888::1::::<><><>0<>0<>92f4118bd63bdf749b913922e1024395<>res://.godot/imported/spritesheet_complete.png-7b02b1fcf3f3a761f62e92fc31bb62a6.ctex::
@@ -22,16 +23,36 @@ ground_3.png::CompressedTexture2D/CompressedTexture2D::7492327436244558565::1745
 plant.png::CompressedTexture2D/CompressedTexture2D::3237843004293351029::1745917866::1745919886::1::::<><><>0<>0<>5863fb7ed4d28ecb5d73b5db355f73d2<>res://.godot/imported/plant.png-9e837096b9d222e8de01c4856c41f195.ctex::
 rocks.png::CompressedTexture2D/CompressedTexture2D::2731089237374276008::1745917866::1745919886::1::::<><><>0<>0<>5e69590fa8a532a430e2b9d0abc3c205<>res://.godot/imported/rocks.png-a183803be52105d4dfa77a147943b5fd.ctex::
 sky.png::CompressedTexture2D/CompressedTexture2D::8680682472069748620::1745917866::1745919886::1::::<><><>0<>0<>1cb9b5471c79c361b8ee89503d6a0732<>res://.godot/imported/sky.png-16bff8674fd06cfe23979ef55252f849.ctex::
-::res://game-main/::1745917866
+::res://Assets/Music/::1747576083
+cv1.wav::AudioStreamWAV::3303754736456208868::1747571010::1747571197::1::::<><><>0<>0<>2c724f0be83d2f3307d30b05c49c4f42<>res://.godot/imported/cv1.wav-d660d14da9cf81457c096db0b9488dee.sample::
+cv2.wav::AudioStreamWAV::2399962280561068184::1747573726::1747573917::1::::<><><>0<>0<>d4e1f9fee8cdf95497ab7ee4a85a3381<>res://.godot/imported/cv2.wav-76da57f5ee1cbe39b1fa427dcf3e7045.sample::
+cv3.wav::AudioStreamWAV::321045216728867886::1747573738::1747573917::1::::<><><>0<>0<>d8a6094b60d8f0da9e5e875b417e28cc<>res://.godot/imported/cv3.wav-f11179226a67b3b15cf4d21c28ed78a4.sample::
+nv1.wav::AudioStreamWAV::2041323968404955214::1747570886::1747571197::1::::<><><>0<>0<>b27deadb058ff81b5e1281ff3c94e251<>res://.godot/imported/nv1.wav-dcf589c6e5bea4e527a197d9e8cc8758.sample::
+nv2.wav::AudioStreamWAV::7937557304185057532::1747570925::1747571197::1::::<><><>0<>0<>f9aebce6f576005661fdcf666dc14320<>res://.godot/imported/nv2.wav-841450dc6ba6df5744170c239dd2b1cf.sample::
+nv3.wav::AudioStreamWAV::4644278506673551519::1747570969::1747571197::1::::<><><>0<>0<>92be33cfb0fc46cc2b90fa12f6fcb08a<>res://.godot/imported/nv3.wav-52affeadc7d460ce5402534a0e7e693b.sample::
+rv1.wav::AudioStreamWAV::3215858680500271397::1747581025::1747581030::1::::<><><>0<>0<>40df00222210400f3a6889522d68a4e4<>res://.godot/imported/rv1.wav-a7c2d5e3b95037cf026d7bbd24f919e2.sample::
+rv2.wav::AudioStreamWAV::2932271752315509782::1747576015::1747576083::1::::<><><>0<>0<>465b0cbae5fbe102f01c8c319399bbc4<>res://.godot/imported/rv2.wav-5947306231b87912e5b36b0e10ff9a27.sample::
+rv3.wav::AudioStreamWAV::6549612627322850759::1747576043::1747576083::1::::<><><>0<>0<>46f097eb7f5624bfa34e6b2e4ee4a27c<>res://.godot/imported/rv3.wav-5cce834cbf130dd462173014a60b12ef.sample::
+::res://Assets/stars/::1747555088
+Nebula Aqua-Pink.png::CompressedTexture2D/CompressedTexture2D::7214288118042260655::1747555082::1747555088::1::::<><><>0<>0<>a71157a4384e977fc901b12e20fe0fe4<>res://.godot/imported/Nebula Aqua-Pink.png-0f493fd4bcfd57e5570bf99ef6cb7c0a.ctex::
+Nebula Blue.png::CompressedTexture2D/CompressedTexture2D::8560295938892667489::1747555082::1747555085::1::::<><><>0<>0<>13973187a823503c5d686188fc8939a3<>res://.godot/imported/Nebula Blue.png-340076820fe9da2fc05347b2d23469bd.ctex::
+Nebula Red.png::CompressedTexture2D/CompressedTexture2D::7482720515234721359::1747555082::1747555086::1::::<><><>0<>0<>661fc50d893e510726b4a68dff4b124e<>res://.godot/imported/Nebula Red.png-aa4fcf31d14586f19089ffcd784689e4.ctex::
+Stars Small_1.png::CompressedTexture2D/CompressedTexture2D::6714242769900503769::1747555082::1747555088::1::::<><><>0<>0<>1432bd87452ceba95e51e16d9186e9db<>res://.godot/imported/Stars Small_1.png-8e88d4ddae14f4aa11d04701c2e54fef.ctex::
+Stars Small_2.png::CompressedTexture2D/CompressedTexture2D::7136789830993118622::1747555082::1747555088::1::::<><><>0<>0<>ce1f25848c5941328a9960157a1c5fd4<>res://.godot/imported/Stars Small_2.png-2ff2186f167cd4bfe70c43e97877a4a0.ctex::
+Stars-Big_1_1_PC.png::CompressedTexture2D/CompressedTexture2D::77514485877790096::1747555082::1747555085::1::::<><><>0<>0<>ea1943949dd41f5c478e7756f93af150<>res://.godot/imported/Stars-Big_1_1_PC.png-a706a80e65f083dfca5fa21e5614c7c0.ctex::
+Stars-Big_1_2_PC.png::CompressedTexture2D/CompressedTexture2D::4110463100980346929::1747555082::1747555085::1::::<><><>0<>0<>2d70e09f24187861150c2da7912c0fff<>res://.godot/imported/Stars-Big_1_2_PC.png-90a82889ffac89e432e7f31573ba1677.ctex::
+::res://game-main/::1747555072
 README.md::TextFile/TextFile::-1::1745917866::0::1::::<><><>0<>0<><>::
-::res://Scenes/::1745919938
-bg.tscn::PackedScene/PackedScene::7174846952357725691::1745919938::0::1::::<><><>0<>0<><>::uid://dvw8tpj55iegq::::res://Assets/layers/sky.png<>uid://be57v1w7o7swu::::res://Assets/layers/rocks.png<>uid://ct0oy3u2sma6k::::res://Assets/layers/ground_1.png<>uid://ckjdtv3me0dps::::res://Assets/layers/ground_2.png<>uid://de0lskgxcw23r::::res://Assets/layers/ground_3.png
-Main.tscn::PackedScene/PackedScene::5768680837664871393::1745919938::0::1::::<><><>0<>0<><>::uid://bj74kaevi1j5f::::res://Scenes/rhythm_system.tscn<>uid://buahucf2kyd0q::::res://Scripts/command_manager.gd<>uid://cke620574v27d::::res://Scripts/battle_node.gd<>uid://d4bmchdhtwcpw::::res://Assets/beats/pata.wav<>uid://co8xgbq66u62g::::res://Scenes/player.tscn<>uid://dahsxfj4yr7el::::res://Scenes/bg.tscn<>uid://du5qih0ee8lr0::::res://Assets/beats/pon.wav<>uid://db1xlw6glheqh::::res://Scripts/player.gd<>uid://biv0qm56523ma::::res://Assets/beats/chaka.wav<>uid://dw8qnm30yhk6s::::res://Assets/beats/beat.wav
-player.tscn::PackedScene/PackedScene::5825016928490654344::1745917866::0::1::::<><><>0<>0<><>::uid://bj27rsk3lbwdq::::res://Assets/Soldier-Idle.png
-rhythm_system.tscn::PackedScene/PackedScene::3085959022439667349::1745919938::0::1::::<><><>0<>0<><>::uid://cyx8h3kpes34t::::res://Scripts/rhythm_system.gd<>uid://brvflxmbitdiu::::res://Assets/beats/metronome.wav
-::res://Scripts/::1745919351
+::res://Scenes/::1747580775
+bg.tscn::PackedScene::7174846952357725691::1747580775::0::1::::<><><>0<>0<><>::uid://dvw8tpj55iegq::::res://Assets/layers/sky.png<>uid://bdswgalbqqc3::::res://Assets/stars/Stars-Big_1_1_PC.png<>uid://bunwljs5bj4ns::::res://Scripts/starlayer3.gd<>uid://dt7w285o0i570::::res://Assets/stars/Nebula Blue.png<>uid://ciyhrstvy25m7::::res://starlayer2.gd<>uid://wwnw3teolp2s::::res://Scripts/starlayer.gd<>uid://be57v1w7o7swu::::res://Assets/layers/rocks.png<>uid://ct0oy3u2sma6k::::res://Assets/layers/ground_1.png<>uid://c8xd5eahbgfg5::::res://Assets/stars/Stars Small_2.png<>uid://ckjdtv3me0dps::::res://Assets/layers/ground_2.png<>uid://de0lskgxcw23r::::res://Assets/layers/ground_3.png
+Main.tscn::PackedScene::5768680837664871393::1747580775::0::1::::<><><>0<>0<><>::uid://bj74kaevi1j5f::::res://Scenes/rhythm_system.tscn<>uid://buahucf2kyd0q::::res://Scripts/command_manager.gd<>uid://cke620574v27d::::res://Scripts/battle_node.gd<>uid://d4bmchdhtwcpw::::res://Assets/beats/pata.wav<>uid://co8xgbq66u62g::::res://Scenes/player.tscn<>uid://dahsxfj4yr7el::::res://Scenes/bg.tscn<>uid://du5qih0ee8lr0::::res://Assets/beats/pon.wav<>uid://dldan56ueyos7::::res://Assets/Music/nv2.wav<>uid://db1xlw6glheqh::::res://Scripts/player.gd<>uid://b7fyuajecyvql::::res://Assets/Music/nv3.wav<>uid://biv0qm56523ma::::res://Assets/beats/chaka.wav<>uid://dw8qnm30yhk6s::::res://Assets/beats/beat.wav<>uid://4c3kpqx84i0e::::res://Assets/Music/nv1.wav<>uid://be6gemmpc43eo::::res://Assets/spritesheet_ground.png<>uid://bncmmfv7gxkkq::::res://Assets/Music/cv1.wav<>uid://bagta7rknlgcu::::res://Assets/Music/cv2.wav<>uid://etrtknmul60i::::res://Assets/Music/cv3.wav<>uid://bl21ytmb2svsn::::res://Assets/Music/rv1.wav<>uid://bh1oc78hpghji::::res://Assets/Music/rv2.wav<>uid://c0kxfsq8efdqt::::res://Assets/Music/rv3.wav
+player.tscn::PackedScene::5825016928490654344::1747580775::0::1::::<><><>0<>0<><>::uid://bj27rsk3lbwdq::::res://Assets/Soldier-Idle.png
+rhythm_system.tscn::PackedScene::3085959022439667349::1747580775::0::1::::<><><>0<>0<><>::uid://cyx8h3kpes34t::::res://Scripts/rhythm_system.gd<>uid://brvflxmbitdiu::::res://Assets/beats/metronome.wav
+::res://Scripts/::1747575056
 battle_node.gd::GDScript/GDScript::5484919118915388711::1745917866::0::1::::<>Node<><>0<>0<><>::
-command_manager.gd::GDScript/GDScript::3790658405293001710::1745919351::0::1::::<>Node<><>0<>0<><>::
+command_manager.gd::GDScript::3790658405293001710::1747575056::0::1::::<>Node<><>0<>0<><>::
 player.gd::GDScript/GDScript::7284542054579704863::1745917866::0::1::::<>CharacterBody2D<><>0<>0<><>::
-rhythm_system.gd::GDScript/GDScript::6506871951150447501::1745917866::0::1::::<>Node<><>0<>0<><>::
+rhythm_system.gd::GDScript/GDScript::6506871951150447501::1745922777::0::1::::<>Node<><>0<>0<><>::
+starlayer3.gd::GDScript::3818390386711759448::1747556634::0::1::::<>ParallaxLayer<><>0<>0<><>::
+starlayer.gd::GDScript::1590400979203888220::1747556638::0::1::::<>ParallaxLayer<><>0<>0<><>::
 timer.gd::GDScript/GDScript::5133284615886565399::1745917866::0::1::::<>Node<><>0<>0<><>::
