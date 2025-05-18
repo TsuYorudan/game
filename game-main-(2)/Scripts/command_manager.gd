@@ -42,7 +42,7 @@ var combo_protection_active: bool = false
 # Track last played success music to avoid repetition
 var last_success_stream: AudioStream = null
 
-@onready var combo_label: Label = get_node("/root/Main/UI/ComboLabelPersistent")
+@onready var combo_label: Label =  $"../UI/ComboLabelPersistent"
 var combo_tween: Tween = null
 
 func _ready() -> void:

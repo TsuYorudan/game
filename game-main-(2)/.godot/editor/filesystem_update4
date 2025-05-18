@@ -1,8 +1,11 @@
 res://Scenes/Main.tscn
+res://Assets/buttons.tres
+res://Assets/test.tres
+res://Assets/backButton.tres
 res://Scenes/rhythm_system.tscn
 res://Scenes/bg.tscn
-res://Scripts/command_manager.gd
 res://Scenes/player.tscn
-res://Scenes/starlayer.gd
-res://Scenes/starlayer2.gd
-res://Scenes/starlayer3.gd
+res://Scenes/main_menu.tscn
+res://Scripts/command_manager.gd
+res://Scripts/main_menu.gd
+res://Scenes/gameplay.tscn

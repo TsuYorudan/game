@@ -1,8 +1,12 @@
-AudioStreamPlayer
-Label
+ParallaxBackground
 CanvasLayer
 ColorRect
+Control
+Node2D
+MenuBar
 Node
+AudioStreamPlayer
+Label
 TileMap
 AudioStreamPlayer2D
 CanvasGroup

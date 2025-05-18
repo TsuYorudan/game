@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bdswgalbqqc3" path="res://Assets/stars/Stars-Big_1_1_PC.png" id="1_wh7op"]
 [ext_resource type="Script" uid="uid://bunwljs5bj4ns" path="res://Scripts/starlayer3.gd" id="2_6j0i3"]
 [ext_resource type="Texture2D" uid="uid://dt7w285o0i570" path="res://Assets/stars/Nebula Blue.png" id="2_gtuxm"]
-[ext_resource type="Script" uid="uid://ciyhrstvy25m7" path="res://starlayer2.gd" id="2_hjmtd"]
+[ext_resource type="Script" uid="uid://ciyhrstvy25m7" path="res://Scripts/starlayer2.gd" id="2_hjmtd"]
 [ext_resource type="Script" uid="uid://wwnw3teolp2s" path="res://Scripts/starlayer.gd" id="2_k2fby"]
 [ext_resource type="Texture2D" uid="uid://be57v1w7o7swu" path="res://Assets/layers/rocks.png" id="2_wh7op"]
 [ext_resource type="Texture2D" uid="uid://ct0oy3u2sma6k" path="res://Assets/layers/ground_1.png" id="3_k2fby"]
