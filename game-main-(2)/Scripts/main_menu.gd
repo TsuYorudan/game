@@ -12,18 +12,26 @@ func _ready():
 
 
 func _on_play_pressed() -> void:
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
 	get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
 
 
 func _on_settings_pressed() -> void:
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
 	main_buttons.visible = false
 	settings_menu.visible = true
 
 
 func _on_quit_pressed() -> void:
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
 	get_tree().quit()
 
 
 func _on_back_pressed() -> void:
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
 	main_buttons.visible = true
 	settings_menu.visible = false
