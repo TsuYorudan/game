@@ -1,13 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgya4v7w3eyqb"]
+[gd_scene load_steps=21 format=3 uid="uid://dgya4v7w3eyqb"]
 
 [ext_resource type="Texture2D" uid="uid://daa0nvinwqoif" path="res://Assets/v675-taus-35c-technologyinterface.jpg" id="1_ce3w2"]
 [ext_resource type="Script" uid="uid://d3sw12l2b4wv0" path="res://Scripts/main_menu.gd" id="1_n45e2"]
 [ext_resource type="FontFile" uid="uid://32roxwaec324" path="res://Assets/fonts/DynastyFantasyDemoBlack-lg2p0.ttf" id="2_1ehe0"]
+[ext_resource type="Script" uid="uid://dkh3r70jme3j2" path="res://Scripts/menu_parallax4.gd" id="2_m3bi6"]
 [ext_resource type="Theme" uid="uid://jlyiwdw1q0ae" path="res://Assets/buttons.tres" id="3_opfnp"]
+[ext_resource type="Texture2D" uid="uid://dt7w285o0i570" path="res://Assets/stars/Nebula Blue.png" id="3_wyh8j"]
+[ext_resource type="Script" uid="uid://buxgfk25wtt4x" path="res://Scripts/menu_parallax.gd" id="4_ujyyl"]
+[ext_resource type="Texture2D" uid="uid://da1wjhur4r4b8" path="res://Assets/stars/Nebula Aqua-Pink.png" id="5_mkpwh"]
 [ext_resource type="Theme" uid="uid://b0gcejfk0lxpr" path="res://Assets/test.tres" id="5_opfnp"]
+[ext_resource type="Script" uid="uid://d050rjhc1r4u0" path="res://menu_parallax2.gd" id="6_4nkqq"]
 [ext_resource type="FontFile" uid="uid://bpynnjg67qwx1" path="res://Assets/fonts/MysticGate-0WnMP.ttf" id="6_cp0ys"]
 [ext_resource type="Script" uid="uid://b8acaaw08wv5g" path="res://Scripts/volume.gd" id="7_cp0ys"]
 [ext_resource type="Theme" uid="uid://c87ic0dgqe5vl" path="res://Assets/backButton.tres" id="7_yhxw7"]
+[ext_resource type="Script" uid="uid://bq4ypisw104le" path="res://Scripts/menu_parallax3.gd" id="8_ehtkc"]
+[ext_resource type="Texture2D" uid="uid://bdswgalbqqc3" path="res://Assets/stars/Stars-Big_1_1_PC.png" id="10_vtepg"]
+[ext_resource type="Texture2D" uid="uid://c8xd5eahbgfg5" path="res://Assets/stars/Stars Small_2.png" id="12_m3bi6"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yhxw7"]
 
@@ -31,6 +39,61 @@ offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n45e2")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(2.00006, 0)
+scale = Vector2(1, 2.0736)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+script = ExtResource("2_m3bi6")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
+position = Vector2(800, 188.561)
+scale = Vector2(0.46875, 0.12592)
+texture = ExtResource("3_wyh8j")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer9" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(1, 1, 1, 0.596078)
+position = Vector2(2.00006, 0)
+scale = Vector2(1, 2.0736)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+script = ExtResource("4_ujyyl")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2(800, 188.561)
+scale = Vector2(0.46875, 0.12592)
+texture = ExtResource("5_mkpwh")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(2, 0)
+scale = Vector2(1, 1.44)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+script = ExtResource("6_4nkqq")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
+position = Vector2(951.25, 184.015)
+scale = Vector2(0.459595, 0.0894335)
+texture = ExtResource("10_vtepg")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer8" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(2, 0)
+scale = Vector2(1, 2.0736)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+script = ExtResource("8_ehtkc")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer8"]
+position = Vector2(951.25, 184.015)
+scale = Vector2(0.459595, 0.0894335)
+texture = ExtResource("12_m3bi6")
+offset = Vector2(0, 0.145)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
@@ -84,7 +147,6 @@ horizontal_alignment = 1
 uppercase = true
 
 [node name="mainButtons" type="VBoxContainer" parent="MarginContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1

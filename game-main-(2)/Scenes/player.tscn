@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://co8xgbq66u62g"]
+[gd_scene load_steps=13 format=3 uid="uid://co8xgbq66u62g"]
 
 [ext_resource type="Texture2D" uid="uid://bj27rsk3lbwdq" path="res://Assets/Soldier-Idle.png" id="1_v0iea"]
 
@@ -83,6 +83,15 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0iea"]
 radius = 6.0
 
+[sub_resource type="Gradient" id="Gradient_v0iea"]
+offsets = PackedFloat32Array(0, 0.707792)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cvnsp"]
+gradient = SubResource("Gradient_v0iea")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 modulate = Color(0, 0, 0, 1)
 script = SubResource("GDScript_v0iea")
@@ -97,3 +106,6 @@ frame_progress = 0.928611
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_v0iea")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_cvnsp")

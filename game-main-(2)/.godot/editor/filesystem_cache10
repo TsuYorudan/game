@@ -1,17 +1,19 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1747588794
+::res://::1747632269
+export_presets.cfg::TextFile/TextFile::-1::1747592100::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D/CompressedTexture2D::1573427857687237665::1745917866::1745919885::1::::<><><>0<>0<>d169af14c4c1437895e29e7ccaf4840a<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
-volume.gd::GDScript::4702773992900274486::1747585989::0::1::::<>HSlider<><>0<>0<><>::
-::res://Assets/::1747586549
-backButton.tres::Theme/Theme::7155623921113478509::1747586549::0::1::::<><><>0<>0<><>::uid://bpynnjg67qwx1::::res://Assets/fonts/MysticGate-0WnMP.ttf
-buttons.tres::Theme/Theme::655880403397681544::1747586549::0::1::::<><><>0<>0<><>::uid://bpynnjg67qwx1::::res://Assets/fonts/MysticGate-0WnMP.ttf<>uid://b6w7cnfk8rxbr::::res://Assets/kenney_fantasy-ui-borders/PNG/Default/Divider Fade/divider-fade-002.png
+menu_parallax2.gd::GDScript::8977463241617551069::1747591157::0::1::::<>ParallaxLayer<><>0<>0<><>::
+pause.gd::GDScript/GDScript::8053118963011207905::1747627995::0::1::::<>Node<><>0<>0<><>::
+::res://Assets/::1747631690
+backButton.tres::Theme/Theme::7155623921113478509::1747628785::0::1::::<><><>0<>0<><>::uid://bpynnjg67qwx1::::res://Assets/fonts/MysticGate-0WnMP.ttf
+buttons.tres::Theme/Theme::655880403397681544::1747628785::0::1::::<><><>0<>0<><>::uid://bpynnjg67qwx1::::res://Assets/fonts/MysticGate-0WnMP.ttf<>uid://b6w7cnfk8rxbr::::res://Assets/kenney_fantasy-ui-borders/PNG/Default/Divider Fade/divider-fade-002.png
 font.tres::Theme/Theme::8859779035733718282::1747580752::0::1::::<><><>0<>0<><>::uid://32roxwaec324::::res://Assets/fonts/DynastyFantasyDemoBlack-lg2p0.ttf
 Soldier-Idle.png::CompressedTexture2D/CompressedTexture2D::3075832740215219718::1745917866::1745919885::1::::<><><>0<>0<>d6b1d614b1090b2b60d84e11e9d4dd95<>res://.godot/imported/Soldier-Idle.png-8c81113285e08ebcd530bbecdc5c831f.ctex::
 Soldier.png::CompressedTexture2D/CompressedTexture2D::2195802951162942810::1745917866::1745919885::1::::<><><>0<>0<>1cb418397027e2195699833c37528f47<>res://.godot/imported/Soldier.png-a14231170cf49c5149c0ee391a5eb9d5.ctex::
 spritesheet_complete.png::CompressedTexture2D/CompressedTexture2D::575522385209953624::1745917866::1745919888::1::::<><><>0<>0<>92f4118bd63bdf749b913922e1024395<>res://.godot/imported/spritesheet_complete.png-7b02b1fcf3f3a761f62e92fc31bb62a6.ctex::
 spritesheet_ground.png::CompressedTexture2D/CompressedTexture2D::2731543863256533102::1745917866::1745919886::1::::<><><>0<>0<>ed5d1e5336d71024cfd72d9cf55afcfc<>res://.godot/imported/spritesheet_ground.png-918ec5105e428ab38d8f48625f2b8c80.ctex::
 spritesheet_players.png::CompressedTexture2D/CompressedTexture2D::6873595504922350333::1745917866::1745919886::1::::<><><>0<>0<>fd30d48fc378856cd856887bc7100e38<>res://.godot/imported/spritesheet_players.png-2491b2e3d2515a78a6bd853ac99f7d66.ctex::
-test.tres::Theme/Theme::4153657099251817299::1747586549::0::1::::<><><>0<>0<><>::uid://bfx0lb274sc5u::::res://Assets/kenney_fantasy-ui-borders/PNG/Double/Transparent center/panel-transparent-center-006.png
+test.tres::Theme/Theme::4153657099251817299::1747628785::0::1::::<><><>0<>0<><>::uid://bfx0lb274sc5u::::res://Assets/kenney_fantasy-ui-borders/PNG/Double/Transparent center/panel-transparent-center-006.png
 v675-taus-35c-technologyinterface.jpg::CompressedTexture2D/CompressedTexture2D::7160804307188721997::1747580752::1747586111::1::::<><><>0<>0<>f5bad0aefe9d74e0b3021e638bea3899<>res://.godot/imported/v675-taus-35c-technologyinterface.jpg-646a82e94455355375e20c3481efc2d4.ctex::
 ::res://Assets/beats/::1745919888
 beat.wav::AudioStreamWAV/AudioStreamWAV::8772536438907986096::1745917866::1745919888::1::::<><><>0<>0<>145d67ac36a57f69e8756d2ab4782ef3<>res://.godot/imported/beat.wav-eab99c89c61b8827cabc5ba3e300b698.sample::
@@ -19,6 +21,18 @@ chaka.wav::AudioStreamWAV/AudioStreamWAV::2992830541228271776::1745917866::17459
 metronome.wav::AudioStreamWAV/AudioStreamWAV::3623307413703276008::1745917866::1745919888::1::::<><><>0<>0<>859d969827b5e26bd477b9d61a44affe<>res://.godot/imported/metronome.wav-e733c1b32f7f6238c1a72ea3dcaa8ec0.sample::
 pata.wav::AudioStreamWAV/AudioStreamWAV::9197535442479479580::1745917866::1745919888::1::::<><><>0<>0<>3adf62eced9b0d48c584295b563f7a37<>res://.godot/imported/pata.wav-c61c252edb940d062144359ae9e9e719.sample::
 pon.wav::AudioStreamWAV/AudioStreamWAV::8625956421169205519::1745917866::1745919888::1::::<><><>0<>0<>91d2e281f3518986ba5b85bf8eeae762<>res://.godot/imported/pon.wav-ab0a4e088aa02e331236e2f522e4c04e.sample::
+::res://Assets/enemy/::1747631900
+::res://Assets/enemy/Mage/::1747631725
+Mage_.png::CompressedTexture2D/CompressedTexture2D::3521880972346007506::1747631725::1747631725::1::::<><><>0<>0<>bcb1ccdbf7ba763c483dedd45a1927c4<>res://.godot/imported/Mage_.png-842a35cbf0ceef4c0c40c959bc80cfa6.ctex::
+mage_atk2.png::CompressedTexture2D/CompressedTexture2D::3352621730743452268::1747631725::1747631725::1::::<><><>0<>0<>4d69fbf10058beae4999bd0618692b27<>res://.godot/imported/mage_atk2.png-614188c63ff9c3a1e7c1a9bc3fd19492.ctex::
+::res://Assets/enemy/Mage/eg/::1747631725
+::res://Assets/enemy/Morph/::1747631900
+Morph2.png::CompressedTexture2D/CompressedTexture2D::3319259840379091732::1747631725::1747631900::1::::<><><>0<>0<>5fa03d5007bc8e0a1e0cc58d6d74fadc<>res://.godot/imported/Morph2.png-3bee239d7ae713e2f9a3dd506f78e442.ctex::
+Morph.png::CompressedTexture2D/CompressedTexture2D::8210437400782863046::1747631725::1747631898::1::::<><><>0<>0<>ae49abd059e98d86ead43e62006368e9<>res://.godot/imported/Morph.png-5da1539b3e0873a4241285e6b37afd3d.ctex::
+::res://Assets/enemy/Morph/eg/::1747631824
+::res://Assets/enemy/Sword/::1747631763
+Sword.png::CompressedTexture2D/CompressedTexture2D::6947401987332250926::1747631763::1747631763::1::::<><><>0<>0<>6748cd166fe27af6caa30c897dc4697d<>res://.godot/imported/Sword.png-e3466460f6be8f5dda982c882554ae0c.ctex::
+::res://Assets/enemy/Sword/eg/::1747631763
 ::res://Assets/fonts/::1747586107
 DynastyFantasyDemoBlack-lg2p0.ttf::FontFile/FontFile::2022084253244426867::1747580752::1747586107::1::::<><><>0<>0<>271790803cd8414bf6fc7ebd08c7f662<>res://.godot/imported/DynastyFantasyDemoBlack-lg2p0.ttf-09ab01ff4061a1546ccd5ea842f16e93.fontdata::
 MysticGate-0WnMP.ttf::FontFile/FontFile::3489611424018642912::1747580752::1747586107::1::::<><><>0<>0<>4960e9456e66e71f90abdc83d673ee0d<>res://.godot/imported/MysticGate-0WnMP.ttf-87759ad9484c134ab5d9f9b7f439eddb.fontdata::
@@ -341,8 +355,8 @@ nv3.wav::AudioStreamWAV/AudioStreamWAV::4644278506673551519::1747570969::1747571
 rv1.wav::AudioStreamWAV/AudioStreamWAV::3215858680500271397::1747581025::1747581030::1::::<><><>0<>0<>40df00222210400f3a6889522d68a4e4<>res://.godot/imported/rv1.wav-a7c2d5e3b95037cf026d7bbd24f919e2.sample::
 rv2.wav::AudioStreamWAV/AudioStreamWAV::2932271752315509782::1747576015::1747576083::1::::<><><>0<>0<>465b0cbae5fbe102f01c8c319399bbc4<>res://.godot/imported/rv2.wav-5947306231b87912e5b36b0e10ff9a27.sample::
 rv3.wav::AudioStreamWAV/AudioStreamWAV::6549612627322850759::1747576043::1747576083::1::::<><><>0<>0<>46f097eb7f5624bfa34e6b2e4ee4a27c<>res://.godot/imported/rv3.wav-5cce834cbf130dd462173014a60b12ef.sample::
-::res://Assets/stars/::1747555088
-Nebula Aqua-Pink.png::CompressedTexture2D/CompressedTexture2D::7214288118042260655::1747555082::1747555088::1::::<><><>0<>0<>a71157a4384e977fc901b12e20fe0fe4<>res://.godot/imported/Nebula Aqua-Pink.png-0f493fd4bcfd57e5570bf99ef6cb7c0a.ctex::
+::res://Assets/stars/::1747593025
+Nebula Aqua-Pink.png::CompressedTexture2D/CompressedTexture2D::7214288118042260655::1747555082::1747593025::1::::<><><>0<>0<>a71157a4384e977fc901b12e20fe0fe4<>res://.godot/imported/Nebula Aqua-Pink.png-0f493fd4bcfd57e5570bf99ef6cb7c0a.ctex::
 Nebula Blue.png::CompressedTexture2D/CompressedTexture2D::8560295938892667489::1747555082::1747555085::1::::<><><>0<>0<>13973187a823503c5d686188fc8939a3<>res://.godot/imported/Nebula Blue.png-340076820fe9da2fc05347b2d23469bd.ctex::
 Nebula Red.png::CompressedTexture2D/CompressedTexture2D::7482720515234721359::1747555082::1747555086::1::::<><><>0<>0<>661fc50d893e510726b4a68dff4b124e<>res://.godot/imported/Nebula Red.png-aa4fcf31d14586f19089ffcd784689e4.ctex::
 Stars Small_1.png::CompressedTexture2D/CompressedTexture2D::6714242769900503769::1747555082::1747555088::1::::<><><>0<>0<>1432bd87452ceba95e51e16d9186e9db<>res://.godot/imported/Stars Small_1.png-8e88d4ddae14f4aa11d04701c2e54fef.ctex::
@@ -351,20 +365,26 @@ Stars-Big_1_1_PC.png::CompressedTexture2D/CompressedTexture2D::77514485877790096
 Stars-Big_1_2_PC.png::CompressedTexture2D/CompressedTexture2D::4110463100980346929::1747555082::1747555085::1::::<><><>0<>0<>2d70e09f24187861150c2da7912c0fff<>res://.godot/imported/Stars-Big_1_2_PC.png-90a82889ffac89e432e7f31573ba1677.ctex::
 ::res://game-main/::1747555072
 README.md::TextFile/TextFile::-1::1745917866::0::1::::<><><>0<>0<><>::
-::res://Scenes/::1747588793
-bg.tscn::PackedScene::7174846952357725691::1747588793::0::1::::<><><>0<>0<><>::uid://dvw8tpj55iegq::::res://Assets/layers/sky.png<>uid://bdswgalbqqc3::::res://Assets/stars/Stars-Big_1_1_PC.png<>uid://bunwljs5bj4ns::::res://Scripts/starlayer3.gd<>uid://dt7w285o0i570::::res://Assets/stars/Nebula Blue.png<>uid://ciyhrstvy25m7::::res://Scripts/starlayer2.gd<>uid://wwnw3teolp2s::::res://Scripts/starlayer.gd<>uid://be57v1w7o7swu::::res://Assets/layers/rocks.png<>uid://ct0oy3u2sma6k::::res://Assets/layers/ground_1.png<>uid://c8xd5eahbgfg5::::res://Assets/stars/Stars Small_2.png<>uid://ckjdtv3me0dps::::res://Assets/layers/ground_2.png<>uid://de0lskgxcw23r::::res://Assets/layers/ground_3.png
-gameplay.tscn::PackedScene/PackedScene::8485778576646925341::1747588458::0::1::::<><><>0<>0<><>::uid://bj74kaevi1j5f::::res://Scenes/rhythm_system.tscn<>uid://buahucf2kyd0q::::res://Scripts/command_manager.gd<>uid://4c3kpqx84i0e::::res://Assets/Music/nv1.wav<>uid://dldan56ueyos7::::res://Assets/Music/nv2.wav<>uid://b7fyuajecyvql::::res://Assets/Music/nv3.wav<>uid://bncmmfv7gxkkq::::res://Assets/Music/cv1.wav<>uid://bagta7rknlgcu::::res://Assets/Music/cv2.wav<>uid://etrtknmul60i::::res://Assets/Music/cv3.wav<>uid://bl21ytmb2svsn::::res://Assets/Music/rv1.wav<>uid://bh1oc78hpghji::::res://Assets/Music/rv2.wav<>uid://c0kxfsq8efdqt::::res://Assets/Music/rv3.wav<>uid://d4bmchdhtwcpw::::res://Assets/beats/pata.wav<>uid://du5qih0ee8lr0::::res://Assets/beats/pon.wav<>uid://biv0qm56523ma::::res://Assets/beats/chaka.wav<>uid://dw8qnm30yhk6s::::res://Assets/beats/beat.wav<>uid://cke620574v27d::::res://Scripts/battle_node.gd<>uid://dahsxfj4yr7el::::res://Scenes/bg.tscn<>uid://be6gemmpc43eo::::res://Assets/spritesheet_ground.png<>uid://co8xgbq66u62g::::res://Scenes/player.tscn<>uid://db1xlw6glheqh::::res://Scripts/player.gd
-Main.tscn::PackedScene/PackedScene::5768680837664871393::1747588759::0::1::::<><><>0<>0<><>::uid://dgya4v7w3eyqb::::res://Scenes/main_menu.tscn
-main_menu.tscn::PackedScene::7629993120489450657::1747588796::0::1::::<><><>0<>0<><>::uid://daa0nvinwqoif::::res://Assets/v675-taus-35c-technologyinterface.jpg<>uid://d3sw12l2b4wv0::::res://Scripts/main_menu.gd<>uid://32roxwaec324::::res://Assets/fonts/DynastyFantasyDemoBlack-lg2p0.ttf<>uid://jlyiwdw1q0ae::::res://Assets/buttons.tres<>uid://b0gcejfk0lxpr::::res://Assets/test.tres<>uid://bpynnjg67qwx1::::res://Assets/fonts/MysticGate-0WnMP.ttf<>uid://b8acaaw08wv5g::::res://volume.gd<>uid://c87ic0dgqe5vl::::res://Assets/backButton.tres
-player.tscn::PackedScene/PackedScene::5825016928490654344::1747588759::0::1::::<><><>0<>0<><>::uid://bj27rsk3lbwdq::::res://Assets/Soldier-Idle.png
-rhythm_system.tscn::PackedScene/PackedScene::3085959022439667349::1747588759::0::1::::<><><>0<>0<><>::uid://cyx8h3kpes34t::::res://Scripts/rhythm_system.gd<>uid://brvflxmbitdiu::::res://Assets/beats/metronome.wav
-::res://Scripts/::1747588793
+::res://Scenes/::1747632269
+bg.tscn::PackedScene/PackedScene::7174846952357725691::1747628366::0::1::::<><><>0<>0<><>::uid://dvw8tpj55iegq::::res://Assets/layers/sky.png<>uid://bdswgalbqqc3::::res://Assets/stars/Stars-Big_1_1_PC.png<>uid://bunwljs5bj4ns::::res://Scripts/starlayer3.gd<>uid://dt7w285o0i570::::res://Assets/stars/Nebula Blue.png<>uid://ciyhrstvy25m7::::res://Scripts/starlayer2.gd<>uid://wwnw3teolp2s::::res://Scripts/starlayer.gd<>uid://be57v1w7o7swu::::res://Assets/layers/rocks.png<>uid://ct0oy3u2sma6k::::res://Assets/layers/ground_1.png<>uid://c8xd5eahbgfg5::::res://Assets/stars/Stars Small_2.png<>uid://ckjdtv3me0dps::::res://Assets/layers/ground_2.png<>uid://de0lskgxcw23r::::res://Assets/layers/ground_3.png
+enemy.tscn::PackedScene/PackedScene::6893874367659266977::1747632183::0::1::::<><><>0<>0<><>::uid://do8gx7k7qebmk::::res://Assets/enemy/Morph/Morph.png
+gameplay.gd::GDScript/GDScript::3224367536602143558::1747630921::0::1::::<>Node<><>0<>0<><>::
+gameplay.tscn::PackedScene::8485778576646925341::1747632271::0::1::::<><><>0<>0<><>::uid://bj74kaevi1j5f::::res://Scenes/rhythm_system.tscn<>uid://bl654k0s22e2y::::res://Scenes/gameplay.gd<>uid://buahucf2kyd0q::::res://Scripts/command_manager.gd<>uid://4c3kpqx84i0e::::res://Assets/Music/nv1.wav<>uid://b0gcejfk0lxpr::::res://Assets/test.tres<>uid://bpynnjg67qwx1::::res://Assets/fonts/MysticGate-0WnMP.ttf<>uid://dldan56ueyos7::::res://Assets/Music/nv2.wav<>uid://c87ic0dgqe5vl::::res://Assets/backButton.tres<>uid://b7fyuajecyvql::::res://Assets/Music/nv3.wav<>uid://b8acaaw08wv5g::::res://Scripts/volume.gd<>uid://bncmmfv7gxkkq::::res://Assets/Music/cv1.wav<>uid://bagta7rknlgcu::::res://Assets/Music/cv2.wav<>uid://etrtknmul60i::::res://Assets/Music/cv3.wav<>uid://bl21ytmb2svsn::::res://Assets/Music/rv1.wav<>uid://bh1oc78hpghji::::res://Assets/Music/rv2.wav<>uid://c0kxfsq8efdqt::::res://Assets/Music/rv3.wav<>uid://d4bmchdhtwcpw::::res://Assets/beats/pata.wav<>uid://du5qih0ee8lr0::::res://Assets/beats/pon.wav<>uid://biv0qm56523ma::::res://Assets/beats/chaka.wav<>uid://dw8qnm30yhk6s::::res://Assets/beats/beat.wav<>uid://cke620574v27d::::res://Scripts/battle_node.gd<>uid://dahsxfj4yr7el::::res://Scenes/bg.tscn<>uid://be6gemmpc43eo::::res://Assets/spritesheet_ground.png<>uid://co8xgbq66u62g::::res://Scenes/player.tscn<>uid://db1xlw6glheqh::::res://Scripts/player.gd<>uid://c5hpdr18ongmj::::res://Scenes/enemy.tscn
+Main.tscn::PackedScene/PackedScene::5768680837664871393::1747632183::0::1::::<><><>0<>0<><>::uid://dgya4v7w3eyqb::::res://Scenes/main_menu.tscn
+main_menu.tscn::PackedScene::7629993120489450657::1747632269::0::1::::<><><>0<>0<><>::uid://daa0nvinwqoif::::res://Assets/v675-taus-35c-technologyinterface.jpg<>uid://d3sw12l2b4wv0::::res://Scripts/main_menu.gd<>uid://32roxwaec324::::res://Assets/fonts/DynastyFantasyDemoBlack-lg2p0.ttf<>uid://dkh3r70jme3j2::::res://Scripts/menu_parallax4.gd<>uid://jlyiwdw1q0ae::::res://Assets/buttons.tres<>uid://dt7w285o0i570::::res://Assets/stars/Nebula Blue.png<>uid://buxgfk25wtt4x::::res://Scripts/menu_parallax.gd<>uid://da1wjhur4r4b8::::res://Assets/stars/Nebula Aqua-Pink.png<>uid://b0gcejfk0lxpr::::res://Assets/test.tres<>uid://d050rjhc1r4u0::::res://menu_parallax2.gd<>uid://bpynnjg67qwx1::::res://Assets/fonts/MysticGate-0WnMP.ttf<>uid://b8acaaw08wv5g::::res://Scripts/volume.gd<>uid://c87ic0dgqe5vl::::res://Assets/backButton.tres<>uid://bq4ypisw104le::::res://Scripts/menu_parallax3.gd<>uid://bdswgalbqqc3::::res://Assets/stars/Stars-Big_1_1_PC.png<>uid://c8xd5eahbgfg5::::res://Assets/stars/Stars Small_2.png
+player.tscn::PackedScene/PackedScene::5825016928490654344::1747632183::0::1::::<><><>0<>0<><>::uid://bj27rsk3lbwdq::::res://Assets/Soldier-Idle.png
+rhythm_system.tscn::PackedScene/PackedScene::3085959022439667349::1747632183::0::1::::<><><>0<>0<><>::uid://cyx8h3kpes34t::::res://Scripts/rhythm_system.gd<>uid://brvflxmbitdiu::::res://Assets/beats/metronome.wav
+::res://Scripts/::1747632266
 battle_node.gd::GDScript/GDScript::5484919118915388711::1745917866::0::1::::<>Node<><>0<>0<><>::
-command_manager.gd::GDScript/GDScript::3790658405293001710::1747586405::0::1::::<>Node<><>0<>0<><>::
-main_menu.gd::GDScript/GDScript::9163092113352236627::1747588414::0::1::::mainMenu<>Control<><>0<>0<><>::
+command_manager.gd::GDScript/GDScript::3790658405293001710::1747589840::0::1::::<>Node<><>0<>0<><>::
+main_menu.gd::GDScript/GDScript::9163092113352236627::1747590510::0::1::::mainMenu<>Control<><>0<>0<><>::
+menu_parallax3.gd::GDScript::3570793580532942486::1747591150::0::1::::<>ParallaxLayer<><>0<>0<><>::
+menu_parallax4.gd::GDScript/GDScript::7877333285824349437::1747593218::0::1::::<>ParallaxLayer<><>0<>0<><>::
+menu_parallax.gd::GDScript/GDScript::3838052044059699381::1747593296::0::1::::<>ParallaxLayer<><>0<>0<><>::
 player.gd::GDScript/GDScript::7284542054579704863::1745917866::0::1::::<>CharacterBody2D<><>0<>0<><>::
 rhythm_system.gd::GDScript/GDScript::6506871951150447501::1745922777::0::1::::<>Node<><>0<>0<><>::
-starlayer2.gd::GDScript::5384353535792543080::1747557111::0::1::::<>ParallaxLayer<><>0<>0<><>::
+starlayer2.gd::GDScript/GDScript::5384353535792543080::1747591042::0::1::::<>ParallaxLayer<><>0<>0<><>::
 starlayer3.gd::GDScript/GDScript::3818390386711759448::1747556634::0::1::::<>ParallaxLayer<><>0<>0<><>::
 starlayer.gd::GDScript/GDScript::1590400979203888220::1747556638::0::1::::<>ParallaxLayer<><>0<>0<><>::
 timer.gd::GDScript/GDScript::5133284615886565399::1745917866::0::1::::<>Node<><>0<>0<><>::
+volume.gd::GDScript/GDScript::4702773992900274486::1747585989::0::1::::<>HSlider<><>0<>0<><>::

@@ -1,0 +1,10 @@
+res://Assets/backButton.tres::262e7f8833a258563581e88ece072d0a::1747586549::res://.godot/exported/133200997/export-c30701c03fe5ecd31e75746adae55bfb-backButton.res
+res://Assets/buttons.tres::4e55dbdba217a00f7f52b7fb7848f648::1747586549::res://.godot/exported/133200997/export-577f32cd474bad7e6049941dd1bcd20c-buttons.res
+res://Assets/font.tres::e8b699cce08f504eb95a9eb143a6a190::1747580752::res://.godot/exported/133200997/export-0e95ecd68b53a809eea794f7f498ad58-font.res
+res://Assets/test.tres::a73c83532ebeb65d92623a408457a2b1::1747586549::res://.godot/exported/133200997/export-1276351c2e7a72f7620cc08cc07fc2ea-test.res
+res://Scenes/bg.tscn::b61ca9aaab788e65b1ed813d564d2cc6::1747591538::res://.godot/exported/133200997/export-067731fc00aef0f44ee4fb502d9285ab-bg.scn
+res://Scenes/gameplay.tscn::92f805f3c9edc600e9a22176d8c7cc8b::1747589840::res://.godot/exported/133200997/export-45974fcce1466fe320b093209fe68c6e-gameplay.scn
+res://Scenes/Main.tscn::db16b4ce6d7538e85067f9152ae6498c::1747591584::res://.godot/exported/133200997/export-a8e1520d83f25710dd4e3da8c6f32601-Main.scn
+res://Scenes/main_menu.tscn::c6af4e55bf0234d73f2f4a6bd6a27941::1747591538::res://.godot/exported/133200997/export-502e6a9b269597544b234abf28958cd8-main_menu.scn
+res://Scenes/player.tscn::03551f8d191e2a3c5a7d7de7dacaf9d2::1747591538::res://.godot/exported/133200997/export-1753c997600d68ab5d20ae99fddb15c6-player.scn
+res://Scenes/rhythm_system.tscn::8ecad6bfc5d18baeb123aacbf356e9b9::1747591538::res://.godot/exported/133200997/export-8e11dae56a9c586f7a355262c72420ca-rhythm_system.scn

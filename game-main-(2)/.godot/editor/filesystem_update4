@@ -1,11 +1,10 @@
-res://Scenes/Main.tscn
+res://Scenes/gameplay.tscn
 res://Assets/buttons.tres
 res://Assets/test.tres
 res://Assets/backButton.tres
+res://Scenes/Main.tscn
 res://Scenes/rhythm_system.tscn
-res://Scenes/bg.tscn
 res://Scenes/player.tscn
 res://Scenes/main_menu.tscn
-res://Scripts/command_manager.gd
-res://Scripts/main_menu.gd
-res://Scenes/gameplay.tscn
+res://Scenes/gameplay.gd
+res://Scenes/enemy.tscn
