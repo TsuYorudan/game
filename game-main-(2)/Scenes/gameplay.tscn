@@ -650,7 +650,6 @@ script = ExtResource("4_bl6so")
 player = NodePath("../../Player")
 
 [node name="UI2" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="pause" type="Panel" parent="UI2"]
 material = SubResource("CanvasItemMaterial_8ipd1")
