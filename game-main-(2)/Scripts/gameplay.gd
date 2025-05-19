@@ -5,6 +5,8 @@ extends Node
 @onready var main_menu_button: Button = settings_menu.get_node("MarginContainer/VBoxContainer/HBoxContainer3/Leave")
 
 func _ready() -> void:
+	TransitionScreen.fade_in()
+
 	settings_menu.visible = false
 	settings_menu.process_mode = Node.PROCESS_MODE_ALWAYS
 

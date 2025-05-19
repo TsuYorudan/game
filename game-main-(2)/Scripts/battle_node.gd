@@ -13,8 +13,10 @@ func march():
 	if character:
 		character.start_marching()  # Call the start_marching method on the character node
 
-func counter_attack():
-	print("Executing counter-attack.")
+func attack():
+	print("attack.")
+	if character:
+		character.attack()
 	# Add counter-attack logic here
 
 func shield():
@@ -35,8 +37,8 @@ func process_command(action: String) -> void:
 	match action:
 		"march":
 			march()
-		"counter_attack":
-			counter_attack()
+		"attack":
+			attack()
 		"shield":
 			shield()
 		"calm_enemy":
