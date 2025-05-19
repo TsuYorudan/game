@@ -10,3 +10,4 @@ res://Scenes/main_menu.tscn
 res://Scenes/gameplay.tscn
 res://Scenes/bg.tscn
 res://projectile.gd
+res://Scenes/enemy.gd

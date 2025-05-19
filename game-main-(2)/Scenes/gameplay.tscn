@@ -839,10 +839,12 @@ tile_set = SubResource("TileSet_frkhe")
 
 [node name="Projectile" parent="." instance=ExtResource("25_bsu20")]
 position = Vector2(281, 646)
+collision_layer = 2
 
 [node name="Player" parent="." instance=ExtResource("19_5a717")]
 position = Vector2(219, 641)
 scale = Vector2(8, 8)
+collision_mask = 3
 script = ExtResource("26_bsu20")
 
 [node name="MarchTimer" type="Timer" parent="Player"]
@@ -858,14 +860,17 @@ position_smoothing_speed = 2.0
 drag_left_margin = 0.0
 
 [node name="EnemyDetector" type="Area2D" parent="Player"]
-visible = false
+collision_layer = 16
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/EnemyDetector"]
 position = Vector2(63.9688, -0.15625)
 shape = SubResource("RectangleShape2D_8ipd1")
 
 [node name="Enemy" parent="." groups=["enemies"] instance=ExtResource("26_lavkw")]
-position = Vector2(2367, 648)
+position = Vector2(3121, 642)
+collision_layer = 4
+collision_mask = 3
 
 [connection signal="value_changed" from="UI2/pause/MarginContainer/VBoxContainer/HBoxContainer/volumecontrol" to="UI2/pause/MarginContainer/VBoxContainer/HBoxContainer/volumecontrol" method="_on_value_changed"]
 [connection signal="timeout" from="CommandManager/QueueResetTimer" to="CommandManager" method="_on_queue_reset_timer_timeout"]
