@@ -23,9 +23,10 @@ func shield():
 	print("Activating shield.")
 	# Add shield logic here
 
-func calm_enemy():
-	print("Calming the enemy.")
-	# Add calming logic here
+func heal():
+	print("heal")
+	if character:
+		character.heal(3)
 	
 func retreat():
 	print("retreat")
@@ -41,8 +42,8 @@ func process_command(action: String) -> void:
 			attack()
 		"shield":
 			shield()
-		"calm_enemy":
-			calm_enemy()
+		"heal":
+			heal()
 		"retreat":
 			retreat()  # Now calls retreat
 		_:

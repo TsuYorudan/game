@@ -9,7 +9,7 @@ func update_input_progress() -> void:
 		var label := input_progress.get_child(i)
 		if label is Label:
 			if i < current_inputs:
-				label.text = "X"
+				label.text = "O"
 			else:
 				label.text = "_"
 

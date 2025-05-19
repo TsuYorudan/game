@@ -84,6 +84,8 @@ animations = [{
 
 [node name="Projectile" type="CharacterBody2D"]
 scale = Vector2(30, 30)
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_63pi1")
 MAX_SPEED = 500.0
 
@@ -100,11 +102,13 @@ animation = &"shoot"
 autoplay = "shoot"
 frame_progress = 0.499523
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="hitbox" type="Area2D" parent="."]
 position = Vector2(-0.386667, 0.0600002)
 scale = Vector2(0.09, 0.09)
+collision_layer = 7
+collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(2.5, -0.486111)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(9.11112, -0.296298)
 scale = Vector2(3.33333, 3.33333)
 shape = SubResource("RectangleShape2D_hvxpb")

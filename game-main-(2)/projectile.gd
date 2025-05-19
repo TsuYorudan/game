@@ -12,7 +12,9 @@ var ease_duration: float = 1.0
 var has_dissipated := false
 
 func _ready():
+	add_to_group("projectile")  # So enemy can identify this
 	global_position = spawnPos
+
 	add_child(hit_timer)
 	hit_timer.wait_time = 2.0
 	hit_timer.one_shot = true
@@ -37,6 +39,7 @@ func _on_timeout() -> void:
 	start_dissipate()
 
 func _on_hit_enemy() -> void:
+	print("[DEBUG] Projectile triggered _on_hit_enemy()")
 	start_dissipate()
 
 func start_dissipate():

@@ -3,6 +3,7 @@ extends CanvasLayer
 signal on_fade_in_finished
 signal on_fade_out_finished
 
+
 @onready var color_rect: ColorRect = $ColorRect
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 

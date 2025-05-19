@@ -1,5 +1,7 @@
 CollisionShape2D
 Area2D
+ProgressBar
+Timer
 Camera2D
 AnimatedSprite2D
 CharacterBody2D
@@ -10,5 +12,3 @@ HBoxContainer
 Sprite2D
 Parallax2D
 ParallaxBackground
-PointLight2D
-Node2D
