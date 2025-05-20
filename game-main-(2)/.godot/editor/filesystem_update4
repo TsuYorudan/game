@@ -21,3 +21,4 @@ res://Scripts/command_manager.gd
 res://Scripts/battle_node.gd
 res://Scenes/ui.gd
 res://Scripts/main_menu.gd
+res://Scenes/goal.gd

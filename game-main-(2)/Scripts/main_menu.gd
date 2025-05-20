@@ -3,8 +3,7 @@ extends Control
 
 @onready var main_buttons: VBoxContainer = $MarginContainer/mainButtons
 @onready var settings_menu: Panel = $settingsMenu
-@onready var transition_layer: CanvasLayer = $"../TransitionScreen"
-@onready var transition_color_rect: ColorRect = $TransitionScreen/ColorRect
+@onready var start_music: AudioStreamPlayer = $start
 
 var _quit_after_transition := false
 
@@ -13,53 +12,41 @@ func _ready():
 	main_buttons.visible = true
 	settings_menu.visible = false
 
-	# Connect transition signal
-	transition_layer.connect("on_transition_finished", Callable(self, "_on_transition_finished"))
-
 func _on_play_pressed() -> void:
+	start_music.play()
 
-	$start.play()
-	transition_layer.transition()
-	await transition_layer.on_transition_finished
+	TransitionScreen.fade_out()
+	await TransitionScreen.on_fade_out_finished
 
-	TransitionScreen.transition()
-	await TransitionScreen.on_transition_finished
-	$start.play()                         # Start music
-	transition_layer.fade_out()           # Start fading to black
+	await start_music.finished
 
-	# Wait until fade to black is done
-	await transition_layer.on_fade_out_finished
-
-	# Wait until music finishes
-	await $start.finished
-
-	# Change scene to gameplay
 	get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
 
+	TransitionScreen.fade_in()
+	await TransitionScreen.on_fade_in_finished
+
 func _on_settings_pressed() -> void:
-	TransitionScreen.transition()
-	await TransitionScreen.on_transition_finished
+	TransitionScreen.fade_out()
+	await TransitionScreen.on_fade_out_finished
+
 	main_buttons.visible = false
 	settings_menu.visible = true
 
-func _on_quit_pressed() -> void:
-
-
-	TransitionScreen.transition()
-	await TransitionScreen.on_transition_finished
-	get_tree().quit()
-
-	transition_layer.transition()
-	# Set a flag so we know we want to quit after transition
-	_quit_after_transition = true
-	transition_layer.transition()
+	TransitionScreen.fade_in()
+	await TransitionScreen.on_fade_in_finished
 
 func _on_back_pressed() -> void:
-	TransitionScreen.transition()
-	await TransitionScreen.on_transition_finished
+	TransitionScreen.fade_out()
+	await TransitionScreen.on_fade_out_finished
+
 	main_buttons.visible = true
 	settings_menu.visible = false
 
-func _on_transition_finished() -> void:
-	if _quit_after_transition:
-		get_tree().quit()
+	TransitionScreen.fade_in()
+	await TransitionScreen.on_fade_in_finished
+
+func _on_quit_pressed() -> void:
+	_quit_after_transition = true
+	TransitionScreen.fade_out()
+	await TransitionScreen.on_fade_out_finished
+	get_tree().quit()
