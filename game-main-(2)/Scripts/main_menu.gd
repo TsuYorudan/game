@@ -20,6 +20,8 @@ func _ready():
 
 
 func _on_play_pressed() -> void:
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
 	$start.play()                         # Start music
 	transition_layer.fade_out()           # Start fading to black
 
@@ -38,15 +40,23 @@ func _on_play_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
 	main_buttons.visible = false
 	settings_menu.visible = true
 
 func _on_quit_pressed() -> void:
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
+	get_tree().quit()
+
 	transition_layer.transition()
 	# Set a flag so we know we want to quit after transition
 	_quit_after_transition = true
 
 func _on_back_pressed() -> void:
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
 	main_buttons.visible = true
 	settings_menu.visible = false
 
