@@ -1,3 +1,4 @@
+AudioStreamPlayer
 CollisionShape2D
 Area2D
 ProgressBar
@@ -5,7 +6,6 @@ Timer
 Camera2D
 AnimatedSprite2D
 CharacterBody2D
-AudioStreamPlayer
 Control
 Label
 HBoxContainer

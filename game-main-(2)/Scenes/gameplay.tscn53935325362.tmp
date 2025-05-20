@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://ds5tsettalepx"]
+[gd_scene load_steps=37 format=4 uid="uid://ds5tsettalepx"]
 
 [ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_2em84"]
 [ext_resource type="Script" uid="uid://bl654k0s22e2y" path="res://Scripts/gameplay.gd" id="1_gb8q7"]
@@ -29,7 +29,6 @@
 [ext_resource type="PackedScene" uid="uid://by72ia5sh3cd5" path="res://attack.tscn" id="25_bsu20"]
 [ext_resource type="Script" uid="uid://db1xlw6glheqh" path="res://Scripts/player.gd" id="26_bsu20"]
 [ext_resource type="PackedScene" uid="uid://c5hpdr18ongmj" path="res://Scenes/enemy.tscn" id="26_lavkw"]
-[ext_resource type="AudioStream" uid="uid://dwaihenpduyx0" path="res://Assets/Dramatic Piano Sound Effect.mp3" id="29_j1o6k"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8ipd1"]
 
@@ -881,21 +880,8 @@ collision_mask = 2
 position = Vector2(63.9688, -0.15625)
 shape = SubResource("RectangleShape2D_8ipd1")
 
-[node name="gameover" type="AudioStreamPlayer" parent="Player"]
-stream = ExtResource("29_j1o6k")
-
-[node name="Enemy6" parent="." groups=["enemies"] instance=ExtResource("26_lavkw")]
-position = Vector2(864, 681)
-collision_layer = 2
-collision_mask = 3
-
-[node name="Enemy5" parent="." groups=["enemies"] instance=ExtResource("26_lavkw")]
-position = Vector2(5901, 659)
-collision_layer = 2
-collision_mask = 3
-
 [node name="Enemy4" parent="." groups=["enemies"] instance=ExtResource("26_lavkw")]
-position = Vector2(6997, 661)
+position = Vector2(7217, 661)
 collision_layer = 2
 collision_mask = 3
 
