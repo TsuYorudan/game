@@ -2,7 +2,7 @@ extends CanvasLayer
 
 signal on_fade_in_finished
 signal on_fade_out_finished
-
+signal on_transition_finished
 
 @onready var color_rect: ColorRect = $ColorRect
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -25,3 +25,10 @@ func fade_out() -> void:
 func fade_in() -> void:
 	color_rect.visible = true
 	animation_player.play("fade_normal") # Fade back to normal (transparent)
+
+func transition():
+	await fade_out()
+	await on_fade_out_finished
+	await fade_in()
+	await on_fade_in_finished
+	emit_signal("on_transition_finished")

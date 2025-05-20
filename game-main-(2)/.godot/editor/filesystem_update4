@@ -20,3 +20,4 @@ res://Scenes/transition_screen.tscn
 res://Scripts/command_manager.gd
 res://Scripts/battle_node.gd
 res://Scenes/ui.gd
+res://Scripts/main_menu.gd
