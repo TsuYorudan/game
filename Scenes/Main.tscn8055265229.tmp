@@ -1,0 +1,646 @@
+[gd_scene load_steps=14 format=4 uid="uid://cognliff8vmtt"]
+
+[ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_r150o"]
+[ext_resource type="Script" uid="uid://buahucf2kyd0q" path="res://Scripts/command_manager.gd" id="2_idj7w"]
+[ext_resource type="Script" uid="uid://cke620574v27d" path="res://Scripts/battle_node.gd" id="2_v1gob"]
+[ext_resource type="AudioStream" uid="uid://d4bmchdhtwcpw" path="res://Assets/beats/pata.wav" id="3_jw32o"]
+[ext_resource type="PackedScene" uid="uid://co8xgbq66u62g" path="res://Scenes/player.tscn" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://dahsxfj4yr7el" path="res://Scenes/bg.tscn" id="3_pbw6q"]
+[ext_resource type="AudioStream" uid="uid://du5qih0ee8lr0" path="res://Assets/beats/pon.wav" id="4_50glp"]
+[ext_resource type="Script" uid="uid://db1xlw6glheqh" path="res://Scripts/player.gd" id="4_vy5pj"]
+[ext_resource type="AudioStream" uid="uid://biv0qm56523ma" path="res://Assets/beats/chaka.wav" id="5_vy5pj"]
+[ext_resource type="AudioStream" uid="uid://dw8qnm30yhk6s" path="res://Assets/beats/beat.wav" id="6_bmxlf"]
+[ext_resource type="Texture2D" uid="uid://be6gemmpc43eo" path="res://Assets/spritesheet_ground.png" id="9_4kpch"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_grg3l"]
+texture = ExtResource("9_4kpch")
+texture_region_size = Vector2i(128, 128)
+48:0/0 = 0
+49:0/0 = 0
+50:0/0 = 0
+51:0/0 = 0
+52:0/0 = 0
+53:0/0 = 0
+54:0/0 = 0
+55:0/0 = 0
+48:1/0 = 0
+49:1/0 = 0
+50:1/0 = 0
+51:1/0 = 0
+52:1/0 = 0
+53:1/0 = 0
+54:1/0 = 0
+55:1/0 = 0
+48:2/0 = 0
+49:2/0 = 0
+50:2/0 = 0
+51:2/0 = 0
+52:2/0 = 0
+53:2/0 = 0
+54:2/0 = 0
+55:2/0 = 0
+48:3/0 = 0
+49:3/0 = 0
+50:3/0 = 0
+51:3/0 = 0
+52:3/0 = 0
+53:3/0 = 0
+54:3/0 = 0
+55:3/0 = 0
+48:4/0 = 0
+49:4/0 = 0
+50:4/0 = 0
+51:4/0 = 0
+52:4/0 = 0
+53:4/0 = 0
+54:4/0 = 0
+55:4/0 = 0
+48:8/0 = 0
+49:8/0 = 0
+50:8/0 = 0
+51:8/0 = 0
+52:8/0 = 0
+53:8/0 = 0
+54:8/0 = 0
+55:8/0 = 0
+48:9/0 = 0
+49:9/0 = 0
+50:9/0 = 0
+51:9/0 = 0
+52:9/0 = 0
+53:9/0 = 0
+54:9/0 = 0
+55:9/0 = 0
+48:10/0 = 0
+49:10/0 = 0
+50:10/0 = 0
+51:10/0 = 0
+52:10/0 = 0
+53:10/0 = 0
+54:10/0 = 0
+55:10/0 = 0
+48:11/0 = 0
+49:11/0 = 0
+50:11/0 = 0
+51:11/0 = 0
+52:11/0 = 0
+53:11/0 = 0
+54:11/0 = 0
+55:11/0 = 0
+48:12/0 = 0
+49:12/0 = 0
+50:12/0 = 0
+51:12/0 = 0
+52:12/0 = 0
+53:12/0 = 0
+54:12/0 = 0
+55:12/0 = 0
+48:16/0 = 0
+49:16/0 = 0
+50:16/0 = 0
+51:16/0 = 0
+52:16/0 = 0
+53:16/0 = 0
+54:16/0 = 0
+55:16/0 = 0
+48:17/0 = 0
+49:17/0 = 0
+50:17/0 = 0
+51:17/0 = 0
+52:17/0 = 0
+53:17/0 = 0
+54:17/0 = 0
+55:17/0 = 0
+48:18/0 = 0
+49:18/0 = 0
+50:18/0 = 0
+51:18/0 = 0
+52:18/0 = 0
+53:18/0 = 0
+54:18/0 = 0
+55:18/0 = 0
+48:19/0 = 0
+49:19/0 = 0
+50:19/0 = 0
+51:19/0 = 0
+52:19/0 = 0
+53:19/0 = 0
+54:19/0 = 0
+55:19/0 = 0
+48:20/0 = 0
+49:20/0 = 0
+50:20/0 = 0
+51:20/0 = 0
+52:20/0 = 0
+53:20/0 = 0
+54:20/0 = 0
+55:20/0 = 0
+48:24/0 = 0
+49:24/0 = 0
+50:24/0 = 0
+51:24/0 = 0
+52:24/0 = 0
+53:24/0 = 0
+54:24/0 = 0
+55:24/0 = 0
+48:25/0 = 0
+49:25/0 = 0
+50:25/0 = 0
+51:25/0 = 0
+52:25/0 = 0
+53:25/0 = 0
+54:25/0 = 0
+55:25/0 = 0
+48:26/0 = 0
+49:26/0 = 0
+50:26/0 = 0
+51:26/0 = 0
+52:26/0 = 0
+53:26/0 = 0
+54:26/0 = 0
+55:26/0 = 0
+48:27/0 = 0
+49:27/0 = 0
+50:27/0 = 0
+51:27/0 = 0
+52:27/0 = 0
+53:27/0 = 0
+54:27/0 = 0
+55:27/0 = 0
+48:28/0 = 0
+49:28/0 = 0
+50:28/0 = 0
+51:28/0 = 0
+52:28/0 = 0
+53:28/0 = 0
+54:28/0 = 0
+55:28/0 = 0
+48:29/0 = 0
+49:29/0 = 0
+50:29/0 = 0
+51:29/0 = 0
+52:29/0 = 0
+53:29/0 = 0
+54:29/0 = 0
+55:29/0 = 0
+48:30/0 = 0
+49:30/0 = 0
+50:30/0 = 0
+51:30/0 = 0
+52:30/0 = 0
+53:30/0 = 0
+54:30/0 = 0
+55:30/0 = 0
+48:31/0 = 0
+49:31/0 = 0
+50:31/0 = 0
+51:31/0 = 0
+52:31/0 = 0
+53:31/0 = 0
+54:31/0 = 0
+55:31/0 = 0
+48:32/0 = 0
+49:32/0 = 0
+50:32/0 = 0
+51:32/0 = 0
+52:32/0 = 0
+53:32/0 = 0
+54:32/0 = 0
+55:32/0 = 0
+48:33/0 = 0
+49:33/0 = 0
+50:33/0 = 0
+51:33/0 = 0
+52:33/0 = 0
+53:33/0 = 0
+54:33/0 = 0
+55:33/0 = 0
+48:34/0 = 0
+49:34/0 = 0
+50:34/0 = 0
+51:34/0 = 0
+52:34/0 = 0
+53:34/0 = 0
+54:34/0 = 0
+55:34/0 = 0
+48:35/0 = 0
+49:35/0 = 0
+50:35/0 = 0
+51:35/0 = 0
+52:35/0 = 0
+53:35/0 = 0
+54:35/0 = 0
+55:35/0 = 0
+48:36/0 = 0
+49:36/0 = 0
+50:36/0 = 0
+51:36/0 = 0
+52:36/0 = 0
+53:36/0 = 0
+54:36/0 = 0
+55:36/0 = 0
+48:37/0 = 0
+49:37/0 = 0
+50:37/0 = 0
+51:37/0 = 0
+52:37/0 = 0
+53:37/0 = 0
+54:37/0 = 0
+55:37/0 = 0
+48:38/0 = 0
+49:38/0 = 0
+50:38/0 = 0
+51:38/0 = 0
+52:38/0 = 0
+53:38/0 = 0
+54:38/0 = 0
+55:38/0 = 0
+48:39/0 = 0
+49:39/0 = 0
+50:39/0 = 0
+51:39/0 = 0
+52:39/0 = 0
+53:39/0 = 0
+54:39/0 = 0
+55:39/0 = 0
+48:40/0 = 0
+49:40/0 = 0
+50:40/0 = 0
+51:40/0 = 0
+52:40/0 = 0
+53:40/0 = 0
+54:40/0 = 0
+55:40/0 = 0
+48:41/0 = 0
+49:41/0 = 0
+50:41/0 = 0
+51:41/0 = 0
+52:41/0 = 0
+53:41/0 = 0
+54:41/0 = 0
+55:41/0 = 0
+48:42/0 = 0
+49:42/0 = 0
+50:42/0 = 0
+51:42/0 = 0
+52:42/0 = 0
+53:42/0 = 0
+54:42/0 = 0
+55:42/0 = 0
+48:43/0 = 0
+49:43/0 = 0
+50:43/0 = 0
+51:43/0 = 0
+52:43/0 = 0
+53:43/0 = 0
+54:43/0 = 0
+55:43/0 = 0
+48:44/0 = 0
+49:44/0 = 0
+50:44/0 = 0
+51:44/0 = 0
+52:44/0 = 0
+53:44/0 = 0
+54:44/0 = 0
+55:44/0 = 0
+48:45/0 = 0
+49:45/0 = 0
+50:45/0 = 0
+51:45/0 = 0
+52:45/0 = 0
+53:45/0 = 0
+54:45/0 = 0
+55:45/0 = 0
+48:46/0 = 0
+49:46/0 = 0
+50:46/0 = 0
+51:46/0 = 0
+52:46/0 = 0
+53:46/0 = 0
+54:46/0 = 0
+48:47/0 = 0
+49:47/0 = 0
+50:47/0 = 0
+51:47/0 = 0
+52:47/0 = 0
+48:48/0 = 0
+49:48/0 = 0
+50:48/0 = 0
+51:48/0 = 0
+52:48/0 = 0
+53:48/0 = 0
+54:48/0 = 0
+55:48/0 = 0
+48:49/0 = 0
+49:49/0 = 0
+50:49/0 = 0
+51:49/0 = 0
+52:49/0 = 0
+53:49/0 = 0
+54:49/0 = 0
+55:49/0 = 0
+48:50/0 = 0
+49:50/0 = 0
+50:50/0 = 0
+51:50/0 = 0
+52:50/0 = 0
+53:50/0 = 0
+54:50/0 = 0
+55:50/0 = 0
+48:51/0 = 0
+49:51/0 = 0
+50:51/0 = 0
+51:51/0 = 0
+52:51/0 = 0
+53:51/0 = 0
+54:51/0 = 0
+55:51/0 = 0
+48:52/0 = 0
+49:52/0 = 0
+50:52/0 = 0
+51:52/0 = 0
+52:52/0 = 0
+53:52/0 = 0
+54:52/0 = 0
+55:52/0 = 0
+48:53/0 = 0
+49:53/0 = 0
+50:53/0 = 0
+51:53/0 = 0
+52:53/0 = 0
+53:53/0 = 0
+54:53/0 = 0
+55:53/0 = 0
+49:54/0 = 0
+50:54/0 = 0
+51:54/0 = 0
+52:54/0 = 0
+53:54/0 = 0
+54:54/0 = 0
+55:54/0 = 0
+51:55/0 = 0
+52:55/0 = 0
+53:55/0 = 0
+54:55/0 = 0
+55:55/0 = 0
+48:56/0 = 0
+49:56/0 = 0
+50:56/0 = 0
+51:56/0 = 0
+52:56/0 = 0
+53:56/0 = 0
+54:56/0 = 0
+55:56/0 = 0
+48:57/0 = 0
+49:57/0 = 0
+50:57/0 = 0
+51:57/0 = 0
+52:57/0 = 0
+53:57/0 = 0
+54:57/0 = 0
+55:57/0 = 0
+48:58/0 = 0
+49:58/0 = 0
+50:58/0 = 0
+51:58/0 = 0
+52:58/0 = 0
+53:58/0 = 0
+54:58/0 = 0
+55:58/0 = 0
+48:59/0 = 0
+49:59/0 = 0
+50:59/0 = 0
+51:59/0 = 0
+52:59/0 = 0
+53:59/0 = 0
+54:59/0 = 0
+55:59/0 = 0
+48:60/0 = 0
+49:60/0 = 0
+50:60/0 = 0
+51:60/0 = 0
+52:60/0 = 0
+53:60/0 = 0
+54:60/0 = 0
+48:61/0 = 0
+49:61/0 = 0
+50:61/0 = 0
+51:61/0 = 0
+52:61/0 = 0
+48:62/0 = 0
+49:62/0 = 0
+50:62/0 = 0
+51:62/0 = 0
+48:63/0 = 0
+49:63/0 = 0
+48:64/0 = 0
+49:64/0 = 0
+50:64/0 = 0
+51:64/0 = 0
+52:64/0 = 0
+53:64/0 = 0
+54:64/0 = 0
+55:64/0 = 0
+48:65/0 = 0
+49:65/0 = 0
+50:65/0 = 0
+51:65/0 = 0
+52:65/0 = 0
+53:65/0 = 0
+54:65/0 = 0
+55:65/0 = 0
+48:66/0 = 0
+49:66/0 = 0
+50:66/0 = 0
+51:66/0 = 0
+52:66/0 = 0
+53:66/0 = 0
+54:66/0 = 0
+55:66/0 = 0
+48:67/0 = 0
+49:67/0 = 0
+50:67/0 = 0
+51:67/0 = 0
+52:67/0 = 0
+53:67/0 = 0
+54:67/0 = 0
+55:67/0 = 0
+50:68/0 = 0
+51:68/0 = 0
+52:68/0 = 0
+53:68/0 = 0
+54:68/0 = 0
+55:68/0 = 0
+51:69/0 = 0
+52:69/0 = 0
+53:69/0 = 0
+54:69/0 = 0
+55:69/0 = 0
+53:70/0 = 0
+54:70/0 = 0
+55:70/0 = 0
+3:7/0 = 0
+3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:8/0 = 0
+4:8/0 = 0
+4:7/0 = 0
+4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+5:7/0 = 0
+5:8/0 = 0
+4:9/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+6:10/0 = 0
+6:11/0 = 0
+5:11/0 = 0
+5:12/0 = 0
+3:6/0 = 0
+3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:5/0 = 0
+2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:0/0 = 0
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:5/0 = 0
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_frkhe"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_grg3l")
+
+[node name="Main" type="Node2D"]
+
+[node name="RhythmSystem" parent="." instance=ExtResource("1_r150o")]
+
+[node name="BeatEffects" type="CanvasLayer" parent="RhythmSystem"]
+
+[node name="TopFlash" type="ColorRect" parent="RhythmSystem/BeatEffects"]
+anchors_preset = -1
+anchor_right = 0.993
+anchor_bottom = 1.0
+offset_right = 9.95996
+offset_bottom = -710.0
+
+[node name="BottomFlash" type="ColorRect" parent="RhythmSystem/BeatEffects"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = 710.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="CommandManager" type="Node" parent="." node_paths=PackedStringArray("pata_sound", "pon_sound", "don_sound", "chaka_sound")]
+script = ExtResource("2_idj7w")
+pata_sound = NodePath("pata")
+pon_sound = NodePath("pon")
+don_sound = NodePath("don")
+chaka_sound = NodePath("chaka")
+
+[node name="pata" type="AudioStreamPlayer" parent="CommandManager"]
+stream = ExtResource("3_jw32o")
+
+[node name="pon" type="AudioStreamPlayer" parent="CommandManager"]
+stream = ExtResource("4_50glp")
+
+[node name="chaka" type="AudioStreamPlayer" parent="CommandManager"]
+stream = ExtResource("5_vy5pj")
+
+[node name="don" type="AudioStreamPlayer" parent="CommandManager"]
+stream = ExtResource("6_bmxlf")
+
+[node name="QueueResetTimer" type="Timer" parent="CommandManager"]
+wait_time = 0.7
+one_shot = true
+
+[node name="BeatEffects" type="CanvasLayer" parent="CommandManager"]
+
+[node name="LeftFlash" type="ColorRect" parent="CommandManager/BeatEffects"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.0
+offset_right = -1264.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightFlash" type="ColorRect" parent="CommandManager/BeatEffects"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1262.0
+offset_top = 10.0
+offset_right = 2.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="battle_node" type="Node" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("2_v1gob")
+character = NodePath("../CharacterBody2D")
+
+[node name="BG" parent="." instance=ExtResource("3_pbw6q")]
+visible = false
+
+[node name="TileMap" type="Node" parent="."]
+
+[node name="Layer0" type="TileMapLayer" parent="TileMap"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+use_parent_material = true
+scale = Vector2(0.7, 0.7)
+tile_map_data = PackedByteArray("AAAAAAgAAAADAAQAAAABAAgAAAADAAQAAAACAAgAAAADAAQAAAADAAgAAAADAAQAAAAEAAgAAAADAAQAAAAFAAgAAAADAAQAAAAGAAgAAAADAAQAAAAHAAgAAAADAAQAAAAIAAgAAAADAAQAAAAJAAgAAAADAAQAAAAKAAgAAAADAAQAAAALAAgAAAADAAQAAAAMAAgAAAADAAQAAAANAAgAAAADAAQAAAAOAAgAAAADAAQAAAAPAAgAAAADAAQAAAAQAAgAAAADAAQAAAARAAgAAAADAAQAAAASAAgAAAADAAQAAAATAAgAAAADAAQAAAAUAAgAAAADAAQAAAAVAAgAAAADAAQAAAAWAAgAAAADAAQAAAAXAAgAAAADAAQAAAAYAAgAAAADAAQAAAAZAAgAAAADAAQAAAAaAAgAAAADAAQAAAAbAAgAAAADAAQAAAAcAAgAAAADAAQAAAAdAAgAAAADAAQAAAAeAAgAAAADAAQAAAAfAAgAAAADAAQAAAAgAAgAAAADAAQAAAAhAAgAAAADAAQAAAAiAAgAAAADAAQAAAAjAAgAAAADAAQAAAAkAAgAAAADAAQAAAAoAAgAAAADAAQAAAAnAAgAAAADAAQAAAAmAAgAAAADAAQAAAAlAAgAAAADAAQAAAAvAAgAAAADAAQAAAAuAAgAAAADAAQAAAAtAAgAAAADAAQAAAAsAAgAAAADAAQAAAArAAgAAAADAAQAAAAqAAgAAAADAAQAAAApAAgAAAADAAQAAAAwAAgAAAADAAQAAAAxAAgAAAADAAQAAAAAAAkAAAADAAQAAAABAAkAAAADAAQAAAACAAkAAAADAAQAAAADAAkAAAADAAQAAAAEAAkAAAADAAQAAAAFAAkAAAADAAQAAAAGAAkAAAADAAQAAAAcAAkAAAADAAQAAAAdAAkAAAADAAQAAAAeAAkAAAADAAQAAAAfAAkAAAADAAQAAAAgAAkAAAADAAQAAAAhAAkAAAADAAQAAAAiAAkAAAADAAQAAAAHAAkAAAADAAQAAAAIAAkAAAADAAQAAAAJAAkAAAADAAQAAAAKAAkAAAADAAQAAAALAAkAAAADAAQAAAAMAAkAAAADAAQAAAANAAkAAAADAAQAAAAOAAkAAAADAAQAAAAPAAkAAAADAAQAAAAQAAkAAAADAAQAAAARAAkAAAADAAQAAAASAAkAAAADAAQAAAATAAkAAAADAAQAAAAUAAkAAAADAAQAAAAVAAkAAAADAAQAAAAWAAkAAAADAAQAAAAXAAkAAAADAAQAAAAYAAkAAAADAAQAAAAZAAkAAAADAAQAAAAaAAkAAAADAAQAAAAbAAkAAAADAAQAAAAjAAkAAAADAAQAAAAkAAkAAAADAAQAAAAlAAkAAAADAAQAAAAmAAkAAAADAAQAAAAnAAkAAAADAAQAAAAoAAkAAAADAAQAAAApAAkAAAADAAQAAAAqAAkAAAADAAQAAAAxAAkAAAADAAQAAAAwAAkAAAADAAQAAAAvAAkAAAADAAQAAAAuAAkAAAADAAQAAAAtAAkAAAADAAQAAAAsAAkAAAADAAQAAAArAAkAAAADAAQAAAAyAAgAAAADAAQAAAAzAAgAAAADAAQAAAA0AAgAAAADAAQAAAA1AAgAAAADAAQAAAA2AAgAAAADAAQAAAA3AAgAAAADAAQAAAA4AAgAAAADAAQAAAA5AAgAAAADAAQAAAA6AAgAAAADAAQAAAA7AAgAAAADAAQAAAA8AAgAAAADAAQAAAA9AAgAAAADAAQAAAA+AAgAAAADAAQAAAA/AAgAAAADAAQAAABAAAgAAAADAAQAAABBAAgAAAADAAQAAABBAAkAAAADAAQAAABAAAkAAAADAAQAAAA/AAkAAAADAAQAAAA+AAkAAAADAAQAAAA9AAkAAAADAAQAAAA8AAkAAAADAAQAAAA7AAkAAAADAAQAAAA6AAkAAAADAAQAAAA5AAkAAAADAAQAAAA4AAkAAAADAAQAAAA3AAkAAAADAAQAAAA2AAkAAAADAAQAAAA1AAkAAAADAAQAAAA0AAkAAAADAAQAAAAzAAkAAAADAAQAAAAyAAkAAAADAAQAAAA=")
+tile_set = SubResource("TileSet_frkhe")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_kln2b")]
+position = Vector2(218, 718)
+scale = Vector2(8, 8)
+script = ExtResource("4_vy5pj")
+speed = 500.0
+jump_velocity = -500.0
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(52.5, -34.625)
+scale = Vector2(0.125, 0.125)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+drag_left_margin = 0.0
+
+[node name="MarchTimer" type="Timer" parent="CharacterBody2D"]
+wait_time = 1.25
+one_shot = true
+
+[connection signal="timeout" from="CommandManager/QueueResetTimer" to="CommandManager" method="_on_queue_reset_timer_timeout"]
+[connection signal="timeout" from="CharacterBody2D/MarchTimer" to="CharacterBody2D" method="_on_march_timer_timeout"]

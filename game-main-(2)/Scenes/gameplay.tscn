@@ -1,10 +1,12 @@
-[gd_scene load_steps=33 format=4 uid="uid://ds5tsettalepx"]
+[gd_scene load_steps=38 format=4 uid="uid://ds5tsettalepx"]
 
 [ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_2em84"]
-[ext_resource type="Script" uid="uid://bl654k0s22e2y" path="res://gameplay.gd" id="1_gb8q7"]
+[ext_resource type="Script" uid="uid://bl654k0s22e2y" path="res://Scripts/gameplay.gd" id="1_gb8q7"]
 [ext_resource type="Script" uid="uid://buahucf2kyd0q" path="res://Scripts/command_manager.gd" id="2_0kugc"]
+[ext_resource type="Script" uid="uid://b3105r1oyc8ia" path="res://Scenes/ui.gd" id="3_bsu20"]
 [ext_resource type="AudioStream" uid="uid://4c3kpqx84i0e" path="res://Assets/Music/nv1.wav" id="3_hwi80"]
 [ext_resource type="Theme" uid="uid://b0gcejfk0lxpr" path="res://Assets/test.tres" id="3_lavkw"]
+[ext_resource type="Script" uid="uid://dqr10fn0ctpj1" path="res://Scenes/healthbar.gd" id="4_bl6so"]
 [ext_resource type="FontFile" uid="uid://bpynnjg67qwx1" path="res://Assets/fonts/MysticGate-0WnMP.ttf" id="4_bsu20"]
 [ext_resource type="AudioStream" uid="uid://dldan56ueyos7" path="res://Assets/Music/nv2.wav" id="4_td3eq"]
 [ext_resource type="Theme" uid="uid://c87ic0dgqe5vl" path="res://Assets/backButton.tres" id="5_fhel8"]
@@ -24,8 +26,10 @@
 [ext_resource type="PackedScene" uid="uid://dahsxfj4yr7el" path="res://Scenes/bg.tscn" id="17_j6kuv"]
 [ext_resource type="Texture2D" uid="uid://be6gemmpc43eo" path="res://Assets/spritesheet_ground.png" id="18_s35uu"]
 [ext_resource type="PackedScene" uid="uid://co8xgbq66u62g" path="res://Scenes/player.tscn" id="19_5a717"]
-[ext_resource type="Script" uid="uid://db1xlw6glheqh" path="res://Scripts/player.gd" id="20_dsr22"]
+[ext_resource type="PackedScene" uid="uid://by72ia5sh3cd5" path="res://attack.tscn" id="25_bsu20"]
+[ext_resource type="Script" uid="uid://db1xlw6glheqh" path="res://Scripts/player.gd" id="26_bsu20"]
 [ext_resource type="PackedScene" uid="uid://c5hpdr18ongmj" path="res://Scenes/enemy.tscn" id="26_lavkw"]
+[ext_resource type="AudioStream" uid="uid://dwaihenpduyx0" path="res://Assets/Dramatic Piano Sound Effect.mp3" id="29_j1o6k"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8ipd1"]
 
@@ -565,6 +569,9 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_grg3l")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ipd1"]
+size = Vector2(181.563, 28.9375)
+
 [node name="gameplay" type="Node"]
 script = ExtResource("1_gb8q7")
 
@@ -591,16 +598,57 @@ grow_horizontal = 2
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="ComboLabelPersistent" type="Label" parent="UI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 55.0
-offset_top = 81.0
-offset_right = -863.0
-offset_bottom = -579.0
+anchors_preset = -1
+anchor_top = 0.312
+anchor_bottom = 0.312
+offset_left = 37.0
+offset_top = -88.64
+offset_right = 420.0
+offset_bottom = 32.36
+grow_vertical = 2
+
+[node name="InputProgess" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_bsu20")
+
+[node name="InputProgress" type="HBoxContainer" parent="UI/InputProgess"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 17.175
+anchor_right = 31.92
+anchor_bottom = 18.0
+offset_left = 42.0
+offset_top = -611.0
+offset_right = 27.2
+offset_bottom = -552.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
+
+[node name="Label4" type="Label" parent="UI/InputProgess/InputProgress"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="UI/InputProgess/InputProgress"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="UI/InputProgess/InputProgress"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/InputProgess/InputProgress"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="UI" node_paths=PackedStringArray("player")]
+modulate = Color(0.392157, 1, 0.0823529, 1)
+offset_left = 26.0
+offset_top = 49.0
+offset_right = 391.0
+offset_bottom = 80.0
+value = 100.0
+show_percentage = false
+script = ExtResource("4_bl6so")
+player = NodePath("../../Player")
 
 [node name="UI2" type="CanvasLayer" parent="."]
 
@@ -731,7 +779,7 @@ layout_mode = 2
 theme = ExtResource("5_fhel8")
 text = "LEAVE"
 
-[node name="CommandManager" type="Node" parent="." node_paths=PackedStringArray("success_music", "pata_sound", "pon_sound", "don_sound", "chaka_sound")]
+[node name="CommandManager" type="Node" parent="." node_paths=PackedStringArray("success_music", "pata_sound", "pon_sound", "don_sound", "chaka_sound", "input_display")]
 script = ExtResource("2_0kugc")
 success_music = NodePath("nv1")
 pata_sound = NodePath("pata")
@@ -741,6 +789,7 @@ chaka_sound = NodePath("chaka")
 neutral_success_music = Array[AudioStream]([ExtResource("3_hwi80"), ExtResource("4_td3eq"), ExtResource("5_yr68n")])
 combo_success_music = Array[AudioStream]([ExtResource("6_eyn1h"), ExtResource("7_ip4p6"), ExtResource("8_xfxku")])
 resonance_success_music = Array[AudioStream]([ExtResource("9_yvepb"), ExtResource("10_rix74"), ExtResource("11_nccno")])
+input_display = NodePath("../UI/InputProgess")
 
 [node name="pata" type="AudioStreamPlayer" parent="CommandManager"]
 stream = ExtResource("12_deoll")
@@ -759,7 +808,6 @@ wait_time = 0.7
 one_shot = true
 
 [node name="BeatEffects" type="CanvasLayer" parent="CommandManager"]
-visible = false
 
 [node name="LeftFlash" type="ColorRect" parent="CommandManager/BeatEffects"]
 anchors_preset = 15
@@ -804,29 +852,69 @@ scale = Vector2(0.7, 0.7)
 tile_map_data = PackedByteArray("AAAAAAgAAAADAAQAAAABAAgAAAADAAQAAAACAAgAAAADAAQAAAADAAgAAAADAAQAAAAEAAgAAAADAAQAAAAFAAgAAAADAAQAAAAGAAgAAAADAAQAAAAHAAgAAAADAAQAAAAIAAgAAAADAAQAAAAJAAgAAAADAAQAAAAKAAgAAAADAAQAAAALAAgAAAADAAQAAAAMAAgAAAADAAQAAAANAAgAAAADAAQAAAAOAAgAAAADAAQAAAAPAAgAAAADAAQAAAAQAAgAAAADAAQAAAARAAgAAAADAAQAAAASAAgAAAADAAQAAAATAAgAAAADAAQAAAAUAAgAAAADAAQAAAAVAAgAAAADAAQAAAAWAAgAAAADAAQAAAAXAAgAAAADAAQAAAAYAAgAAAADAAQAAAAZAAgAAAADAAQAAAAaAAgAAAADAAQAAAAbAAgAAAADAAQAAAAcAAgAAAADAAQAAAAdAAgAAAADAAQAAAAeAAgAAAADAAQAAAAfAAgAAAADAAQAAAAgAAgAAAADAAQAAAAhAAgAAAADAAQAAAAiAAgAAAADAAQAAAAjAAgAAAADAAQAAAAkAAgAAAADAAQAAAAoAAgAAAADAAQAAAAnAAgAAAADAAQAAAAmAAgAAAADAAQAAAAlAAgAAAADAAQAAAAvAAgAAAADAAQAAAAuAAgAAAADAAQAAAAtAAgAAAADAAQAAAAsAAgAAAADAAQAAAArAAgAAAADAAQAAAAqAAgAAAADAAQAAAApAAgAAAADAAQAAAAwAAgAAAADAAQAAAAxAAgAAAADAAQAAAAAAAkAAAADAAQAAAABAAkAAAADAAQAAAACAAkAAAADAAQAAAADAAkAAAADAAQAAAAEAAkAAAADAAQAAAAFAAkAAAADAAQAAAAGAAkAAAADAAQAAAAcAAkAAAADAAQAAAAdAAkAAAADAAQAAAAeAAkAAAADAAQAAAAfAAkAAAADAAQAAAAgAAkAAAADAAQAAAAhAAkAAAADAAQAAAAiAAkAAAADAAQAAAAHAAkAAAADAAQAAAAIAAkAAAADAAQAAAAJAAkAAAADAAQAAAAKAAkAAAADAAQAAAALAAkAAAADAAQAAAAMAAkAAAADAAQAAAANAAkAAAADAAQAAAAOAAkAAAADAAQAAAAPAAkAAAADAAQAAAAQAAkAAAADAAQAAAARAAkAAAADAAQAAAASAAkAAAADAAQAAAATAAkAAAADAAQAAAAUAAkAAAADAAQAAAAVAAkAAAADAAQAAAAWAAkAAAADAAQAAAAXAAkAAAADAAQAAAAYAAkAAAADAAQAAAAZAAkAAAADAAQAAAAaAAkAAAADAAQAAAAbAAkAAAADAAQAAAAjAAkAAAADAAQAAAAkAAkAAAADAAQAAAAlAAkAAAADAAQAAAAmAAkAAAADAAQAAAAnAAkAAAADAAQAAAAoAAkAAAADAAQAAAApAAkAAAADAAQAAAAqAAkAAAADAAQAAAAxAAkAAAADAAQAAAAwAAkAAAADAAQAAAAvAAkAAAADAAQAAAAuAAkAAAADAAQAAAAtAAkAAAADAAQAAAAsAAkAAAADAAQAAAArAAkAAAADAAQAAAAyAAgAAAADAAQAAAAzAAgAAAADAAQAAAA0AAgAAAADAAQAAAA1AAgAAAADAAQAAAA2AAgAAAADAAQAAAA3AAgAAAADAAQAAAA4AAgAAAADAAQAAAA5AAgAAAADAAQAAAA6AAgAAAADAAQAAAA7AAgAAAADAAQAAAA8AAgAAAADAAQAAAA9AAgAAAADAAQAAAA+AAgAAAADAAQAAAA/AAgAAAADAAQAAABAAAgAAAADAAQAAABBAAgAAAADAAQAAABBAAkAAAADAAQAAABAAAkAAAADAAQAAAA/AAkAAAADAAQAAAA+AAkAAAADAAQAAAA9AAkAAAADAAQAAAA8AAkAAAADAAQAAAA7AAkAAAADAAQAAAA6AAkAAAADAAQAAAA5AAkAAAADAAQAAAA4AAkAAAADAAQAAAA3AAkAAAADAAQAAAA2AAkAAAADAAQAAAA1AAkAAAADAAQAAAA0AAkAAAADAAQAAAAzAAkAAAADAAQAAAAyAAkAAAADAAQAAABCAAgAAAADAAQAAABDAAgAAAADAAQAAABEAAgAAAADAAQAAABFAAgAAAADAAQAAABGAAgAAAADAAQAAABHAAgAAAADAAQAAABIAAgAAAADAAQAAABJAAgAAAADAAQAAABKAAgAAAADAAQAAABLAAgAAAADAAQAAABMAAgAAAADAAQAAABNAAgAAAADAAQAAABOAAgAAAADAAQAAABPAAgAAAADAAQAAABQAAgAAAADAAQAAABRAAgAAAADAAQAAABSAAgAAAADAAQAAABTAAgAAAADAAQAAABUAAgAAAADAAQAAABVAAgAAAADAAQAAABWAAgAAAADAAQAAABXAAgAAAADAAQAAABYAAgAAAADAAQAAABZAAgAAAADAAQAAABaAAgAAAADAAQAAABbAAgAAAADAAQAAABcAAgAAAADAAQAAABdAAgAAAADAAQAAABeAAgAAAADAAQAAABfAAgAAAADAAQAAABgAAgAAAADAAQAAABhAAgAAAADAAQAAABiAAgAAAADAAQAAABjAAgAAAADAAQAAABkAAgAAAADAAQAAABlAAgAAAADAAQAAABmAAgAAAADAAQAAABnAAgAAAADAAQAAABoAAgAAAADAAQAAABCAAkAAAADAAQAAABDAAkAAAADAAQAAABEAAkAAAADAAQAAABFAAkAAAADAAQAAABGAAkAAAADAAQAAABXAAkAAAADAAQAAABYAAkAAAADAAQAAABZAAkAAAADAAQAAABaAAkAAAADAAQAAABbAAkAAAADAAQAAABcAAkAAAADAAQAAABdAAkAAAADAAQAAABeAAkAAAADAAQAAABfAAkAAAADAAQAAABgAAkAAAADAAQAAABhAAkAAAADAAQAAABpAAkAAAADAAQAAABoAAkAAAADAAQAAABnAAkAAAADAAQAAABmAAkAAAADAAQAAABlAAkAAAADAAQAAABkAAkAAAADAAQAAABjAAkAAAADAAQAAABiAAkAAAADAAQAAABWAAkAAAADAAQAAABVAAkAAAADAAQAAABUAAkAAAADAAQAAABTAAkAAAADAAQAAABSAAkAAAADAAQAAABRAAkAAAADAAQAAABQAAkAAAADAAQAAABPAAkAAAADAAQAAABOAAkAAAADAAQAAABNAAkAAAADAAQAAABMAAkAAAADAAQAAABLAAkAAAADAAQAAABKAAkAAAADAAQAAABJAAkAAAADAAQAAABIAAkAAAADAAQAAABHAAkAAAADAAQAAABpAAgAAAADAAQAAABqAAgAAAADAAQAAABrAAgAAAADAAQAAABsAAgAAAADAAQAAABtAAgAAAADAAQAAABtAAkAAAADAAQAAABuAAkAAAADAAQAAABvAAkAAAADAAQAAABwAAkAAAADAAQAAABxAAkAAAADAAQAAAByAAkAAAADAAQAAABzAAkAAAADAAQAAAB0AAkAAAADAAQAAAB1AAkAAAADAAQAAAB2AAkAAAADAAQAAAB3AAkAAAADAAQAAAB3AAgAAAADAAQAAAB2AAgAAAADAAQAAAB1AAgAAAADAAQAAAB0AAgAAAADAAQAAABzAAgAAAADAAQAAAByAAgAAAADAAQAAABxAAgAAAADAAQAAABwAAgAAAADAAQAAABvAAgAAAADAAQAAABuAAgAAAADAAQAAABsAAkAAAADAAQAAABrAAkAAAADAAQAAABqAAkAAAADAAQAAAD//wgAAAADAAQAAAD//wkAAAADAAQAAAD+/wgAAAADAAQAAAD+/wkAAAADAAQAAAD9/wkAAAADAAQAAAD9/wgAAAADAAQAAAD8/wgAAAADAAQAAAD8/wkAAAADAAQAAAD7/wkAAAADAAQAAAD7/wgAAAADAAQAAAD6/wgAAAADAAQAAAD6/wkAAAADAAQAAAD5/wgAAAADAAQAAAD5/wkAAAADAAQAAAD4/wgAAAADAAQAAAD4/wkAAAADAAQAAAD3/wkAAAADAAQAAAD3/wgAAAADAAQAAAD2/wgAAAADAAQAAAD1/wgAAAADAAQAAAD0/wgAAAADAAQAAADz/wgAAAADAAQAAADy/wgAAAADAAQAAADx/wgAAAADAAQAAADw/wgAAAADAAQAAADv/wgAAAADAAQAAADu/wgAAAADAAQAAADu/wkAAAADAAQAAADv/wkAAAADAAQAAADw/wkAAAADAAQAAADx/wkAAAADAAQAAADy/wkAAAADAAQAAADz/wkAAAADAAQAAAD0/wkAAAADAAQAAAD1/wkAAAADAAQAAAD2/wkAAAADAAQAAADp/wgAAAADAAQAAADq/wgAAAADAAQAAADr/wgAAAADAAQAAADs/wgAAAADAAQAAADt/wgAAAADAAQAAADt/wkAAAADAAQAAADs/wkAAAADAAQAAADr/wkAAAADAAQAAADq/wkAAAADAAQAAADp/wkAAAADAAQAAADp/wcAAAADAAQAAADp/wYAAAADAAQAAADp/wUAAAADAAQAAADp/wQAAAADAAQAAADp/wMAAAADAAQAAADp/wIAAAADAAQAAADp/wEAAAADAAQAAADp/wAAAAADAAQAAADp////AAADAAQAAADq/wAAAAADAAQAAADq/wEAAAADAAQAAADq/wIAAAADAAQAAADq/wMAAAADAAQAAADq/wQAAAADAAQAAADq/wUAAAADAAQAAADq/wYAAAADAAQAAADq/wcAAAADAAQAAADr/wcAAAADAAQAAADr/wYAAAADAAQAAADr/wUAAAADAAQAAADr/wQAAAADAAQAAADr/wMAAAADAAQAAADr/wIAAAADAAQAAADs/wQAAAADAAQAAADs/wUAAAADAAQAAADs/wYAAAADAAQAAADs/wcAAAADAAQAAAA=")
 tile_set = SubResource("TileSet_frkhe")
 
-[node name="Player" parent="." instance=ExtResource("19_5a717")]
-position = Vector2(218, 718)
-scale = Vector2(8, 8)
-script = ExtResource("20_dsr22")
-speed = 500.0
-jump_velocity = -500.0
+[node name="Projectile" parent="." groups=["projectile"] instance=ExtResource("25_bsu20")]
+position = Vector2(281, 646)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(52.5, -34.625)
+[node name="Player" parent="." groups=["player"] instance=ExtResource("19_5a717")]
+position = Vector2(219, 641)
+scale = Vector2(8, 8)
+collision_mask = 3
+script = ExtResource("26_bsu20")
+
+[node name="MarchTimer" type="Timer" parent="Player"]
+wait_time = 1.25
+one_shot = true
+
+[node name="Camera2D2" type="Camera2D" parent="Player"]
+position = Vector2(52.375, -23.75)
 scale = Vector2(0.125, 0.125)
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 drag_left_margin = 0.0
 
-[node name="MarchTimer" type="Timer" parent="Player"]
-wait_time = 1.25
-one_shot = true
+[node name="EnemyDetector" type="Area2D" parent="Player"]
+collision_layer = 128
+collision_mask = 2
 
-[node name="Enemy" parent="." instance=ExtResource("26_lavkw")]
-visible = false
-position = Vector2(917, 653)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/EnemyDetector"]
+position = Vector2(63.9688, -0.15625)
+shape = SubResource("RectangleShape2D_8ipd1")
+
+[node name="gameover" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("29_j1o6k")
+
+[node name="Enemy6" parent="." groups=["enemies"] instance=ExtResource("26_lavkw")]
+position = Vector2(864, 681)
+collision_layer = 2
+collision_mask = 3
+
+[node name="Enemy5" parent="." groups=["enemies"] instance=ExtResource("26_lavkw")]
+position = Vector2(5901, 659)
+collision_layer = 2
+collision_mask = 3
+
+[node name="Enemy4" parent="." groups=["enemies"] instance=ExtResource("26_lavkw")]
+position = Vector2(6997, 661)
+collision_layer = 2
+collision_mask = 3
+
+[node name="Enemy3" parent="." groups=["enemies"] instance=ExtResource("26_lavkw")]
+position = Vector2(5753, 662)
+collision_layer = 2
+collision_mask = 3
+
+[node name="Enemy2" parent="." groups=["enemies"] instance=ExtResource("26_lavkw")]
+position = Vector2(4473, 661)
+collision_layer = 2
+collision_mask = 3
+
+[node name="Enemy" parent="." groups=["enemies"] instance=ExtResource("26_lavkw")]
+position = Vector2(2984, 662)
+collision_layer = 2
+collision_mask = 3
 
 [connection signal="value_changed" from="UI2/pause/MarginContainer/VBoxContainer/HBoxContainer/volumecontrol" to="UI2/pause/MarginContainer/VBoxContainer/HBoxContainer/volumecontrol" method="_on_value_changed"]
 [connection signal="timeout" from="CommandManager/QueueResetTimer" to="CommandManager" method="_on_queue_reset_timer_timeout"]
+[connection signal="hpchange" from="Player" to="UI/ProgressBar" method="_on_player_hpchange"]
 [connection signal="timeout" from="Player/MarchTimer" to="Player" method="_on_march_timer_timeout"]

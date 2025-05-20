@@ -1,8 +1,8 @@
 extends Node
 
 @export var commands: Dictionary = {
-	"pata pata pata pon": "march",
-	"pon pon pata pon": "calm_enemy",
+	"pata pata pon pon": "march",
+	"pon pon pata don": "attack",
 	"chaka chaka pata pon": "heal",
 	"don don chaka chaka": "calm_enemy",
 	"pon pata pon pata": "retreat"
@@ -19,6 +19,9 @@ extends Node
 @export var neutral_success_music: Array[AudioStream] = []
 @export var combo_success_music: Array[AudioStream] = []
 @export var resonance_success_music: Array[AudioStream] = []
+
+# Input visual tracker (InputProgress)
+@export var input_display: Node  # Assign your InputProgress node in the editor
 
 var command_queue: Array = []
 var max_command_length: int = 4
@@ -42,7 +45,7 @@ var combo_protection_active: bool = false
 # Track last played success music to avoid repetition
 var last_success_stream: AudioStream = null
 
-@onready var combo_label: Label =  $"../UI/ComboLabelPersistent"
+@onready var combo_label: Label = $"../UI/ComboLabelPersistent"
 var combo_tween: Tween = null
 
 func _ready() -> void:
@@ -70,6 +73,9 @@ func _ready() -> void:
 		combo_label.visible = false
 		combo_label.modulate.a = 0.0
 		combo_label.scale = Vector2.ONE
+
+	if input_display and input_display.has_method("reset_input"):
+		input_display.call("reset_input")
 
 func _process(_delta: float) -> void:
 	var current_time = Time.get_ticks_msec()
@@ -113,6 +119,9 @@ func handle_input(beat_sound: String, current_time: int) -> void:
 		reset_combo()
 		$QueueResetTimer.stop()
 
+		if input_display and input_display.has_method("reset_input"):
+			input_display.call("reset_input")
+
 		player.pitch_scale = randf_range(1.0, 1.05)
 		player.play()
 		await get_tree().create_timer(0.1).timeout
@@ -150,6 +159,10 @@ func register_beat(beat_sound: String) -> void:
 
 	print("✅ Registered beat. Current Queue:", command_queue)
 	$QueueResetTimer.start()
+
+	if input_display and input_display.has_method("add_input"):
+		input_display.call("add_input")
+
 	check_command()
 
 func check_command() -> void:
@@ -165,7 +178,10 @@ func check_command() -> void:
 		else:
 			print("❌ No command matched.")
 			reset_combo()
+
 		command_queue.clear()
+		if input_display and input_display.has_method("reset_input"):
+			input_display.call("reset_input")
 
 func execute_command(action: String) -> void:
 	await get_tree().create_timer(beat_interval).timeout
@@ -266,3 +282,5 @@ func _on_queue_reset_timer_timeout() -> void:
 	if command_queue.size() != 0:
 		print("⏳ Timeout! Clearing command queue.")
 		command_queue.clear()
+		if input_display and input_display.has_method("reset_input"):
+			input_display.call("reset_input")

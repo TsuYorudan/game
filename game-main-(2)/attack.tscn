@@ -1,0 +1,114 @@
+[gd_scene load_steps=14 format=3 uid="uid://by72ia5sh3cd5"]
+
+[ext_resource type="Script" uid="uid://dvvj8efjbic76" path="res://projectile.gd" id="1_63pi1"]
+[ext_resource type="Texture2D" uid="uid://dsoaba6x4r11j" path="res://Assets/Wanderer Magican/Charge_1.png" id="1_hvxpb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvxpb"]
+size = Vector2(10.4167, 3.33333)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvxpb"]
+atlas = ExtResource("1_hvxpb")
+region = Rect2(320, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdck2"]
+atlas = ExtResource("1_hvxpb")
+region = Rect2(384, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_043e1"]
+atlas = ExtResource("1_hvxpb")
+region = Rect2(448, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qhpk"]
+atlas = ExtResource("1_hvxpb")
+region = Rect2(512, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63pi1"]
+atlas = ExtResource("1_hvxpb")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqc8w"]
+atlas = ExtResource("1_hvxpb")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yfhp"]
+atlas = ExtResource("1_hvxpb")
+region = Rect2(128, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0c0jm"]
+atlas = ExtResource("1_hvxpb")
+region = Rect2(192, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3och2"]
+atlas = ExtResource("1_hvxpb")
+region = Rect2(256, 0, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_043e1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvxpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdck2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_043e1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qhpk")
+}],
+"loop": false,
+"name": &"dissipate",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63pi1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqc8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yfhp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0c0jm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3och2")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 10.0
+}]
+
+[node name="Projectile" type="CharacterBody2D"]
+scale = Vector2(30, 30)
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_63pi1")
+MAX_SPEED = 500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.0883331, 0.0162501)
+scale = Vector2(0.3, 0.3)
+shape = SubResource("RectangleShape2D_hvxpb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.386667, 0.0600002)
+scale = Vector2(0.09, 0.09)
+sprite_frames = SubResource("SpriteFrames_043e1")
+animation = &"shoot"
+autoplay = "shoot"
+frame_progress = 0.499523
+
+[node name="hitbox" type="Area2D" parent="."]
+position = Vector2(-0.386667, 0.0600002)
+scale = Vector2(0.09, 0.09)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(9.11112, -0.296298)
+scale = Vector2(3.33333, 3.33333)
+shape = SubResource("RectangleShape2D_hvxpb")

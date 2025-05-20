@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dgya4v7w3eyqb"]
+[gd_scene load_steps=22 format=3 uid="uid://dgya4v7w3eyqb"]
 
 [ext_resource type="Texture2D" uid="uid://daa0nvinwqoif" path="res://Assets/v675-taus-35c-technologyinterface.jpg" id="1_ce3w2"]
 [ext_resource type="Script" uid="uid://d3sw12l2b4wv0" path="res://Scripts/main_menu.gd" id="1_n45e2"]
@@ -9,13 +9,14 @@
 [ext_resource type="Script" uid="uid://buxgfk25wtt4x" path="res://Scripts/menu_parallax.gd" id="4_ujyyl"]
 [ext_resource type="Texture2D" uid="uid://da1wjhur4r4b8" path="res://Assets/stars/Nebula Aqua-Pink.png" id="5_mkpwh"]
 [ext_resource type="Theme" uid="uid://b0gcejfk0lxpr" path="res://Assets/test.tres" id="5_opfnp"]
-[ext_resource type="Script" uid="uid://d050rjhc1r4u0" path="res://menu_parallax2.gd" id="6_4nkqq"]
+[ext_resource type="Script" uid="uid://d050rjhc1r4u0" path="res://Scripts/menu_parallax2.gd" id="6_4nkqq"]
 [ext_resource type="FontFile" uid="uid://bpynnjg67qwx1" path="res://Assets/fonts/MysticGate-0WnMP.ttf" id="6_cp0ys"]
 [ext_resource type="Script" uid="uid://b8acaaw08wv5g" path="res://Scripts/volume.gd" id="7_cp0ys"]
 [ext_resource type="Theme" uid="uid://c87ic0dgqe5vl" path="res://Assets/backButton.tres" id="7_yhxw7"]
 [ext_resource type="Script" uid="uid://bq4ypisw104le" path="res://Scripts/menu_parallax3.gd" id="8_ehtkc"]
 [ext_resource type="Texture2D" uid="uid://bdswgalbqqc3" path="res://Assets/stars/Stars-Big_1_1_PC.png" id="10_vtepg"]
 [ext_resource type="Texture2D" uid="uid://c8xd5eahbgfg5" path="res://Assets/stars/Stars Small_2.png" id="12_m3bi6"]
+[ext_resource type="AudioStream" uid="uid://c52dd8txsfnao" path="res://Assets/Piano Sound Effect.mp3" id="17_wyh8j"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yhxw7"]
 
@@ -298,6 +299,9 @@ popup/item_1/text = "1680x1050"
 popup/item_1/id = 1
 popup/item_2/text = "1280x720"
 popup/item_2/id = 2
+
+[node name="start" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_wyh8j")
 
 [connection signal="pressed" from="MarginContainer/mainButtons/HBoxContainer3/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/mainButtons/HBoxContainer2/settings" to="." method="_on_settings_pressed"]
