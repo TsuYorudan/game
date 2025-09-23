@@ -12,3 +12,7 @@ res://attack.tscn
 res://menu.tscn
 res://Scenes/transition_screen.tscn
 res://Scripts/command_manager.gd
+res://Scripts/rhythm_system.gd
+res://Scenes/new gameplay.tscn
+res://Scripts/turn_manager.gd
+res://Scripts/player.gd
