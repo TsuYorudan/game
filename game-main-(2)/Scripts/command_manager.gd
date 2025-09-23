@@ -1,5 +1,7 @@
 extends Node
 
+#test
+
 @export var commands: Dictionary = {
 	"pata pata pon pon": "march",
 	"pon pon pata don": "attack",

@@ -1,0 +1,15 @@
+CanvasLayer
+CollisionShape2D
+StaticBody2D
+Camera2D
+Sprite2D
+ParallaxLayer
+ParallaxBackground
+Parallax2D
+TileMapLayer
+Node
+AnimatedSprite2D
+CharacterBody2D
+TileMap
+WorldEnvironment
+Timer
