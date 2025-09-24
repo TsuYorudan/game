@@ -1,5 +1,9 @@
-Node
+Control
+Label
+CanvasLayer
 Node2D
+TileMap
+Node
 CollisionShape2D
 Area2D
 TileMapLayer
@@ -9,7 +13,3 @@ Timer
 Camera2D
 AnimatedSprite2D
 CharacterBody2D
-Control
-Label
-HBoxContainer
-Sprite2D

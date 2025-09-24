@@ -418,6 +418,7 @@ shape = SubResource("RectangleShape2D_8erm5")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 3.59
 texture = ExtResource("7_3smsa")
+offset = Vector2(10, 10)
 
 [node name="hitbox" type="Area2D" parent="."]
 

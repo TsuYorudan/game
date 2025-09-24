@@ -7,11 +7,6 @@ signal died
 @export var MAX_HP := 3
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var detector: Area2D = $Area2D
-@onready var attack_area: Area2D = $Area2D2
-@onready var hitbox: Area2D = $hitbox  # For *attacking* the player
-@onready var hurtbox: Area2D = $hurtbox  # For *receiving* damage
-@onready var attack_repeat_timer: Timer = $Timer
 
 var player: Node2D = null
 var state: String = "idle"
@@ -20,13 +15,6 @@ var hp: int
 
 func _ready() -> void:
 	hp = MAX_HP
-	detector.body_entered.connect(_on_body_entered)
-	attack_area.body_entered.connect(_on_attack_area_entered)
-	attack_area.body_exited.connect(_on_attack_area_exited)
-	attack_repeat_timer.timeout.connect(_on_attack_repeat_timeout)
-	hitbox.monitoring = false
-	hurtbox.monitoring = true
-	hurtbox.connect("area_entered", _on_hurtbox_area_entered)
 	print("[DEBUG] Enemy ready, HP =", hp)
 
 func _physics_process(delta: float) -> void:
@@ -69,41 +57,6 @@ func _physics_process(delta: float) -> void:
 			await sprite.animation_finished
 			free()
 
-func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):
-		player = body
-		state = "walk"
-
-func _on_attack_area_entered(body: Node) -> void:
-	if body.is_in_group("player"):
-		player = body
-		if state != "attack":
-			state = "attack"
-			attack_repeat_timer.start()
-
-func _on_attack_area_exited(body: Node) -> void:
-	if body == player and not is_dead:
-		attack_repeat_timer.stop()
-		state = "walk"
-
-func _on_attack_repeat_timeout() -> void:
-	if state == "attack" and not is_dead:
-		hitbox.monitoring = true
-		sprite.play("attack")
-		await sprite.animation_finished
-		sprite.play("idle")
-		hitbox.monitoring = false
-
-func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if is_dead:
-		return
-
-	# DEBUG OUTPUT
-	print("[DEBUG] Hurtbox touched by:", area.name)
-
-	if area.name == "hitbox" or area.get_parent().name == "hitbox":
-		print("[DEBUG] Projectile hit confirmed!")
-		take_damage()
 
 func take_damage() -> void:
 	if is_dead:

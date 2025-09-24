@@ -2,17 +2,10 @@ res://Scenes/Main.tscn
 res://Assets/buttons.tres
 res://Assets/test.tres
 res://Assets/backButton.tres
-res://Scenes/rhythm_system.tscn
+res://Scenes/gameplay.tscn
+res://Scenes/new gameplay.tscn
 res://Scenes/player.tscn
 res://Scenes/enemy.tscn
-res://Scenes/main_menu.tscn
-res://Scenes/gameplay.tscn
-res://Scenes/bg.tscn
-res://attack.tscn
-res://menu.tscn
-res://Scenes/transition_screen.tscn
-res://Scripts/command_manager.gd
-res://Scripts/rhythm_system.gd
-res://Scenes/new gameplay.tscn
+res://Scenes/enemy.gd
 res://Scripts/turn_manager.gd
-res://Scripts/player.gd
+res://Scenes/bg.tscn

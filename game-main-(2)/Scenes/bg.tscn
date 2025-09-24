@@ -138,8 +138,8 @@ motion_mirroring = Vector2(1920, 0)
 script = ExtResource("13_ngop3")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground3/ParallaxLayer5"]
-position = Vector2(960, 300)
-scale = Vector2(3.33854, 1.86214)
+position = Vector2(960, 397.382)
+scale = Vector2(3.33854, 2.4638)
 texture = ExtResource("13_e0ca0")
 offset = Vector2(0, 0.145)
 
@@ -168,6 +168,7 @@ texture = ExtResource("1_wh7op")
 offset = Vector2(0, 0.145)
 
 [node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground3"]
+visible = false
 scale = Vector2(1, 1.44)
 motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(1920, 0)
@@ -179,6 +180,7 @@ texture = ExtResource("14_ngop3")
 offset = Vector2(0, 0.145)
 
 [node name="ParallaxLayer11" type="ParallaxLayer" parent="ParallaxBackground3"]
+visible = false
 scale = Vector2(1, 2.0736)
 motion_scale = Vector2(0.3, 0.3)
 motion_mirroring = Vector2(1920, 0)
