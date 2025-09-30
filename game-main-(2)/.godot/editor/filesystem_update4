@@ -6,6 +6,4 @@ res://Scenes/gameplay.tscn
 res://Scenes/new gameplay.tscn
 res://Scenes/player.tscn
 res://Scenes/enemy.tscn
-res://Scenes/enemy.gd
-res://Scripts/turn_manager.gd
-res://Scenes/bg.tscn
+res://Scenes/beatbar.gd

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://b4bf1umf3f2m"]
+[gd_scene load_steps=22 format=4 uid="uid://b4bf1umf3f2m"]
 
 [ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_aoy1v"]
 [ext_resource type="Script" uid="uid://buahucf2kyd0q" path="res://Scripts/command_manager.gd" id="2_e8tod"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dldan56ueyos7" path="res://Assets/Music/nv2.wav" id="4_uu2y7"]
 [ext_resource type="AudioStream" uid="uid://b7fyuajecyvql" path="res://Assets/Music/nv3.wav" id="5_w7hjo"]
 [ext_resource type="Script" uid="uid://dss7hdl8v4j3x" path="res://Scenes/turnCamera.gd" id="11_thm4x"]
+[ext_resource type="Script" uid="uid://ct53lic783mtr" path="res://Scenes/beatbar.gd" id="12_0i8bo"]
 [ext_resource type="AudioStream" uid="uid://d4bmchdhtwcpw" path="res://Assets/beats/pata.wav" id="12_6dsoa"]
 [ext_resource type="PackedScene" uid="uid://c5hpdr18ongmj" path="res://Scenes/enemy.tscn" id="12_uu2y7"]
 [ext_resource type="AudioStream" uid="uid://du5qih0ee8lr0" path="res://Assets/beats/pon.wav" id="13_82xq7"]
@@ -637,6 +638,13 @@ position = Vector2(1059, 623)
 scale = Vector2(8, 8)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control2" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("12_0i8bo")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
