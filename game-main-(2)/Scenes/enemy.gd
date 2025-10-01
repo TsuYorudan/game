@@ -1,75 +1,34 @@
-extends CharacterBody2D
+extends Node2D
+class_name Enemy
 
-signal died
+var beats := ["pata", "pon", "don", "chaka"]
+var attack_sequence: Array = []
+var chosen_attack: String = "basic"
 
-@export var SPEED := 100.0
-@export var DISSOLVE_TIME := 1.2
-@export var MAX_HP := 3
+signal enemy_attack_started(sequence: Array)
+signal enemy_attack_resolved(success: bool, mismatches: int)
 
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+func decide_action():
+	# Always pick 4 beats randomly (basic attack)
+	chosen_attack = "basic"
+	attack_sequence.clear()
+	for i in range(4):
+		attack_sequence.append(beats[randi() % beats.size()])
 
-var player: Node2D = null
-var state: String = "idle"
-var is_dead := false
-var hp: int
+	print("👾 Enemy decided attack:", attack_sequence)
+	emit_signal("enemy_attack_started", attack_sequence)
 
-func _ready() -> void:
-	hp = MAX_HP
-	print("[DEBUG] Enemy ready, HP =", hp)
+func perform_action(player_input: Array):
+	# Compare player input to enemy sequence
+	var mismatches := 0
+	for i in range(min(player_input.size(), attack_sequence.size())):
+		if player_input[i] != attack_sequence[i]:
+			mismatches += 1
 
-func _physics_process(delta: float) -> void:
-	if is_dead:
-		return
-
-	match state:
-		"idle":
-			sprite.play("idle")
-			velocity = Vector2.ZERO
-			move_and_slide()
-
-		"walk":
-			var to_player = player.global_position - global_position
-			var dir = to_player.normalized()
-			velocity = dir * SPEED
-			sprite.play("walk")
-			move_and_slide()
-
-		"attack":
-			velocity = Vector2.ZERO
-			move_and_slide()
-
-		"hurt":
-			velocity = Vector2.ZERO
-			move_and_slide()
-			sprite.play("hurt")
-			await sprite.animation_finished
-			if hp > 0:
-				state = "walk"
-			else:
-				die()
-
-		"dissolve":
-			is_dead = true
-			emit_signal("died")
-			velocity = Vector2.ZERO
-			move_and_slide()
-			sprite.play("dissolve")
-			await sprite.animation_finished
-			free()
-
-
-func take_damage() -> void:
-	if is_dead:
-		return
-	hp -= 1
-	print("[DEBUG] Enemy took damage! HP =", hp)
-	if hp > 0:
-		state = "hurt"
+	var success := mismatches == 0
+	if success:
+		print("🛡️ Player successfully countered enemy attack!")
 	else:
-		die()
+		print("💥 Player failed! Mismatches:", mismatches)
 
-func die() -> void:
-	if is_dead:
-		return
-	print("[DEBUG] Enemy died.")
-	state = "dissolve"
+	emit_signal("enemy_attack_resolved", success, mismatches)

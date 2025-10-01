@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://ds5tsettalepx"]
+[gd_scene load_steps=35 format=4 uid="uid://ds5tsettalepx"]
 
 [ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_2em84"]
 [ext_resource type="Script" uid="uid://bl654k0s22e2y" path="res://Scripts/gameplay.gd" id="1_gb8q7"]
@@ -8,9 +8,7 @@
 [ext_resource type="Theme" uid="uid://b0gcejfk0lxpr" path="res://Assets/test.tres" id="3_lavkw"]
 [ext_resource type="Script" uid="uid://dqr10fn0ctpj1" path="res://Scenes/healthbar.gd" id="4_bl6so"]
 [ext_resource type="FontFile" uid="uid://bpynnjg67qwx1" path="res://Assets/fonts/MysticGate-0WnMP.ttf" id="4_bsu20"]
-[ext_resource type="AudioStream" uid="uid://dldan56ueyos7" path="res://Assets/Music/nv2.wav" id="4_td3eq"]
 [ext_resource type="Theme" uid="uid://c87ic0dgqe5vl" path="res://Assets/backButton.tres" id="5_fhel8"]
-[ext_resource type="AudioStream" uid="uid://b7fyuajecyvql" path="res://Assets/Music/nv3.wav" id="5_yr68n"]
 [ext_resource type="Script" uid="uid://b8acaaw08wv5g" path="res://Scripts/volume.gd" id="6_bl6so"]
 [ext_resource type="AudioStream" uid="uid://d4bmchdhtwcpw" path="res://Assets/beats/pata.wav" id="12_deoll"]
 [ext_resource type="AudioStream" uid="uid://du5qih0ee8lr0" path="res://Assets/beats/pon.wav" id="13_7r3lg"]
@@ -794,15 +792,8 @@ layout_mode = 2
 theme = ExtResource("5_fhel8")
 text = "LEAVE"
 
-[node name="CommandManager" type="Node" parent="." node_paths=PackedStringArray("success_music", "pata_sound", "pon_sound", "don_sound", "chaka_sound", "input_display")]
+[node name="CommandManager" type="Node" parent="."]
 script = ExtResource("2_0kugc")
-success_music = NodePath("nv1")
-pata_sound = NodePath("pata")
-pon_sound = NodePath("pon")
-don_sound = NodePath("don")
-chaka_sound = NodePath("chaka")
-neutral_success_music = Array[AudioStream]([ExtResource("3_hwi80"), ExtResource("4_td3eq"), ExtResource("5_yr68n")])
-input_display = NodePath("../UI/InputProgess")
 
 [node name="pata" type="AudioStreamPlayer" parent="CommandManager"]
 stream = ExtResource("12_deoll")

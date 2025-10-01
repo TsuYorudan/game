@@ -41,11 +41,9 @@ func _ready() -> void:
 	$BeatEffects/LeftFlash.modulate.a = 0.0
 	$BeatEffects/RightFlash.modulate.a = 0.0
 
-	# UI setup
 	if input_display and input_display.has_method("reset_input"):
 		input_display.call("reset_input")
 
-	# Connect to RhythmSystem
 	if rhythm_system:
 		rhythm_system.connect("beat", Callable(self, "_on_beat"))
 		beat_interval = 60.0 / rhythm_system.bpm
@@ -147,7 +145,12 @@ func check_command() -> void:
 	print("Checking command:", command_string)
 
 	if command_queue.size() == max_command_length:
-		if command_string in commands:
+		var turn_manager = get_tree().get_first_node_in_group("turn_manager")
+
+		if turn_manager and turn_manager.phase == turn_manager.TurnPhase.ENEMY_RESOLUTION:
+			turn_manager.record_player_response(command_queue)
+			print("📨 Sent player response:", command_queue)
+		elif command_string in commands:
 			var command_action = commands[command_string]
 			print("✅ Command recognized:", command_action)
 			execute_command(command_action)
@@ -167,13 +170,11 @@ func execute_command(action: String) -> void:
 	else:
 		print("⚠️ No battle node found.")
 
-	# 🎯 Tell TurnManager to move to resolution phase
 	var turn_manager = get_tree().get_first_node_in_group("turn_manager")
 	if turn_manager:
 		print("🔄 Player command executed, advancing turn...")
 		turn_manager.call("next_phase")
 
-	# Success music handling
 	if success_music:
 		success_music.stop()
 		if neutral_success_music.size() > 0:

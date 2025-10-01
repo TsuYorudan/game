@@ -7,3 +7,6 @@ res://Scenes/new gameplay.tscn
 res://Scenes/player.tscn
 res://Scenes/enemy.tscn
 res://Scenes/beatbar.gd
+res://Scenes/enemy.gd
+res://Scripts/turn_manager.gd
+res://Scripts/command_manager.gd

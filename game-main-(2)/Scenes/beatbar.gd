@@ -17,7 +17,9 @@ var hits: Dictionary = {}
 
 # Smooth movement
 var elapsed: float = 0.0
-var beat_interval: float = 1.0   # will be set by rhythm system
+var beat_interval: float = 1.0   # updated by rhythm system
+var marker_alpha: float = 0.0    # fade in/out control
+var marker_active: bool = false  # true only during phases
 
 func _ready():
 	# Precompute beat line X positions
@@ -30,23 +32,43 @@ func _ready():
 	var rhythm = get_tree().get_first_node_in_group("rhythm")
 	if rhythm:
 		rhythm.connect("beat", Callable(self, "_on_beat"))
-		beat_interval = rhythm.beat_time   # directly use rhythm’s beat length
+		beat_interval = rhythm.beat_time
 
 	queue_redraw()
-
 
 func _process(delta: float):
-	elapsed += delta
-	if elapsed > beat_interval:
-		elapsed = beat_interval # clamp so it doesn’t overshoot
+	if marker_active:
+		elapsed += delta
+		if elapsed > beat_interval:
+			elapsed = beat_interval # clamp so it doesn’t overshoot
+		# fade in quickly
+		marker_alpha = lerp(marker_alpha, 1.0, delta * 8.0)
+	else:
+		# fade out smoothly
+		marker_alpha = lerp(marker_alpha, 0.0, delta * 4.0)
+
 	queue_redraw()
 
-
 func _on_beat(beat_count: int, _timestamp: int):
+	if not marker_active:
+		return
+
 	current_beat = beat_count % total_beats
 	elapsed = 0.0
 	queue_redraw()
 
+# === API for TurnManager ===
+func start_phase():
+	marker_active = true
+	marker_alpha = 0.0
+	current_beat = 0
+	elapsed = 0.0
+	hits.clear()
+	queue_redraw()
+
+func end_phase():
+	marker_active = false
+	# marker will fade out automatically
 
 func register_input(success: bool):
 	if success:
@@ -55,13 +77,13 @@ func register_input(success: bool):
 		hits[current_beat] = "miss"
 	queue_redraw()
 
-
 func reset_bar():
 	hits.clear()
 	current_beat = 0
 	elapsed = 0.0
+	marker_alpha = 0.0
+	marker_active = false
 	queue_redraw()
-
 
 func _draw():
 	# Draw baseline
@@ -71,16 +93,17 @@ func _draw():
 	for pos in beat_positions:
 		draw_line(Vector2(pos, 0), Vector2(pos, bar_height), line_color, line_thickness)
 
-	# Marker position interpolates between beats
-	var next_beat = (current_beat + 1) % total_beats
-	var start_x = beat_positions[current_beat]
-	var end_x = beat_positions[next_beat]
+	# Only draw marker if visible
+	if marker_alpha > 0.01:
+		var next_beat = (current_beat + 1) % total_beats
+		var start_x = beat_positions[current_beat]
+		var end_x = beat_positions[next_beat]
+		var t = clamp(elapsed / beat_interval, 0.0, 1.0)
+		var marker_x = lerp(start_x, end_x, t)
 
-	var t = clamp(elapsed / beat_interval, 0.0, 1.0)
-	var marker_x = lerp(start_x, end_x, t)
-
-	# Draw marker
-	draw_line(Vector2(marker_x, 0), Vector2(marker_x, bar_height), marker_color, line_thickness + 1)
+		var color = marker_color
+		color.a = marker_alpha
+		draw_line(Vector2(marker_x, 0), Vector2(marker_x, bar_height), color, line_thickness + 1)
 
 	# Draw hit/miss history
 	for beat in hits.keys():
