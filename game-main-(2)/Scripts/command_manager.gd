@@ -1,8 +1,8 @@
 extends Node
 
 @export var commands: Dictionary = {
-	"pata pata pon pon": "march",
-	"pon pon pata don": "attack",
+	"pata pata pon pon": "attack",
+	"pon pon pata don": "march",
 	"chaka chaka pata pon": "heal",
 	"don don chaka chaka": "calm_enemy",
 	"pon pata pon pata": "retreat"

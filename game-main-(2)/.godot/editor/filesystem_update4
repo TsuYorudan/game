@@ -1,12 +1,10 @@
-res://Scenes/Main.tscn
+res://Scenes/new gameplay.tscn
 res://Assets/buttons.tres
 res://Assets/test.tres
 res://Assets/backButton.tres
+res://Scenes/Main.tscn
 res://Scenes/gameplay.tscn
-res://Scenes/new gameplay.tscn
 res://Scenes/player.tscn
 res://Scenes/enemy.tscn
-res://Scenes/beatbar.gd
-res://Scenes/enemy.gd
-res://Scripts/turn_manager.gd
 res://Scripts/command_manager.gd
+res://Scripts/player.gd

@@ -624,9 +624,6 @@ position_smoothing_speed = 2.0
 drag_left_margin = 0.0
 script = ExtResource("11_thm4x")
 normal_zoom = Vector2(1, 1)
-focused_zoom = Vector2(2, 2)
-player_offset = Vector2(-175, 150)
-enemy_offset = Vector2(175, 150)
 
 [node name="Node2D" type="Node2D" parent="."]
 visible = false
@@ -637,10 +634,20 @@ scale = Vector2(8, 8)
 
 [node name="beatbar" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -182.0
+offset_top = -80.0
+offset_right = 185.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("12_0i8bo")
+bar_height = 60.0
+line_thickness = 10.0
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3

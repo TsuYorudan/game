@@ -61,7 +61,6 @@ func attack():
 	is_retreating = false
 	velocity.x = 0
 	sprite.play("attack")
-	shoot()
 
 	await sprite.animation_finished
 	is_attacking = false
