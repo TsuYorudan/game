@@ -8,7 +8,7 @@ var phase: TurnPhase = TurnPhase.PREBATTLE
 
 signal phase_changed(phase: String)
 
-@export var prebattle_beats: int = 4   # number of beats before fight starts
+@export var prebattle_beats: int = 3   # number of beats before fight starts
 var beat_count: int = 0
 
 @onready var rhythm_system: Node = get_tree().get_first_node_in_group("rhythm")
@@ -126,29 +126,39 @@ func process_phase():
 		TurnPhase.PLAYER_RESOLUTION:
 			$"../CanvasLayer/beatbar".end_phase()
 			print("✅ Resolving player action...")
-			await get_tree().create_timer(1.0).timeout
-			# 1-beat rest before next phase
-			await wait_one_beat()
+			for i in range(4):
+				await wait_one_beat()
 			next_phase()
+
 
 		TurnPhase.ENEMY_INPUT:
 			print("👾 Enemy preparing rhythm sequence...")
 			generate_enemy_sequence(4)
-			# 1-beat rest before executing enemy sequence
-			await wait_one_beat()
-			await get_tree().create_timer(2.0).timeout
+			update_turn_label("Enemy Turn")
+
+			# Play the sequence one beat at a time
+			$"../CanvasLayer/beatbar".start_phase()
+			await play_enemy_sequence()
 			next_phase()
 
+
 		TurnPhase.ENEMY_RESOLUTION:
+			$"../CanvasLayer/beatbar".end_phase()
 			print("💥 Enemy executes its action! Player must counter...")
+			$"../CanvasLayer/beatbar".start_phase()
+			for i in range(4):
+				await wait_one_beat()
+			$"../CanvasLayer/beatbar".end_phase()	
+			for i in range(1):
+				await wait_one_beat()
 			var dmg = compare_sequences()
 			if dmg > 0:
 				print("❌ Player failed! Took", dmg, "damage.")
 			else:
 				print("🛡️ Perfect counter!")
-			await get_tree().create_timer(1.0).timeout
 			# 1-beat rest before next player input
-			await wait_one_beat()
+			for i in range(2):
+				await wait_one_beat()
 			next_phase()
 
 		_:
@@ -157,6 +167,34 @@ func process_phase():
 # =====================
 # Enemy sequence helpers
 # =====================
+# =====================
+# Enemy sequence playback
+# =====================
+func play_enemy_sequence() -> void:
+	if enemy_sequence.is_empty():
+		print("⚠️ No enemy sequence to play.")
+		return
+
+	print("🎶 Enemy performing sequence:", enemy_sequence)
+	
+	for i in range(enemy_sequence.size()):
+		var beat = enemy_sequence[i]
+		print("👾 Beat %d: %s" % [i + 1, beat])
+
+		# Optionally: trigger sound here if you have AudioStreamPlayers
+		# match beat:
+		#     "pata": pata_sound.play()
+		#     "pon": pon_sound.play()
+		#     "don": don_sound.play()
+		#     "chaka": chaka_sound.play()
+
+		# Wait for the next beat from the rhythm system
+		await wait_one_beat()
+
+	print("✅ Enemy finished performing sequence.")
+
+
+
 func generate_enemy_sequence(length: int = 4) -> void:
 	enemy_sequence.clear()
 	for i in range(length):

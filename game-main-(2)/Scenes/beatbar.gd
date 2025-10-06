@@ -59,6 +59,7 @@ func _on_beat(beat_count: int, _timestamp: int):
 
 # === API for TurnManager ===
 func start_phase():
+	# reset completely for new phase (so it starts from leftmost position)
 	marker_active = true
 	marker_alpha = 0.0
 	current_beat = 0

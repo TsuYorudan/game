@@ -8,3 +8,5 @@ res://Scenes/player.tscn
 res://Scenes/enemy.tscn
 res://Scripts/command_manager.gd
 res://Scripts/player.gd
+res://Scripts/turn_manager.gd
+res://Scenes/beatbar.gd
