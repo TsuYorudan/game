@@ -632,6 +632,20 @@ scale = Vector2(8, 8)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Audio" type="Node2D" parent="CanvasLayer"]
+
+[node name="pata" type="AudioStreamPlayer" parent="CanvasLayer/Audio"]
+stream = ExtResource("12_6dsoa")
+
+[node name="pon" type="AudioStreamPlayer" parent="CanvasLayer/Audio"]
+stream = ExtResource("13_82xq7")
+
+[node name="chaka" type="AudioStreamPlayer" parent="CanvasLayer/Audio"]
+stream = ExtResource("14_77rj5")
+
+[node name="don" type="AudioStreamPlayer" parent="CanvasLayer/Audio"]
+stream = ExtResource("15_pdmy6")
+
 [node name="beatbar" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 7

@@ -15,6 +15,9 @@ var current_beat: int = 0
 var beat_positions: Array = []
 var hits: Dictionary = {}
 
+var is_enemy_turn: bool = false
+
+
 # Smooth movement
 var elapsed: float = 0.0
 var beat_interval: float = 1.0   # updated by rhythm system
@@ -103,8 +106,11 @@ func _draw():
 		var marker_x = lerp(start_x, end_x, t)
 
 		var color = marker_color
+		if is_enemy_turn:
+			color = Color.RED
 		color.a = marker_alpha
 		draw_line(Vector2(marker_x, 0), Vector2(marker_x, bar_height), color, line_thickness + 1)
+
 
 	# Draw hit/miss history
 	for beat in hits.keys():

@@ -11,6 +11,12 @@ signal phase_changed(phase: String)
 @export var prebattle_beats: int = 3   # number of beats before fight starts
 var beat_count: int = 0
 
+@onready var pata_sound: AudioStreamPlayer = $"../CanvasLayer/Audio/pata"
+@onready var pon_sound: AudioStreamPlayer = $"../CanvasLayer/Audio/pon"
+@onready var don_sound: AudioStreamPlayer = $"../CanvasLayer/Audio/don"
+@onready var chaka_sound: AudioStreamPlayer = $"../CanvasLayer/Audio/chaka"
+
+
 @onready var rhythm_system: Node = get_tree().get_first_node_in_group("rhythm")
 @onready var countdown_label: Label = $"../CanvasLayer/Control/CountdownLabel"
 @onready var turn_label: Label = $"../CanvasLayer/Control/TurnLabel"
@@ -120,6 +126,7 @@ func process_phase():
 			print("🎵 Player turn: preparing to input a rhythm command...")
 			# Wait 1 beat before starting beat bar
 			await wait_one_beat()
+			$"../CanvasLayer/beatbar".is_enemy_turn = false
 			$"../CanvasLayer/beatbar".start_phase()
 			print("🎵 Beat bar started, player can input now")
 
@@ -137,6 +144,7 @@ func process_phase():
 			update_turn_label("Enemy Turn")
 
 			# Play the sequence one beat at a time
+			$"../CanvasLayer/beatbar".is_enemy_turn = true
 			$"../CanvasLayer/beatbar".start_phase()
 			await play_enemy_sequence()
 			next_phase()
@@ -145,6 +153,7 @@ func process_phase():
 		TurnPhase.ENEMY_RESOLUTION:
 			$"../CanvasLayer/beatbar".end_phase()
 			print("💥 Enemy executes its action! Player must counter...")
+			$"../CanvasLayer/beatbar".is_enemy_turn = false
 			$"../CanvasLayer/beatbar".start_phase()
 			for i in range(4):
 				await wait_one_beat()
@@ -176,20 +185,27 @@ func play_enemy_sequence() -> void:
 		return
 
 	print("🎶 Enemy performing sequence:", enemy_sequence)
-	
+
 	for i in range(enemy_sequence.size()):
 		var beat = enemy_sequence[i]
 		print("👾 Beat %d: %s" % [i + 1, beat])
 
-		# Optionally: trigger sound here if you have AudioStreamPlayers
-		# match beat:
-		#     "pata": pata_sound.play()
-		#     "pon": pon_sound.play()
-		#     "don": don_sound.play()
-		#     "chaka": chaka_sound.play()
+		# Play corresponding sound
+		match beat:
+			"pata":
+				if pata_sound: pata_sound.play()
+			"pon":
+				if pon_sound: pon_sound.play()
+			"don":
+				if don_sound: don_sound.play()
+			"chaka":
+				if chaka_sound: chaka_sound.play()
 
-		# Wait for the next beat from the rhythm system
+		# Wait exactly one beat
 		await wait_one_beat()
+
+	print("✅ Enemy finished performing sequence.")
+
 
 	print("✅ Enemy finished performing sequence.")
 

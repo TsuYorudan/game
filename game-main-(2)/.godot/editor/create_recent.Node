@@ -1,8 +1,8 @@
+Node2D
 Node
 Control
 Label
 CanvasLayer
-Node2D
 TileMap
 CollisionShape2D
 Area2D
