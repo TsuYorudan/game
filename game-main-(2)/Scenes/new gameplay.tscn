@@ -624,6 +624,9 @@ position_smoothing_speed = 2.0
 drag_left_margin = 0.0
 script = ExtResource("11_thm4x")
 normal_zoom = Vector2(1, 1)
+player_offset = Vector2(-100, 75)
+enemy_offset = Vector2(100, 75)
+center_offset = Vector2(0, 75)
 
 [node name="Node2D" type="Node2D" parent="."]
 visible = false
@@ -646,7 +649,7 @@ stream = ExtResource("14_77rj5")
 [node name="don" type="AudioStreamPlayer" parent="CanvasLayer/Audio"]
 stream = ExtResource("15_pdmy6")
 
-[node name="beatbar" type="Control" parent="CanvasLayer"]
+[node name="beatbar" type="Control" parent="CanvasLayer" groups=["beatbar"]]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -654,14 +657,17 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -182.0
-offset_top = -80.0
+offset_top = -142.0
 offset_right = 185.0
-offset_bottom = -3.0
+offset_bottom = -65.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("12_0i8bo")
 bar_height = 60.0
 line_thickness = 10.0
+mark_fade_time = 1.75
+shape_size = 40.0
+outline_thickness = 5.0
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -699,11 +705,12 @@ horizontal_alignment = 1
 uppercase = true
 
 [node name="Enemy" parent="." instance=ExtResource("12_uu2y7")]
-position = Vector2(933, 656)
+position = Vector2(983, 630)
+scale = Vector2(1.5, 1.5)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("17_0i8bo")]
-position = Vector2(347, 650)
-scale = Vector2(8, 8)
+position = Vector2(353, 616)
+scale = Vector2(12, 12)
 collision_mask = 3
 script = ExtResource("18_v3xtg")
 

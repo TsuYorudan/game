@@ -10,28 +10,34 @@ class_name BeatBar
 @export var hit_color: Color = Color.GREEN
 @export var miss_color: Color = Color.RED
 @export var line_thickness: float = 2.0
+@export var input_offset: float = -0.05
+@export var mark_fade_time: float = 1.0 # seconds before marks fade
+
+@export var shape_size: float = 16.0
+@export var outline_thickness: float = 4.0
+
 
 var current_beat: int = 0
 var beat_positions: Array = []
 var hits: Dictionary = {}
+var input_marks: Array = [] # [{x, is_enemy, timestamp, input_type}]
 
 var is_enemy_turn: bool = false
-
-
-# Smooth movement
 var elapsed: float = 0.0
-var beat_interval: float = 1.0   # updated by rhythm system
-var marker_alpha: float = 0.0    # fade in/out control
-var marker_active: bool = false  # true only during phases
+var beat_interval: float = 1.0
+var marker_alpha: float = 0.0
+var marker_active: bool = false
 
 func _ready():
-	# Precompute beat line X positions
+	set_custom_minimum_size(Vector2(bar_width, bar_height))
+
+	# Divider positions
 	beat_positions.clear()
 	for i in range(total_beats):
 		var x = (i / float(total_beats - 1)) * bar_width
 		beat_positions.append(x)
 
-	# Connect to rhythm system
+	# Connect rhythm
 	var rhythm = get_tree().get_first_node_in_group("rhythm")
 	if rhythm:
 		rhythm.connect("beat", Callable(self, "_on_beat"))
@@ -42,80 +48,146 @@ func _ready():
 func _process(delta: float):
 	if marker_active:
 		elapsed += delta
-		if elapsed > beat_interval:
-			elapsed = beat_interval # clamp so it doesn’t overshoot
-		# fade in quickly
+		elapsed = min(elapsed, beat_interval)
 		marker_alpha = lerp(marker_alpha, 1.0, delta * 8.0)
 	else:
-		# fade out smoothly
 		marker_alpha = lerp(marker_alpha, 0.0, delta * 4.0)
+
+	# Fade input marks
+	for i in range(input_marks.size() - 1, -1, -1):
+		var age = (Time.get_ticks_msec() / 1000.0) - input_marks[i].timestamp
+		if age >= mark_fade_time:
+			input_marks.remove_at(i)
 
 	queue_redraw()
 
 func _on_beat(beat_count: int, _timestamp: int):
 	if not marker_active:
 		return
-
 	current_beat = beat_count % total_beats
 	elapsed = 0.0
 	queue_redraw()
 
-# === API for TurnManager ===
+# === API ===
 func start_phase():
-	# reset completely for new phase (so it starts from leftmost position)
 	marker_active = true
 	marker_alpha = 0.0
 	current_beat = 0
 	elapsed = 0.0
 	hits.clear()
+	input_marks.clear()
 	queue_redraw()
 
 func end_phase():
 	marker_active = false
-	# marker will fade out automatically
 
 func register_input(success: bool):
-	if success:
-		hits[current_beat] = "hit"
-	else:
-		hits[current_beat] = "miss"
+	hits[current_beat] = "hit" if success else "miss"
+	queue_redraw()
+
+func register_action_mark(is_enemy: bool, input_type: String = ""):
+	if not marker_active:
+		return
+
+	var next_beat = (current_beat + 1) % total_beats
+	var start_x = beat_positions[current_beat]
+	var end_x = beat_positions[next_beat]
+
+	var adjusted_elapsed = clamp(elapsed + input_offset, 0.0, beat_interval)
+	var t = adjusted_elapsed / beat_interval
+	var marker_x = lerp(start_x, end_x, t)
+	marker_x = clamp(marker_x, 0, bar_width)
+
+	input_marks.append({
+		"x": marker_x,
+		"is_enemy": is_enemy,
+		"timestamp": Time.get_ticks_msec() / 1000.0,
+		"input_type": input_type
+	})
+
 	queue_redraw()
 
 func reset_bar():
 	hits.clear()
+	input_marks.clear()
 	current_beat = 0
 	elapsed = 0.0
 	marker_alpha = 0.0
 	marker_active = false
 	queue_redraw()
 
+# === DRAWING ===
 func _draw():
-	# Draw baseline
-	draw_line(Vector2(0, bar_height/2), Vector2(bar_width, bar_height/2), line_color, line_thickness)
+	# Baseline
+	draw_line(Vector2(0, bar_height / 2), Vector2(bar_width, bar_height / 2), line_color, line_thickness)
 
-	# Draw beat dividers
+	# Beat dividers
 	for pos in beat_positions:
 		draw_line(Vector2(pos, 0), Vector2(pos, bar_height), line_color, line_thickness)
 
-	# Only draw marker if visible
+	# Sliding marker
 	if marker_alpha > 0.01:
 		var next_beat = (current_beat + 1) % total_beats
 		var start_x = beat_positions[current_beat]
 		var end_x = beat_positions[next_beat]
 		var t = clamp(elapsed / beat_interval, 0.0, 1.0)
 		var marker_x = lerp(start_x, end_x, t)
-
-		var color = marker_color
-		if is_enemy_turn:
-			color = Color.RED
+		var color = marker_color if not is_enemy_turn else Color.RED
 		color.a = marker_alpha
 		draw_line(Vector2(marker_x, 0), Vector2(marker_x, bar_height), color, line_thickness + 1)
 
+	# Draw all input marks
+	for mark in input_marks:
+		draw_input_mark(mark)
 
-	# Draw hit/miss history
-	for beat in hits.keys():
-		var pos_x = beat_positions[beat]
-		var pos_y = bar_height/2 + 20
-		var text = "●"
-		var color = hit_color if hits[beat] == "hit" else miss_color
-		draw_string(get_theme_default_font(), Vector2(pos_x - 8, pos_y), text, HORIZONTAL_ALIGNMENT_LEFT, -1, color)
+
+func draw_input_mark(mark: Dictionary):
+	var color = Color.RED if mark.is_enemy else Color.CYAN
+	var age = Time.get_ticks_msec() / 1000.0 - mark.timestamp
+	var fade = clamp(1.0 - age / mark_fade_time, 0.0, 1.0)
+	var alpha_color = Color(color.r, color.g, color.b, fade)
+	var white_fill = Color(1, 1, 1, fade)
+
+	var x = mark.x
+	var y = bar_height / 2
+	var s = shape_size  # configurable shape size
+
+	match mark.input_type:
+		"pata":
+			# square
+			draw_rect(Rect2(x - s/2, y - s/2, s, s), white_fill)
+			draw_rect(Rect2(x - s/2, y - s/2, s, s), alpha_color, false, outline_thickness)
+
+		"pon":
+			# circle
+			draw_circle(Vector2(x, y), s/2, white_fill)
+			draw_circle(Vector2(x, y), s/2, alpha_color, false, outline_thickness)
+
+		"don":
+		# X shape (thickened)
+			var offset = s / 2
+			var p1 = Vector2(x - offset, y - offset)
+			var p2 = Vector2(x + offset, y + offset)
+			var p3 = Vector2(x - offset, y + offset)
+			var p4 = Vector2(x + offset, y - offset)
+
+			# white fill layer
+			draw_line(p1, p2, white_fill, outline_thickness)
+			draw_line(p3, p4, white_fill, outline_thickness)
+
+			# colored outline layer (slightly thicker for glow-like effect)
+			draw_line(p1, p2, alpha_color, outline_thickness + 1)
+			draw_line(p3, p4, alpha_color, outline_thickness + 1)
+
+		"chaka":
+			# triangle
+			var points = [
+				Vector2(x, y - s/2),
+				Vector2(x - s/2, y + s/2),
+				Vector2(x + s/2, y + s/2)
+			]
+			draw_colored_polygon(points, white_fill)
+			draw_polyline(points + [points[0]], alpha_color, outline_thickness)
+
+		_:
+			draw_circle(Vector2(x, y), 3, alpha_color)

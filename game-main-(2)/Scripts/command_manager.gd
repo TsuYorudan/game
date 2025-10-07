@@ -94,15 +94,29 @@ func handle_input(beat_sound: String, current_time: int) -> void:
 		if input_display and input_display.has_method("reset_input"):
 			input_display.call("reset_input")
 
+		# Play sound
 		player.pitch_scale = randf_range(1.0, 1.05)
 		player.play()
 		await get_tree().create_timer(0.1).timeout
 		player.stop()
+
+		# ✅ Still show a mark on the beatbar (colored differently if you want)
+		var beatbar = get_tree().get_first_node_in_group("beatbar")
+		if beatbar:
+			beatbar.call("register_action_mark", false, beat_sound)
+
+
 		return
+
 
 	player.pitch_scale = randf_range(0.95, 1.05)
 	player.play()
 	flash_screen(Color.WHITE)
+	var beatbar = get_tree().get_first_node_in_group("beatbar")
+	if beatbar:
+		beatbar.call("register_action_mark", false, beat_sound)
+
+
 	register_beat(beat_sound)
 
 

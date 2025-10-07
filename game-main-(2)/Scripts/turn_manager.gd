@@ -125,7 +125,6 @@ func process_phase():
 		TurnPhase.PLAYER_INPUT:
 			print("🎵 Player turn: preparing to input a rhythm command...")
 			# Wait 1 beat before starting beat bar
-			await wait_one_beat()
 			$"../CanvasLayer/beatbar".is_enemy_turn = false
 			$"../CanvasLayer/beatbar".start_phase()
 			print("🎵 Beat bar started, player can input now")
@@ -166,7 +165,7 @@ func process_phase():
 			else:
 				print("🛡️ Perfect counter!")
 			# 1-beat rest before next player input
-			for i in range(2):
+			for i in range(3):
 				await wait_one_beat()
 			next_phase()
 
@@ -200,6 +199,11 @@ func play_enemy_sequence() -> void:
 				if don_sound: don_sound.play()
 			"chaka":
 				if chaka_sound: chaka_sound.play()
+		var beatbar = get_tree().get_first_node_in_group("beatbar")
+		if beatbar:
+			beatbar.call("register_action_mark", true, beat)
+
+
 
 		# Wait exactly one beat
 		await wait_one_beat()
