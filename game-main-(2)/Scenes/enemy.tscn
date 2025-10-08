@@ -103,13 +103,13 @@ region = Rect2(640, 0, 128, 64)
 atlas = ExtResource("1_hghv2")
 region = Rect2(0, 64, 128, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8uf12"]
-atlas = ExtResource("1_hghv2")
-region = Rect2(128, 64, 128, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_po0sg"]
 atlas = ExtResource("1_hghv2")
 region = Rect2(256, 64, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uf12"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(128, 64, 128, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_haro7"]
 atlas = ExtResource("1_hghv2")
@@ -222,10 +222,10 @@ animations = [{
 "texture": SubResource("AtlasTexture_auwsv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8uf12")
+"texture": SubResource("AtlasTexture_po0sg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_po0sg")
+"texture": SubResource("AtlasTexture_8uf12")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_haro7")
@@ -252,8 +252,9 @@ self_modulate = Color(1, 0, 0, 1)
 position = Vector2(-217, -58)
 scale = Vector2(7, 7)
 sprite_frames = SubResource("SpriteFrames_auwsv")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.128029
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,5 +1,8 @@
 extends Node
 
+@onready var player: Node = get_tree().get_first_node_in_group("player")
+
+
 @export var commands: Dictionary = {
 	"pata pata pon pon": "attack",
 	"pon pon pata don": "march",
@@ -75,14 +78,14 @@ func is_on_beat(current_time: int) -> bool:
 
 
 func handle_input(beat_sound: String, current_time: int) -> void:
-	var player: AudioStreamPlayer = null
+	var sound_player: AudioStreamPlayer = null
 	match beat_sound:
-		"pata": player = pata_sound
-		"pon": player = pon_sound
-		"don": player = don_sound
-		"chaka": player = chaka_sound
+		"pata": sound_player = pata_sound
+		"pon": sound_player = pon_sound
+		"don": sound_player = don_sound
+		"chaka": sound_player = chaka_sound
 
-	if not player:
+	if not sound_player:
 		return
 
 	if not is_on_beat(current_time):
@@ -94,30 +97,42 @@ func handle_input(beat_sound: String, current_time: int) -> void:
 		if input_display and input_display.has_method("reset_input"):
 			input_display.call("reset_input")
 
-		# Play sound
-		player.pitch_scale = randf_range(1.0, 1.05)
-		player.play()
+		# Play sound feedback
+		sound_player.pitch_scale = randf_range(1.0, 1.05)
+		sound_player.play()
 		await get_tree().create_timer(0.1).timeout
-		player.stop()
+		sound_player.stop()
 
-		# ✅ Still show a mark on the beatbar (colored differently if you want)
+		# ✅ Still show a mark on the beatbar
 		var beatbar = get_tree().get_first_node_in_group("beatbar")
 		if beatbar:
 			beatbar.call("register_action_mark", false, beat_sound)
-
-
 		return
 
-
-	player.pitch_scale = randf_range(0.95, 1.05)
-	player.play()
+	# ✅ On-beat input
+	sound_player.pitch_scale = randf_range(0.95, 1.05)
+	sound_player.play()
 	flash_screen(Color.WHITE)
+
 	var beatbar = get_tree().get_first_node_in_group("beatbar")
 	if beatbar:
 		beatbar.call("register_action_mark", false, beat_sound)
 
+	# ✅ Trigger "input" animation on the Player node
+# ✅ Trigger "input" animation on the Player node
+	if player and player.has_node("AnimatedSprite2D2"):
+		var anim_sprite = player.get_node("AnimatedSprite2D2")
+		if "input" in anim_sprite.sprite_frames.get_animation_names():
+			anim_sprite.play("input")
+			var input_anim_length = anim_sprite.sprite_frames.get_frame_count("input") / anim_sprite.sprite_frames.get_animation_speed("input")
+			get_tree().create_timer(input_anim_length).timeout.connect(func():
+				if "idle" in anim_sprite.sprite_frames.get_animation_names():
+					anim_sprite.play("idle")
+		)
+
 
 	register_beat(beat_sound)
+
 
 
 func flash_screen(color: Color) -> void:

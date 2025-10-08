@@ -1,6 +1,7 @@
 extends ProgressBar
+class_name EnemyHealthBar
 
-@export var player: Node
+@export var enemy: Node
 @export var delay_speed: float = 60.0
 @export var heal_speed: float = 100.0
 @export var delay_color: Color = Color(1, 0, 0, 0.7)
@@ -19,17 +20,17 @@ var original_position: Vector2
 var shake_offset: Vector2 = Vector2.ZERO
 
 func _ready():
-	if player:
-		player.connect("hpchange", Callable(self, "_on_player_hpchange"))
-		await player.ready
-		value = player.current_hp * 100.0 / player.max_hp
+	if enemy:
+		enemy.connect("hpchange", Callable(self, "_on_enemy_hpchange"))
+		await enemy.ready
+		value = enemy.current_hp * 100.0 / enemy.max_hp
 		delayed_value = value
 		target_value = value
 		_create_delay_bar()
 		_create_main_bar_style()
 		original_position = position
 	else:
-		print("No player assigned!")
+		print("No enemy assigned!")
 
 func _create_delay_bar():
 	delay_bar = ColorRect.new()
@@ -69,18 +70,15 @@ func _process(delta):
 	if shaking:
 		shake_time -= delta
 		if shake_time > 0:
-			# Generate random target offset
 			var target_offset = Vector2(
 				randf_range(-shake_magnitude, shake_magnitude),
 				randf_range(-shake_magnitude, shake_magnitude)
 			)
-			# Smoothly interpolate current shake offset toward target
 			shake_offset = shake_offset.lerp(target_offset, shake_ease * delta)
 			position = original_position + shake_offset
 			if delay_bar:
 				delay_bar.position = Vector2(shake_offset.x, shake_offset.y)
 		else:
-			# Stop shaking
 			position = original_position
 			if delay_bar:
 				delay_bar.position = Vector2.ZERO
@@ -92,7 +90,9 @@ func _update_delay_bar():
 	delay_bar.size.x = percent * size.x
 
 func update_bar():
-	var new_target = player.current_hp * 100.0 / player.max_hp
+	if not enemy:
+		return
+	var new_target = enemy.current_hp * 100.0 / enemy.max_hp
 	if new_target < value:
 		delay_bar.visible = true
 		delayed_value = value
@@ -103,5 +103,5 @@ func _start_shake():
 	shaking = true
 	shake_time = shake_duration
 
-func _on_player_hpchange():
+func _on_enemy_hpchange():
 	update_bar()

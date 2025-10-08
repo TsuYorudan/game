@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://co8xgbq66u62g"]
+[gd_scene load_steps=65 format=3 uid="uid://co8xgbq66u62g"]
 
 [ext_resource type="Texture2D" uid="uid://dsms315ge8fog" path="res://Assets/Wanderer Magican/Attack_2.png" id="1_8erm5"]
 [ext_resource type="Texture2D" uid="uid://dtvdlpwdwq5ht" path="res://Assets/Wanderer Magican/Hurt.png" id="1_fkybt"]
@@ -132,6 +132,22 @@ region = Rect2(768, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ijsl"]
 atlas = ExtResource("4_vgqql")
 region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq3lt"]
+atlas = ExtResource("1_x3wgy")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pukcj"]
+atlas = ExtResource("1_x3wgy")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m376e"]
+atlas = ExtResource("1_x3wgy")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1htnp"]
+atlas = ExtResource("1_x3wgy")
+region = Rect2(768, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("2_6t5aa")
@@ -326,6 +342,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vq3lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pukcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m376e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1htnp")
+}],
+"loop": false,
+"name": &"input",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vgqql")
 }, {
 "duration": 1.0,
@@ -407,8 +440,10 @@ modulate = Color(0.0807833, 0.0807833, 0.0807833, 1)
 position = Vector2(1, -11)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_p1odr")
-animation = &"attack"
+animation = &"input"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)

@@ -4,7 +4,6 @@ class_name Player
 signal hpchange
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D2
-@onready var projectile = load("res://attack.tscn")
 
 @export var speed: float = 500.0
 @export var jump_velocity: float = -500.0
@@ -21,16 +20,6 @@ var is_dead: bool = false
 func _ready():
 	current_hp = max_hp
 
-func start_marching():
-	if is_attacking or is_dead:
-		return
-	print("Character starting to march.")
-	is_marching = true
-	is_retreating = false
-	sprite.play("walk")
-	sprite.flip_h = false
-	$MarchTimer.start()
-
 func start_retreat():
 	if is_attacking or is_dead:
 		return
@@ -39,26 +28,11 @@ func start_retreat():
 	is_marching = false
 	sprite.play("retreat")
 	sprite.flip_h = true
-	$MarchTimer.start()
-
-func stop_moving():
-	if is_dead:
-		return
-	print("Character stopping movement.")
-	is_marching = false
-	is_retreating = false
-	if not is_attacking:
-		sprite.play("idle")
-		sprite.flip_h = false
-	velocity.x = 0
 
 func attack():
 	if is_attacking or is_dead:
 		return
 	print("Character attacking.")
-	is_attacking = true
-	is_marching = false
-	is_retreating = false
 	velocity.x = 0
 	sprite.play("attack")
 
@@ -67,11 +41,6 @@ func attack():
 	if not is_dead:
 		sprite.play("idle")
 		sprite.flip_h = false
-
-func shoot():
-	var instance = projectile.instantiate()
-	instance.spawnPos = global_position
-	get_tree().get_root().get_node("gameplay").call_deferred("add_child", instance)
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -89,10 +58,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0
 
 	move_and_slide()
-
-func _on_march_timer_timeout() -> void:
-	print("March timer timed out.")
-	stop_moving()
 
 func take_damage(amount: int = 1) -> void:
 	if is_dead:
