@@ -74,7 +74,10 @@ func next_phase():
 	_debug_state()
 	emit_signal("phase_changed", TurnPhase.keys()[phase])
 	process_phase()
-
+	
+func record_player_response(response: Array) -> void:
+	player_response = response.duplicate()
+	
 func process_phase():
 	match phase:
 		TurnPhase.PREBATTLE:

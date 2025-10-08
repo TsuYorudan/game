@@ -5,6 +5,8 @@ signal hpchange
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D2
 
+@onready var enemy: Enemy = get_tree().get_first_node_in_group("enemy")
+
 @export var speed: float = 500.0
 @export var jump_velocity: float = -500.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -33,6 +35,8 @@ func attack():
 	if is_attacking or is_dead:
 		return
 	print("Character attacking.")
+	var dmg = 4
+	enemy.take_damage(dmg)
 	velocity.x = 0
 	sprite.play("attack")
 
