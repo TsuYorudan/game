@@ -1,16 +1,13 @@
-res://Scenes/new gameplay.tscn
+res://Scenes/Main.tscn
 res://Assets/buttons.tres
 res://Assets/test.tres
 res://Assets/backButton.tres
-res://Scripts/player.gd
-res://Scripts/turn_manager.gd
-res://Scenes/Main.tscn
 res://Scenes/gameplay.tscn
+res://Scenes/new gameplay.tscn
 res://Scenes/player.tscn
 res://Scenes/enemy.tscn
+res://Scripts/turn_manager.gd
 res://Scripts/command_manager.gd
-res://Scenes/healthbar.gd
-res://Scenes/enemy.gd
-res://Scenes/EnemyHealthBar.gd
-res://Scripts/rhythm_system.gd
-res://Scenes/turnCamera.gd
+res://Scripts/battle_node.gd
+res://Scripts/player.gd
+res://Scenes/timeline.gd

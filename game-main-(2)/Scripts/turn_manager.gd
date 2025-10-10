@@ -93,17 +93,21 @@ func process_phase() -> void:
 				rhythm_system.connect("beat", Callable(self, "_on_prebattle_beat"), CONNECT_ONE_SHOT)
 
 		TurnPhase.PLAYER_INPUT:
+			$"../CanvasLayer/timeline".set_phase(0)  # Player turn
 			$"../CanvasLayer/beatbar".is_enemy_turn = false
 			$"../CanvasLayer/beatbar".start_phase()
 			print("🎵 Player can input now")
 
 		TurnPhase.PLAYER_RESOLUTION:
+			$"../CanvasLayer/timeline".set_phase(1)  # Player turn
 			$"../CanvasLayer/beatbar".end_phase()
 			for i in range(4):
 				await wait_one_beat()
 			next_phase()
 
 		TurnPhase.ENEMY_INPUT:
+			$"../CanvasLayer/timeline".set_phase(2)  # Player turn
+			emit_signal("phase_changed", TurnPhase.keys()[phase])
 			print("👾 Enemy turn...")
 			update_turn_label("Enemy Turn")
 			if enemy:
@@ -114,6 +118,7 @@ func process_phase() -> void:
 			next_phase()
 
 		TurnPhase.ENEMY_RESOLUTION:
+			$"../CanvasLayer/timeline".set_phase(3)  # Player turn
 			update_turn_label("COUNTER")
 			$"../CanvasLayer/beatbar".end_phase()
 			$"../CanvasLayer/beatbar".is_enemy_turn = false
@@ -121,11 +126,12 @@ func process_phase() -> void:
 			for i in range(4):
 				await wait_one_beat()
 			$"../CanvasLayer/beatbar".end_phase()
+			$"../CanvasLayer/timeline".set_phase(4)  # Player turn
 			var dmg = await enemy.resolve_attack(player_response) if enemy else 0
 			if dmg > 0:
 				if player and not player.is_dead:
 					player.take_damage(dmg)
-			for i in range(4):
+			for i in range(3):
 				await wait_one_beat()
 			next_phase()
 
