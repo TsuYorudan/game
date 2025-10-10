@@ -189,6 +189,18 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vh8xy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jyny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vh8xy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jyny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vh8xy")
 }],
 "loop": false,
 "name": &"hurt",
@@ -248,13 +260,14 @@ radius = 56.0089
 script = ExtResource("1_1f0kj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.992157, 0.141176, 0.286275, 1)
 self_modulate = Color(1, 0, 0, 1)
 position = Vector2(-217, -58)
 scale = Vector2(7, 7)
 sprite_frames = SubResource("SpriteFrames_auwsv")
-animation = &"attack"
+animation = &"hurt"
 autoplay = "idle"
-frame = 7
+frame = 5
 frame_progress = 1.0
 flip_h = true
 

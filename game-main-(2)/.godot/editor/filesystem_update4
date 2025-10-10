@@ -11,3 +11,4 @@ res://Scripts/command_manager.gd
 res://Scripts/battle_node.gd
 res://Scripts/player.gd
 res://Scenes/timeline.gd
+res://Scenes/enemy.gd

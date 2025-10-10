@@ -132,6 +132,11 @@ func take_damage(amount: int = 1) -> void:
 
 	if current_hp <= 0:
 		die()
+	else:
+		sprite.play("hurt")
+		# Wait for animation to finish
+		await sprite.animation_finished
+		sprite.play("idle")
 
 # Heal
 func heal(amount: int = 1) -> void:

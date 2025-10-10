@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://co8xgbq66u62g"]
+[gd_scene load_steps=64 format=3 uid="uid://co8xgbq66u62g"]
 
 [ext_resource type="Texture2D" uid="uid://dsms315ge8fog" path="res://Assets/Wanderer Magican/Attack_2.png" id="1_8erm5"]
 [ext_resource type="Texture2D" uid="uid://dtvdlpwdwq5ht" path="res://Assets/Wanderer Magican/Hurt.png" id="1_fkybt"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bfo268ps8c8tq" path="res://Assets/Wanderer Magican/Run.png" id="3_vgqql"]
 [ext_resource type="Texture2D" uid="uid://cqdi02e7xxh6a" path="res://Assets/Wanderer Magican/Idle.png" id="4_vgqql"]
 [ext_resource type="Texture2D" uid="uid://2sxopkmx303" path="res://Assets/Wanderer Magican/Walk.png" id="5_fkybt"]
-[ext_resource type="Texture2D" uid="uid://b3xgvkifwhd07" path="res://Assets/light.png" id="7_3smsa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nmr2m"]
 atlas = ExtResource("1_8erm5")
@@ -436,7 +435,6 @@ size = Vector2(25.5, 61)
 [node name="CharacterBody2D" type="CharacterBody2D"]
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.0807833, 0.0807833, 0.0807833, 1)
 position = Vector2(1, -11)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_p1odr")
@@ -449,11 +447,6 @@ frame_progress = 1.0
 position = Vector2(0, -1)
 scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_8erm5")
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 3.59
-texture = ExtResource("7_3smsa")
-offset = Vector2(10, 10)
 
 [node name="hitbox" type="Area2D" parent="."]
 
