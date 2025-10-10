@@ -252,9 +252,10 @@ self_modulate = Color(1, 0, 0, 1)
 position = Vector2(-217, -58)
 scale = Vector2(7, 7)
 sprite_frames = SubResource("SpriteFrames_auwsv")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
-frame_progress = 0.128029
+frame = 7
+frame_progress = 1.0
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,6 +1,6 @@
 extends Node
 
-enum TurnPhase { PREBATTLE, PLAYER_INPUT, PLAYER_RESOLUTION, ENEMY_INPUT, ENEMY_RESOLUTION, END }
+enum TurnPhase { PREBATTLE, PLAYER_INPUT, PLAYER_RESOLUTION, ENEMY_INPUT, ENEMY_RESOLUTION, BATTLE_END, END }
 
 var current_turn: String = "PLAYER"
 var phase: TurnPhase = TurnPhase.PREBATTLE
@@ -12,7 +12,7 @@ var beat_count: int = 0
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 @onready var enemy: Enemy = get_tree().get_first_node_in_group("enemy")
-@onready var rhythm_system: Node = get_tree().get_first_node_in_group("rhythm")
+@onready var rhythm_system: Node = $"../RhythmSystem"
 @onready var countdown_label: Label = $"../CanvasLayer/Control/CountdownLabel"
 @onready var turn_label: Label = $"../CanvasLayer/Control/TurnLabel"
 
@@ -52,33 +52,37 @@ func roll_first_turn():
 	update_turn_label("%s Turn" % current_turn.capitalize())
 
 func next_phase():
-	match phase:
-		TurnPhase.PREBATTLE:
-			roll_first_turn()
-			phase = TurnPhase.PLAYER_INPUT if current_turn == "PLAYER" else TurnPhase.ENEMY_INPUT
-		TurnPhase.PLAYER_INPUT:
-			phase = TurnPhase.PLAYER_RESOLUTION
-		TurnPhase.PLAYER_RESOLUTION:
-			current_turn = "ENEMY"
-			phase = TurnPhase.ENEMY_INPUT
-			update_turn_label("Enemy Turn")
-		TurnPhase.ENEMY_INPUT:
-			phase = TurnPhase.ENEMY_RESOLUTION
-		TurnPhase.ENEMY_RESOLUTION:
-			current_turn = "PLAYER"
-			phase = TurnPhase.PLAYER_INPUT
-			update_turn_label("Player Turn")
-		_:
-			print("⚠️ Unknown phase transition.")
+	# If someone died, go straight to BATTLE_END
+	if (player and player.is_dead) or (enemy and enemy.is_dead):
+		phase = TurnPhase.BATTLE_END
+	else:
+		match phase:
+			TurnPhase.PREBATTLE:
+				roll_first_turn()
+				phase = TurnPhase.PLAYER_INPUT if current_turn == "PLAYER" else TurnPhase.ENEMY_INPUT
+			TurnPhase.PLAYER_INPUT:
+				phase = TurnPhase.PLAYER_RESOLUTION
+			TurnPhase.PLAYER_RESOLUTION:
+				current_turn = "ENEMY"
+				phase = TurnPhase.ENEMY_INPUT
+				update_turn_label("Enemy Turn")
+			TurnPhase.ENEMY_INPUT:
+				phase = TurnPhase.ENEMY_RESOLUTION
+			TurnPhase.ENEMY_RESOLUTION:
+				current_turn = "PLAYER"
+				phase = TurnPhase.PLAYER_INPUT
+				update_turn_label("Player Turn")
+			_:
+				print("⚠️ Unknown phase transition.")
 
 	_debug_state()
 	emit_signal("phase_changed", TurnPhase.keys()[phase])
-	process_phase()
-	
+	await process_phase()  # Make process_phase async so we can await it
+
 func record_player_response(response: Array) -> void:
 	player_response = response.duplicate()
-	
-func process_phase():
+
+func process_phase() -> void:
 	match phase:
 		TurnPhase.PREBATTLE:
 			beat_count = 0
@@ -117,13 +121,33 @@ func process_phase():
 			for i in range(4):
 				await wait_one_beat()
 			$"../CanvasLayer/beatbar".end_phase()
-			var dmg = enemy.resolve_attack(player_response) if enemy else 0
+			var dmg = await enemy.resolve_attack(player_response) if enemy else 0
 			if dmg > 0:
 				if player and not player.is_dead:
 					player.take_damage(dmg)
 			for i in range(4):
 				await wait_one_beat()
 			next_phase()
+
+		TurnPhase.BATTLE_END:
+			print("⚡ Battle ended. Disabling everything.")
+			# Disable beatbar, inputs, and metronome
+			if rhythm_system:
+				rhythm_system.stop_rhythm()
+			var beatbar = get_tree().get_first_node_in_group("beatbar")
+			if beatbar:
+				beatbar.end_phase()
+				beatbar.set_process(false)
+				beatbar.visible = false
+			# Wait for animations to finish
+			if player and player.is_dead:
+				while player.sprite.animation != "overwhelm":
+					await get_tree().process_frame
+			if enemy and enemy.is_dead:
+				while enemy.sprite.animation != "dissolve":
+					await get_tree().process_frame
+			print("🏆 Battle finished.")
+			phase = TurnPhase.END
 
 		_:
 			print("⚠️ No logic for this phase.")

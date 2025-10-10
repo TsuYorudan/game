@@ -20,6 +20,8 @@ var current_hp: int
 @export var attack_power: int = 1  # can be used for future damage calculations
 var is_dead: bool = false
 
+@onready var sprite: AnimatedSprite2D =$AnimatedSprite2D 
+
 # =====================
 # Audio players
 # =====================
@@ -106,6 +108,10 @@ func _on_beat_done(_beat_count: int, _timestamp: int) -> void:
 # =====================
 func resolve_attack(player_input: Array) -> int:
 	var damage := 0
+	sprite.play("attack")
+	# Wait for animation to finish
+	await sprite.animation_finished
+	sprite.play("idle")
 	for i in range(min(sequence.size(), player_input.size())):
 		if sequence[i] != player_input[i]:
 			damage += 1
@@ -143,7 +149,10 @@ func die() -> void:
 
 	is_dead = true
 	print("Enemy has been defeated!")
-	# You can play death animation, disable the node, or queue_free()
-	# For example:
-	# sprite.play("death")
+
+	if sprite and "dissolve" in sprite.sprite_frames.get_animation_names():
+		sprite.play("dissolve")
+		# Wait for animation to finish
+		await sprite.animation_finished
+
 	queue_free()

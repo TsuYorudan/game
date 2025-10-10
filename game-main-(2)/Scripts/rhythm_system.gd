@@ -5,6 +5,7 @@ extends Node
 var beat_time: float
 var beat_count: int = 0
 var last_beat_time: int = 0
+var battle_active: bool = true  # new flag
 
 signal beat(beat_count: int, timestamp: int)
 
@@ -20,9 +21,10 @@ func _ready():
 	$BeatEffects/TopFlash.modulate.a = 0.0
 	$BeatEffects/BottomFlash.modulate.a = 0.0
 
-	#print("RhythmSystem started. Beat time:", beat_time)
-
 func flash_screen(color: Color) -> void:
+	if not battle_active:
+		return  # skip if battle is inactive
+
 	var top = $BeatEffects/TopFlash
 	var bot = $BeatEffects/BottomFlash
 
@@ -37,9 +39,10 @@ func flash_screen(color: Color) -> void:
 	top_tween.tween_property(top, "modulate:a", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	bot_tween.tween_property(bot, "modulate:a", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
-	#print("✅ Tween animations applied.")
-
 func _on_timer_timeout() -> void:
+	if not battle_active:
+		return  # skip beats if battle ended
+
 	beat_count += 1
 	last_beat_time = Time.get_ticks_msec()
 
@@ -47,3 +50,8 @@ func _on_timer_timeout() -> void:
 
 	$MetronomeSound.play()
 	flash_screen(Color.WHITE)
+
+# Call this from TurnManager when battle ends
+func stop_rhythm():
+	battle_active = false
+	$Timer.stop()

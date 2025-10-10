@@ -12,3 +12,5 @@ res://Scripts/command_manager.gd
 res://Scenes/healthbar.gd
 res://Scenes/enemy.gd
 res://Scenes/EnemyHealthBar.gd
+res://Scripts/rhythm_system.gd
+res://Scenes/turnCamera.gd

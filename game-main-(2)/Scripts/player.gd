@@ -121,7 +121,7 @@ func die() -> void:
 	TransitionScreen.fade_out()
 	await TransitionScreen.on_fade_out_finished
 
-	get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
+	get_tree().change_scene_to_file("res://Scenes/new gameplay.tscn")
 
 	TransitionScreen.fade_in()
 	await TransitionScreen.on_fade_in_finished
