@@ -1,7 +1,9 @@
+Label
+HBoxContainer
+VBoxContainer
 Control
 Node2D
 Node
-Label
 CanvasLayer
 TileMap
 CollisionShape2D
@@ -10,5 +12,3 @@ TileMapLayer
 AudioStreamPlayer
 ProgressBar
 Timer
-Camera2D
-AnimatedSprite2D

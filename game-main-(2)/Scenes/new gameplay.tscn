@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://b4bf1umf3f2m"]
+[gd_scene load_steps=23 format=4 uid="uid://b4bf1umf3f2m"]
 
 [ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_aoy1v"]
 [ext_resource type="Script" uid="uid://buahucf2kyd0q" path="res://Scripts/command_manager.gd" id="2_e8tod"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://d4bmchdhtwcpw" path="res://Assets/beats/pata.wav" id="12_6dsoa"]
 [ext_resource type="PackedScene" uid="uid://c5hpdr18ongmj" path="res://Scenes/enemy.tscn" id="12_uu2y7"]
 [ext_resource type="AudioStream" uid="uid://du5qih0ee8lr0" path="res://Assets/beats/pon.wav" id="13_82xq7"]
+[ext_resource type="Script" uid="uid://b07i4rebght3m" path="res://Scenes/command_cheat_sheet.gd" id="13_v3xtg"]
 [ext_resource type="AudioStream" uid="uid://biv0qm56523ma" path="res://Assets/beats/chaka.wav" id="14_77rj5"]
 [ext_resource type="Script" uid="uid://cke620574v27d" path="res://Scripts/battle_node.gd" id="15_e8tod"]
 [ext_resource type="AudioStream" uid="uid://dw8qnm30yhk6s" path="res://Assets/beats/beat.wav" id="15_pdmy6"]
@@ -750,6 +751,43 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 75
 horizontal_alignment = 1
 uppercase = true
+
+[node name="CommandCheatSheet" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -604.0
+offset_top = -174.0
+offset_right = 628.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("13_v3xtg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CommandCheatSheet"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -606.5
+offset_top = -201.0
+offset_right = 626.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CommandCheatSheet/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/CommandCheatSheet/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/CommandCheatSheet/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("pata_sound", "pon_sound", "don_sound", "chaka_sound") groups=["enemy"] instance=ExtResource("12_uu2y7")]
 position = Vector2(983, 630)

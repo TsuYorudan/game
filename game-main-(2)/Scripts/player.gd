@@ -19,6 +19,9 @@ var is_retreating: bool = false
 var is_attacking: bool = false
 var is_dead: bool = false
 
+# NEW: effectiveness applied to next command (set by CommandManager)
+var current_command_effectiveness: float = 1.0
+
 func _ready():
 	current_hp = max_hp
 
@@ -35,8 +38,20 @@ func attack():
 	if is_attacking or is_dead:
 		return
 	print("Character attacking.")
-	var dmg = 4
-	enemy.take_damage(dmg)
+
+	is_attacking = true
+	var base_dmg = 4
+	# scale with effectiveness (round to nearest int)
+	var dmg = int(round(base_dmg * current_command_effectiveness))
+	# ensure at least 0
+	dmg = max(0, dmg)
+
+	if enemy and dmg > 0:
+		enemy.take_damage(dmg)
+
+	# reset effectiveness after use
+	current_command_effectiveness = 1.0
+
 	velocity.x = 0
 	sprite.play("attack")
 
@@ -89,7 +104,9 @@ func heal(amount: int = 2) -> void:
 		return
 
 	sprite.play("heal")
-	var new_hp = min(current_hp + amount, max_hp)
+	# scale heal with effectiveness (at least 1)
+	var heal_amount = max(1, int(round(amount * current_command_effectiveness)))
+	var new_hp = min(current_hp + heal_amount, max_hp)
 	var healed = new_hp - current_hp
 	current_hp = new_hp
 	if healed > 0:
@@ -97,6 +114,9 @@ func heal(amount: int = 2) -> void:
 		emit_signal("hpchange")
 	else:
 		print("Heal had no effect (HP is already full).")
+
+	# reset effectiveness
+	current_command_effectiveness = 1.0
 
 	await sprite.animation_finished
 	if not is_dead:
@@ -125,3 +145,16 @@ func die() -> void:
 
 	TransitionScreen.fade_in()
 	await TransitionScreen.on_fade_in_finished
+
+var current_command: String = ""
+
+func get_current_command() -> String:
+	return current_command
+
+func execute_command():
+	if current_command == "":
+		return
+
+	var battle_node = get_tree().get_first_node_in_group("battle")
+	if battle_node:
+		battle_node.process_command(current_command)
