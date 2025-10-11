@@ -13,3 +13,4 @@ res://Scripts/battle_node.gd
 res://Scripts/turn_manager.gd
 res://Scenes/enemy.gd
 res://Scenes/charge_bar.gd
+res://Scenes/turnCamera.gd

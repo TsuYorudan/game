@@ -140,12 +140,15 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+signal took_damage  # 🔹 NEW signal
+
 func take_damage(amount: int = 1) -> void:
 	if is_dead:
 		return
 
 	current_hp = max(current_hp - amount, 0)
 	emit_signal("hpchange")
+	emit_signal("took_damage")  # 🔹 trigger camera shake
 	print("Player took damage! HP:", current_hp)
 
 	is_attacking = false
@@ -160,6 +163,7 @@ func take_damage(amount: int = 1) -> void:
 		die()
 	else:
 		sprite.play("idle")
+
 
 func die() -> void:
 	if is_dead:

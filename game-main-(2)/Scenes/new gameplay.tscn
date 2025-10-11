@@ -632,6 +632,7 @@ normal_zoom = Vector2(1, 1)
 player_offset = Vector2(-100, 75)
 enemy_offset = Vector2(100, 75)
 center_offset = Vector2(0, 75)
+shake_duration = 0.7
 
 [node name="Node2D" type="Node2D" parent="."]
 visible = false
