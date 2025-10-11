@@ -9,3 +9,7 @@ res://Scenes/enemy.tscn
 res://Scripts/command_manager.gd
 res://Scripts/player.gd
 res://Scenes/command_cheat_sheet.gd
+res://Scripts/battle_node.gd
+res://Scripts/turn_manager.gd
+res://Scenes/enemy.gd
+res://Scenes/charge_bar.gd

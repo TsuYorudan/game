@@ -4,7 +4,7 @@ class_name CommandCheatSheet
 # Commands -> sequence of inputs (use "pata","pon","don","chaka")
 @export var commands: Dictionary = {
 	"Attack": ["pata", "pata", "pon", "pon"],
-	"March":  ["pon", "pon", "pata", "don"],
+	"charge":  ["pon", "pon", "pata", "don"],
 	"Heal":   ["chaka", "chaka", "pata", "pon"],
 	"Retreat":["pon", "pata", "pon", "pata"]
 }

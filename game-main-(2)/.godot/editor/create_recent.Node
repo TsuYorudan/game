@@ -1,3 +1,4 @@
+ProgressBar
 Label
 HBoxContainer
 VBoxContainer
@@ -10,5 +11,4 @@ CollisionShape2D
 Area2D
 TileMapLayer
 AudioStreamPlayer
-ProgressBar
 Timer

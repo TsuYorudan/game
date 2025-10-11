@@ -2,9 +2,9 @@ extends CharacterBody2D
 class_name Player
 
 signal hpchange
+signal charges_changed  # 🔹 NEW: signal for UI updates (optional)
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D2
-
 @onready var enemy: Enemy = get_tree().get_first_node_in_group("enemy")
 
 @export var speed: float = 500.0
@@ -14,17 +14,26 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var max_hp: int = 10
 var current_hp: int
 
+# 🔹 NEW: charge system
+@export var max_charges: int = 6
+var current_charges: int = 0
+
 var is_marching: bool = false
 var is_retreating: bool = false
 var is_attacking: bool = false
 var is_dead: bool = false
 
-# NEW: effectiveness applied to next command (set by CommandManager)
+# Effectiveness multiplier (set externally by CommandManager)
 var current_command_effectiveness: float = 1.0
 
 func _ready():
 	current_hp = max_hp
+	current_charges = max_charges / 2  # start at half or set to 0 if you want
+	emit_signal("charges_changed", current_charges)
 
+# ==========================
+# Command actions
+# ==========================
 func start_retreat():
 	if is_attacking or is_dead:
 		return
@@ -37,21 +46,25 @@ func start_retreat():
 func attack():
 	if is_attacking or is_dead:
 		return
-	print("Character attacking.")
+	# 🔹 Check charge cost (2)
+	if current_charges < 2:
+		print("❌ Not enough charges to attack!")
+		return
 
+	# spend 2 charges
+	current_charges -= 2
+	emit_signal("charges_changed", current_charges)
+
+	print("Character attacking.")
 	is_attacking = true
 	var base_dmg = 4
-	# scale with effectiveness (round to nearest int)
 	var dmg = int(round(base_dmg * current_command_effectiveness))
-	# ensure at least 0
 	dmg = max(0, dmg)
 
 	if enemy and dmg > 0:
 		enemy.take_damage(dmg)
 
-	# reset effectiveness after use
 	current_command_effectiveness = 1.0
-
 	velocity.x = 0
 	sprite.play("attack")
 
@@ -61,6 +74,55 @@ func attack():
 		sprite.play("idle")
 		sprite.flip_h = false
 
+func heal(amount: int = 2) -> void:
+	if is_dead:
+		return
+	# 🔹 Check charge cost (3)
+	if current_charges < 3:
+		print("❌ Not enough charges to heal!")
+		return
+
+	# spend 3 charges
+	current_charges -= 3
+	emit_signal("charges_changed", current_charges)
+
+	sprite.play("heal")
+	var heal_amount = max(1, int(round(amount * current_command_effectiveness)))
+	var new_hp = min(current_hp + heal_amount, max_hp)
+	var healed = new_hp - current_hp
+	current_hp = new_hp
+	if healed > 0:
+		print("Player healed for", healed, "HP. Current HP:", current_hp)
+		emit_signal("hpchange")
+	else:
+		print("Heal had no effect (HP is already full).")
+
+	current_command_effectiveness = 1.0
+
+	await sprite.animation_finished
+	if not is_dead:
+		sprite.play("idle")
+
+# 🔹 NEW: Charge command (gain 1 charge)
+func charge_up():
+	if is_dead:
+		return
+	if current_charges >= max_charges:
+		print("⚡ Charges full!")
+		return
+
+	current_charges = min(current_charges + 1, max_charges)
+	print("⚡ Charged! Current charges:", current_charges)
+	emit_signal("charges_changed", current_charges)
+
+	sprite.play("charge")  # if you have a charge animation
+	await sprite.animation_finished
+	if not is_dead:
+		sprite.play("idle")
+
+# ==========================
+# Physics + Damage
+# ==========================
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
@@ -99,29 +161,6 @@ func take_damage(amount: int = 1) -> void:
 	else:
 		sprite.play("idle")
 
-func heal(amount: int = 2) -> void:
-	if is_dead:
-		return
-
-	sprite.play("heal")
-	# scale heal with effectiveness (at least 1)
-	var heal_amount = max(1, int(round(amount * current_command_effectiveness)))
-	var new_hp = min(current_hp + heal_amount, max_hp)
-	var healed = new_hp - current_hp
-	current_hp = new_hp
-	if healed > 0:
-		print("Player healed for", healed, "HP. Current HP:", current_hp)
-		emit_signal("hpchange")
-	else:
-		print("Heal had no effect (HP is already full).")
-
-	# reset effectiveness
-	current_command_effectiveness = 1.0
-
-	await sprite.animation_finished
-	if not is_dead:
-		sprite.play("idle")
-
 func die() -> void:
 	if is_dead:
 		return
@@ -131,7 +170,6 @@ func die() -> void:
 	$gameover.play()
 	velocity = Vector2.ZERO
 
-	# Stop input
 	set_physics_process(false)
 	set_process(false)
 
@@ -145,6 +183,11 @@ func die() -> void:
 
 	TransitionScreen.fade_in()
 	await TransitionScreen.on_fade_in_finished
+
+# ==========================
+# Command linking
+# ==========================
+
 
 var current_command: String = ""
 

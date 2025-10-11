@@ -106,20 +106,26 @@ func _on_beat_done(_beat_count: int, _timestamp: int) -> void:
 # =====================
 # Combat
 # =====================
-func resolve_attack(player_input: Array) -> int:
+func resolve_attack(player_input: Array) -> Dictionary:
 	var damage := 0
+	var countered := true  # assume fully countered
+
 	sprite.play("attack")
-	# Wait for animation to finish
 	await sprite.animation_finished
 	sprite.play("idle")
+
 	for i in range(min(sequence.size(), player_input.size())):
 		if sequence[i] != player_input[i]:
 			damage += 1
+			countered = false  # missed input, not fully countered
+
 	if player_input.size() < sequence.size():
 		damage += sequence.size() - player_input.size()
+		countered = false
 
 	emit_signal("attack_resolved", damage)
-	return damage
+	return {"damage": damage, "countered": countered}
+
 
 # Take damage
 func take_damage(amount: int = 1) -> void:

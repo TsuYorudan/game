@@ -1,5 +1,4 @@
 extends Node
-
 enum TurnPhase { PREBATTLE, PLAYER_INPUT, PLAYER_RESOLUTION, ENEMY_INPUT, ENEMY_RESOLUTION, BATTLE_END, END }
 
 var current_turn: String = "PLAYER"
@@ -42,7 +41,7 @@ func start_battle():
 	phase = TurnPhase.PREBATTLE
 	_debug_state()
 	emit_signal("phase_changed", TurnPhase.keys()[phase])
-	process_phase()
+	await process_phase()
 
 func roll_first_turn():
 	if randi() % 2 == 0:
@@ -52,7 +51,7 @@ func roll_first_turn():
 	update_turn_label("%s Turn" % current_turn.capitalize())
 
 func next_phase():
-	# If someone died, go straight to BATTLE_END
+	# Check for death
 	if (player and player.is_dead) or (enemy and enemy.is_dead):
 		phase = TurnPhase.BATTLE_END
 	else:
@@ -77,7 +76,7 @@ func next_phase():
 
 	_debug_state()
 	emit_signal("phase_changed", TurnPhase.keys()[phase])
-	await process_phase()  # Make process_phase async so we can await it
+	await process_phase()
 
 func record_player_response(response: Array) -> void:
 	player_response = response.duplicate()
@@ -93,21 +92,40 @@ func process_phase() -> void:
 				rhythm_system.connect("beat", Callable(self, "_on_prebattle_beat"), CONNECT_ONE_SHOT)
 
 		TurnPhase.PLAYER_INPUT:
-			$"../CanvasLayer/timeline".set_phase(0)  # Player turn
+			$"../CanvasLayer/timeline".set_phase(0)
 			$"../CanvasLayer/beatbar".is_enemy_turn = false
 			$"../CanvasLayer/beatbar".start_phase()
 			print("🎵 Player can input now")
 
 		TurnPhase.PLAYER_RESOLUTION:
-			$"../CanvasLayer/timeline".set_phase(1)  # Player turn
+			$"../CanvasLayer/timeline".set_phase(1)
 			$"../CanvasLayer/beatbar".end_phase()
+			# Check for charges before executing commands
+			if player_response.size() > 0:
+				for cmd in player_response:
+					match cmd:
+						"attack":
+							if player.current_charges >= 2:
+								player.current_charges -= 2
+								player.execute_command()
+							else:
+								print("❌ Not enough charges for attack")
+						"heal":
+							if player.current_charges >= 3:
+								player.current_charges -= 3
+								player.execute_command()
+							else:
+								print("❌ Not enough charges for heal")
+						"charge":
+							player.charge_up()
+						"retreat":
+							player.execute_command()
 			for i in range(4):
 				await wait_one_beat()
 			next_phase()
 
 		TurnPhase.ENEMY_INPUT:
-			$"../CanvasLayer/timeline".set_phase(2)  # Player turn
-			emit_signal("phase_changed", TurnPhase.keys()[phase])
+			$"../CanvasLayer/timeline".set_phase(2)
 			print("👾 Enemy turn...")
 			update_turn_label("Enemy Turn")
 			if enemy:
@@ -118,7 +136,7 @@ func process_phase() -> void:
 			next_phase()
 
 		TurnPhase.ENEMY_RESOLUTION:
-			$"../CanvasLayer/timeline".set_phase(3)  # Player turn
+			$"../CanvasLayer/timeline".set_phase(3)
 			update_turn_label("COUNTER")
 			$"../CanvasLayer/beatbar".end_phase()
 			$"../CanvasLayer/beatbar".is_enemy_turn = false
@@ -126,18 +144,26 @@ func process_phase() -> void:
 			for i in range(4):
 				await wait_one_beat()
 			$"../CanvasLayer/beatbar".end_phase()
-			$"../CanvasLayer/timeline".set_phase(4)  # Player turn
-			var dmg = await enemy.resolve_attack(player_response) if enemy else 0
-			if dmg > 0:
-				if player and not player.is_dead:
-					player.take_damage(dmg)
+			$"../CanvasLayer/timeline".set_phase(4)
+
+			# Resolve enemy attack and award charge on successful counter
+			if enemy:
+				var result = await enemy.resolve_attack(player_response)
+				var damage = result.damage if "damage" in result else result
+				var countered = result.countered if "countered" in result else false
+
+				if damage > 0 and player and not player.is_dead:
+					player.take_damage(damage)
+				elif countered:
+					player.charge_up()
+					print("✅ Counter successful, gained 1 charge!")
+
 			for i in range(3):
 				await wait_one_beat()
 			next_phase()
 
 		TurnPhase.BATTLE_END:
 			print("⚡ Battle ended. Disabling everything.")
-			# Disable beatbar, inputs, and metronome
 			if rhythm_system:
 				rhythm_system.stop_rhythm()
 			var beatbar = get_tree().get_first_node_in_group("beatbar")
@@ -145,7 +171,6 @@ func process_phase() -> void:
 				beatbar.end_phase()
 				beatbar.set_process(false)
 				beatbar.visible = false
-			# Wait for animations to finish
 			if player and player.is_dead:
 				while player.sprite.animation != "overwhelm":
 					await get_tree().process_frame
