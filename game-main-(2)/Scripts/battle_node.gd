@@ -1,43 +1,58 @@
 extends Node
 
-# Export the reference to the CharacterBody2D node
-@export var character: CharacterBody2D  # This will be set in the editor
+@export var character: CharacterBody2D  # set this in the editor (Player node reference)
 
 func _ready():
-	# Add this node to the "battle" group
 	add_to_group("battle")
 
-# Declare the possible actions
-func march():
-	print("march")
+# ==========================
+# Action methods
+# ==========================
+func charge():
+	print("charge")
 	if character:
-		character.start_marching()  # Call the start_marching method on the character node
+		character.charge_up()
 
 func attack():
 	print("attack.")
-	if character:
-		character.attack()
-	# Add counter-attack logic here
+	if not character:
+		return
 
-func shield():
-	print("Activating shield.")
-	# Add shield logic here
+	# ✅ Check if enough charges before executing
+	if character.current_charges < 2:
+		print("❌ Not enough charges to attack! (Needs 2, has %d)" % character.current_charges)
+		return
+
+	character.attack()
 
 func heal():
 	print("heal")
-	if character:
-		character.heal(3)
-	
+	if not character:
+		return
+
+	# ✅ Check if enough charges before executing
+	if character.current_charges < 3:
+		print("❌ Not enough charges to heal! (Needs 3, has %d)" % character.current_charges)
+		return
+
+	character.heal(3)
+
+func shield():
+	print("Activating shield.")
+	# (You can add charge cost here later if needed)
+
 func retreat():
 	print("retreat")
 	if character:
-		character.start_retreat()  # Call the start_retreat method to move the character left
+		character.start_retreat()
 
-# Method to process the command sent from the rhythm system
+# ==========================
+# Command router
+# ==========================
 func process_command(action: String) -> void:
 	match action:
-		"march":
-			march()
+		"charge":
+			charge()
 		"attack":
 			attack()
 		"shield":
@@ -45,6 +60,6 @@ func process_command(action: String) -> void:
 		"heal":
 			heal()
 		"retreat":
-			retreat()  # Now calls retreat
+			retreat()
 		_:
-			print("❌ Unknown action: ", action)
+			print("❌ Unknown action:", action)

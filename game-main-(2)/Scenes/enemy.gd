@@ -1,122 +1,169 @@
-extends CharacterBody2D
+extends Node2D
+class_name Enemy
 
-signal died
+# =====================
+# Beats
+# =====================
+var beat_pool: Array = ["pata", "pon", "don", "chaka"]
+var sequence: Array = []
 
-@export var SPEED := 100.0
-@export var DISSOLVE_TIME := 1.2
-@export var MAX_HP := 3
+signal sequence_played(sequence: Array)
+signal attack_resolved(damage: int)
+signal hpchange  # signal for health changes
 
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var detector: Area2D = $Area2D
-@onready var attack_area: Area2D = $Area2D2
-@onready var hitbox: Area2D = $hitbox  # For *attacking* the player
-@onready var hurtbox: Area2D = $hurtbox  # For *receiving* damage
-@onready var attack_repeat_timer: Timer = $Timer
+# =====================
+# Stats
+# =====================
+@export var max_hp: int = 10
+var current_hp: int
 
-var player: Node2D = null
-var state: String = "idle"
-var is_dead := false
-var hp: int
+@export var attack_power: int = 1  # can be used for future damage calculations
+var is_dead: bool = false
 
-func _ready() -> void:
-	hp = MAX_HP
-	detector.body_entered.connect(_on_body_entered)
-	attack_area.body_entered.connect(_on_attack_area_entered)
-	attack_area.body_exited.connect(_on_attack_area_exited)
-	attack_repeat_timer.timeout.connect(_on_attack_repeat_timeout)
-	hitbox.monitoring = false
-	hurtbox.monitoring = true
-	hurtbox.connect("area_entered", _on_hurtbox_area_entered)
-	print("[DEBUG] Enemy ready, HP =", hp)
+@onready var sprite: AnimatedSprite2D =$AnimatedSprite2D 
 
-func _physics_process(delta: float) -> void:
+# =====================
+# Audio players
+# =====================
+@export var pata_sound: AudioStreamPlayer
+@export var pon_sound: AudioStreamPlayer
+@export var don_sound: AudioStreamPlayer
+@export var chaka_sound: AudioStreamPlayer
+
+# =====================
+# BeatBar reference
+# =====================
+var beatbar: Node = null
+
+# Internal flag for awaiting beat
+var _beat_done_flag: bool = false
+
+# =====================
+# Initialization
+# =====================
+func _ready():
+	current_hp = max_hp
+	beatbar = get_tree().get_first_node_in_group("beatbar")
+
+# =====================
+# Beat sequence
+# =====================
+func generate_sequence(length: int = 4) -> void:
+	sequence.clear()
+	for i in range(length):
+		sequence.append(beat_pool[randi() % beat_pool.size()])
+	print("👾 Enemy sequence generated:", sequence)
+
+func get_sequence() -> Array:
+	return sequence.duplicate()
+
+func play_sequence(rhythm_system: Node) -> void:
+	if sequence.is_empty():
+		print("⚠️ No enemy sequence to play.")
+		return
+
+	print("🎶 Enemy playing sequence:", sequence)
+
+	if beatbar:
+		beatbar.is_enemy_turn = true
+		beatbar.start_phase()
+
+	for beat in sequence:
+		match beat:
+			"pata":
+				if pata_sound: pata_sound.play()
+			"pon":
+				if pon_sound: pon_sound.play()
+			"don":
+				if don_sound: don_sound.play()
+			"chaka":
+				if chaka_sound: chaka_sound.play()
+
+		if beatbar:
+			beatbar.call("register_action_mark", true, beat)
+
+		if rhythm_system:
+			await wait_one_beat(rhythm_system)
+
+	if beatbar:
+		beatbar.end_phase()
+		beatbar.is_enemy_turn = false
+
+	emit_signal("sequence_played", sequence)
+
+func wait_one_beat(rhythm_system: Node) -> void:
+	if not rhythm_system:
+		return
+	_beat_done_flag = false
+	var conn = Callable(self, "_on_beat_done")
+	rhythm_system.connect("beat", conn, CONNECT_ONE_SHOT)
+	while not _beat_done_flag:
+		await get_tree().process_frame
+
+func _on_beat_done(_beat_count: int, _timestamp: int) -> void:
+	_beat_done_flag = true
+
+# =====================
+# Combat
+# =====================
+func resolve_attack(player_input: Array) -> Dictionary:
+	var damage := 0
+	var countered := true  # assume fully countered
+
+	sprite.play("attack")
+	await sprite.animation_finished
+	sprite.play("idle")
+
+	for i in range(min(sequence.size(), player_input.size())):
+		if sequence[i] != player_input[i]:
+			damage += 1
+			countered = false  # missed input, not fully countered
+
+	if player_input.size() < sequence.size():
+		damage += sequence.size() - player_input.size()
+		countered = false
+
+	emit_signal("attack_resolved", damage)
+	return {"damage": damage, "countered": countered}
+
+
+# Take damage
+func take_damage(amount: int = 1) -> void:
 	if is_dead:
 		return
 
-	match state:
-		"idle":
-			sprite.play("idle")
-			velocity = Vector2.ZERO
-			move_and_slide()
+	current_hp = max(current_hp - amount, 0)
+	emit_signal("hpchange")
+	print("Enemy took", amount, "damage! Current HP:", current_hp)
 
-		"walk":
-			var to_player = player.global_position - global_position
-			var dir = to_player.normalized()
-			velocity = dir * SPEED
-			sprite.play("walk")
-			move_and_slide()
-
-		"attack":
-			velocity = Vector2.ZERO
-			move_and_slide()
-
-		"hurt":
-			velocity = Vector2.ZERO
-			move_and_slide()
-			sprite.play("hurt")
-			await sprite.animation_finished
-			if hp > 0:
-				state = "walk"
-			else:
-				die()
-
-		"dissolve":
-			is_dead = true
-			emit_signal("died")
-			velocity = Vector2.ZERO
-			move_and_slide()
-			sprite.play("dissolve")
-			await sprite.animation_finished
-			free()
-
-func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):
-		player = body
-		state = "walk"
-
-func _on_attack_area_entered(body: Node) -> void:
-	if body.is_in_group("player"):
-		player = body
-		if state != "attack":
-			state = "attack"
-			attack_repeat_timer.start()
-
-func _on_attack_area_exited(body: Node) -> void:
-	if body == player and not is_dead:
-		attack_repeat_timer.stop()
-		state = "walk"
-
-func _on_attack_repeat_timeout() -> void:
-	if state == "attack" and not is_dead:
-		hitbox.monitoring = true
-		sprite.play("attack")
+	if current_hp <= 0:
+		die()
+	else:
+		sprite.play("hurt")
+		# Wait for animation to finish
 		await sprite.animation_finished
 		sprite.play("idle")
-		hitbox.monitoring = false
 
-func _on_hurtbox_area_entered(area: Area2D) -> void:
+# Heal
+func heal(amount: int = 1) -> void:
 	if is_dead:
 		return
 
-	# DEBUG OUTPUT
-	print("[DEBUG] Hurtbox touched by:", area.name)
+	current_hp = min(current_hp + amount, max_hp)
+	emit_signal("hpchange")
+	print("Enemy healed", amount, "HP. Current HP:", current_hp)
 
-	if area.name == "hitbox" or area.get_parent().name == "hitbox":
-		print("[DEBUG] Projectile hit confirmed!")
-		take_damage()
-
-func take_damage() -> void:
-	if is_dead:
-		return
-	hp -= 1
-	print("[DEBUG] Enemy took damage! HP =", hp)
-	if hp > 0:
-		state = "hurt"
-	else:
-		die()
-
+# Death
 func die() -> void:
 	if is_dead:
 		return
-	print("[DEBUG] Enemy died.")
-	state = "dissolve"
+
+	is_dead = true
+	print("Enemy has been defeated!")
+
+	if sprite and "dissolve" in sprite.sprite_frames.get_animation_names():
+		sprite.play("dissolve")
+		# Wait for animation to finish
+		await sprite.animation_finished
+
+	queue_free()

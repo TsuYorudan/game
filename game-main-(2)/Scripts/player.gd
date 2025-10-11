@@ -2,25 +2,10 @@ extends CharacterBody2D
 class_name Player
 
 signal hpchange
+signal charges_changed  # 🔹 NEW: signal for UI updates (optional)
 
-@onready var camera: Camera2D = $Camera2D2
-@onready var enemy_detector: Area2D = $EnemyDetector
-@onready var hurt_receiver: Area2D = $hitbox
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D2
-@onready var main = get_tree().get_root().get_node("gameplay")
-@onready var projectile = load("res://attack.tscn")
-
-var base_zoom := Vector2(1, 1)
-var zoomed_out := Vector2(1.5, 1.5)
-var zoom_speed := 5.0
-
-var enemy_nearby := false
-
-# Camera shake variables
-var camera_shake_strength := 55.0
-var camera_shake_duration := 0.3
-var camera_shake_timer := 0.0
-var rng := RandomNumberGenerator.new()
+@onready var enemy: Enemy = get_tree().get_first_node_in_group("enemy")
 
 @export var speed: float = 500.0
 @export var jump_velocity: float = -500.0
@@ -29,25 +14,26 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var max_hp: int = 10
 var current_hp: int
 
+# 🔹 NEW: charge system
+@export var max_charges: int = 6
+var current_charges: int = 0
+
 var is_marching: bool = false
 var is_retreating: bool = false
 var is_attacking: bool = false
 var is_dead: bool = false
 
+# Effectiveness multiplier (set externally by CommandManager)
+var current_command_effectiveness: float = 1.0
+
 func _ready():
 	current_hp = max_hp
-	hurt_receiver.connect("area_entered", Callable(self, "_on_hurtbox_entered"))
+	current_charges = max_charges / 2  # start at half or set to 0 if you want
+	emit_signal("charges_changed", current_charges)
 
-func start_marching():
-	if is_attacking or is_dead:
-		return
-	print("Character starting to march.")
-	is_marching = true
-	is_retreating = false
-	sprite.play("walk")
-	sprite.flip_h = false
-	$MarchTimer.start()
-
+# ==========================
+# Command actions
+# ==========================
 func start_retreat():
 	if is_attacking or is_dead:
 		return
@@ -56,29 +42,31 @@ func start_retreat():
 	is_marching = false
 	sprite.play("retreat")
 	sprite.flip_h = true
-	$MarchTimer.start()
-
-func stop_moving():
-	if is_dead:
-		return
-	print("Character stopping movement.")
-	is_marching = false
-	is_retreating = false
-	if not is_attacking:
-		sprite.play("idle")
-		sprite.flip_h = false
-	velocity.x = 0
 
 func attack():
 	if is_attacking or is_dead:
 		return
+	# 🔹 Check charge cost (2)
+	if current_charges < 2:
+		print("❌ Not enough charges to attack!")
+		return
+
+	# spend 2 charges
+	current_charges -= 2
+	emit_signal("charges_changed", current_charges)
+
 	print("Character attacking.")
 	is_attacking = true
-	is_marching = false
-	is_retreating = false
+	var base_dmg = 4
+	var dmg = int(round(base_dmg * current_command_effectiveness))
+	dmg = max(0, dmg)
+
+	if enemy and dmg > 0:
+		enemy.take_damage(dmg)
+
+	current_command_effectiveness = 1.0
 	velocity.x = 0
 	sprite.play("attack")
-	shoot()
 
 	await sprite.animation_finished
 	is_attacking = false
@@ -86,11 +74,55 @@ func attack():
 		sprite.play("idle")
 		sprite.flip_h = false
 
-func shoot():
-	var instance = projectile.instantiate()
-	instance.spawnPos = global_position
-	main.call_deferred("add_child", instance)
+func heal(amount: int = 2) -> void:
+	if is_dead:
+		return
+	# 🔹 Check charge cost (3)
+	if current_charges < 3:
+		print("❌ Not enough charges to heal!")
+		return
 
+	# spend 3 charges
+	current_charges -= 3
+	emit_signal("charges_changed", current_charges)
+
+	sprite.play("heal")
+	var heal_amount = max(1, int(round(amount * current_command_effectiveness)))
+	var new_hp = min(current_hp + heal_amount, max_hp)
+	var healed = new_hp - current_hp
+	current_hp = new_hp
+	if healed > 0:
+		print("Player healed for", healed, "HP. Current HP:", current_hp)
+		emit_signal("hpchange")
+	else:
+		print("Heal had no effect (HP is already full).")
+
+	current_command_effectiveness = 1.0
+
+	await sprite.animation_finished
+	if not is_dead:
+		sprite.play("idle")
+
+# 🔹 NEW: Charge command (gain 1 charge)
+func charge_up():
+	if is_dead:
+		return
+	if current_charges >= max_charges:
+		print("⚡ Charges full!")
+		return
+
+	current_charges = min(current_charges + 1, max_charges)
+	print("⚡ Charged! Current charges:", current_charges)
+	emit_signal("charges_changed", current_charges)
+
+	sprite.play("charge")  # if you have a charge animation
+	await sprite.animation_finished
+	if not is_dead:
+		sprite.play("idle")
+
+# ==========================
+# Physics + Damage
+# ==========================
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
@@ -108,45 +140,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func _process(delta: float) -> void:
-	# Check if enemies are nearby
-	enemy_nearby = enemy_detector.get_overlapping_bodies().any(
-		func(b): return b.is_in_group("enemies")
-	)
-
-	# Determine zoom and offset
-	var target_zoom = base_zoom if enemy_nearby or is_dead else zoomed_out
-	var target_offset = Vector2.ZERO
-	if is_dead:
-		target_offset = Vector2.ZERO
-	elif enemy_nearby:
-		target_offset = Vector2(100, 0)
-	else:
-		target_offset = Vector2(-150, 130)
-
-	# Camera shake logic
-	if camera_shake_timer > 0:
-		camera_shake_timer -= delta
-		var shake_offset = Vector2(
-			rng.randf_range(-camera_shake_strength, camera_shake_strength),
-			rng.randf_range(-camera_shake_strength, camera_shake_strength)
-		)
-		camera.offset = camera.offset.lerp(target_offset + shake_offset, delta * zoom_speed)
-	else:
-		camera.offset = camera.offset.lerp(target_offset, delta * zoom_speed)
-
-	camera.zoom = camera.zoom.lerp(target_zoom, delta * zoom_speed)
-
-func _on_march_timer_timeout() -> void:
-	print("March timer timed out.")
-	stop_moving()
-
-func _on_hurtbox_entered(area: Area2D) -> void:
-	if is_dead:
-		return
-
-	if area.name == "hitbox" or area.get_parent().name == "hitbox":
-		take_damage()
+signal took_damage  # 🔹 NEW signal
 
 func take_damage(amount: int = 1) -> void:
 	if is_dead:
@@ -154,10 +148,8 @@ func take_damage(amount: int = 1) -> void:
 
 	current_hp = max(current_hp - amount, 0)
 	emit_signal("hpchange")
+	emit_signal("took_damage")  # 🔹 trigger camera shake
 	print("Player took damage! HP:", current_hp)
-
-	# Trigger camera shake
-	camera_shake_timer = camera_shake_duration
 
 	is_attacking = false
 	is_marching = false
@@ -172,23 +164,6 @@ func take_damage(amount: int = 1) -> void:
 	else:
 		sprite.play("idle")
 
-func heal(amount: int = 2) -> void:
-	if is_dead:
-		return
-
-	sprite.play("heal")
-	var new_hp = min(current_hp + amount, max_hp)
-	var healed = new_hp - current_hp
-	current_hp = new_hp
-	if healed > 0:
-		print("Player healed for", healed, "HP. Current HP:", current_hp)
-		emit_signal("hpchange")
-	else:
-		print("Heal had no effect (HP is already full).")
-
-	await sprite.animation_finished
-	if not is_dead:
-		sprite.play("idle")
 
 func die() -> void:
 	if is_dead:
@@ -199,26 +174,6 @@ func die() -> void:
 	$gameover.play()
 	velocity = Vector2.ZERO
 
-	# Camera zoom-in and offset transition
-	var zoom_duration := 0.3
-	var zoom_timer := 0.0
-	var start_zoom = camera.zoom
-	var end_zoom = Vector2(3.0, 3.0)  # Strong zoom-IN
-	var start_offset = camera.offset
-	var end_offset = Vector2(-380, 150)  # Upward focus (adjust as needed)
-
-	while zoom_timer < zoom_duration:
-		var t = zoom_timer / zoom_duration
-		camera.zoom = start_zoom.lerp(end_zoom, t)
-		camera.offset = start_offset.lerp(end_offset, t)
-		zoom_timer += get_process_delta_time()
-		await get_tree().process_frame
-
-	# Ensure final values are set
-	camera.zoom = end_zoom
-	camera.offset = end_offset
-
-	# Stop input
 	set_physics_process(false)
 	set_process(false)
 
@@ -228,7 +183,25 @@ func die() -> void:
 	TransitionScreen.fade_out()
 	await TransitionScreen.on_fade_out_finished
 
-	get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
+	get_tree().change_scene_to_file("res://Scenes/new gameplay.tscn")
 
 	TransitionScreen.fade_in()
 	await TransitionScreen.on_fade_in_finished
+
+# ==========================
+# Command linking
+# ==========================
+
+
+var current_command: String = ""
+
+func get_current_command() -> String:
+	return current_command
+
+func execute_command():
+	if current_command == "":
+		return
+
+	var battle_node = get_tree().get_first_node_in_group("battle")
+	if battle_node:
+		battle_node.process_command(current_command)
