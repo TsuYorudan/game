@@ -1,7 +1,9 @@
+Label
+CanvasModulate
+PointLight2D
 TileMapLayer
 Node2D
 Node
-PointLight2D
 GPUParticles2D
 AnimationPlayer
 Control
@@ -11,4 +13,3 @@ CanvasLayer
 Camera2D
 CharacterBody2D
 Sprite2D
-CollisionShape2D

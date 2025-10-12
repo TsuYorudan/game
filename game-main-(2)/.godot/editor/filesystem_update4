@@ -18,3 +18,4 @@ res://overworld_manager.gd
 res://battle_scene_handler.gd
 res://BattleSceneHandler.tscn
 res://Scenes/bg.tscn
+res://Scenes/command_cheat_sheet.gd

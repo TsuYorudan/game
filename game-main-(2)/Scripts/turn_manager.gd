@@ -15,6 +15,10 @@ var beat_count: int = 0
 @onready var countdown_label: Label = $"../CanvasLayer/Control/CountdownLabel"
 @onready var turn_label: Label = $"../CanvasLayer/Control/TurnLabel"
 
+var reverse_challenge: bool = false
+@onready var reverse_label: Label = $"../CanvasLayer/Control/ReverseLabel"
+
+
 var player_response: Array = []
 
 signal _beat_rest_done
@@ -56,6 +60,12 @@ func roll_first_turn():
 		current_turn = "ENEMY"
 	update_turn_label("%s Turn" % current_turn.capitalize())
 
+	# 🕒 If enemy starts first, wait one beat before proceeding
+	if current_turn == "ENEMY":
+		print("🕐 Enemy rolled first — waiting one beat before starting...")
+		await wait_one_beat()
+
+
 func next_phase():
 	# Check for death
 	if (player and player.is_dead) or (enemy and enemy.is_dead):
@@ -86,6 +96,9 @@ func next_phase():
 
 func record_player_response(response: Array) -> void:
 	player_response = response.duplicate()
+	if reverse_challenge:
+		player_response.reverse()
+
 
 func process_phase() -> void:
 	match phase:
@@ -138,7 +151,26 @@ func process_phase() -> void:
 				$"../CanvasLayer/beatbar".is_enemy_turn = true
 				$"../CanvasLayer/beatbar".start_phase()
 				enemy.generate_sequence(4)
+			reverse_challenge = randf() < 0.25
+
+			if reverse_label:
+				if reverse_challenge:
+					reverse_label.visible = true
+					reverse_label.modulate = Color(1, 0.3, 0.3, 1)
+					reverse_label.scale = Vector2.ONE * 0.8
+					reverse_label.text = "REVERSE!"  # just to be safe
+					await get_tree().process_frame  # ensures label actually updates next frame
+
+					var tween = get_tree().create_tween()
+					tween.tween_property(reverse_label, "scale", Vector2.ONE * 1.3, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+					tween.tween_property(reverse_label, "scale", Vector2.ONE, 0.25)
+				else:
+					reverse_label.visible = false
 				await enemy.play_sequence(rhythm_system)
+				
+			if reverse_label and reverse_challenge:
+				reverse_label.visible = false
+				# 🔄 25% chance next player phase requires reversed input
 			next_phase()
 
 		TurnPhase.ENEMY_RESOLUTION:
@@ -169,6 +201,8 @@ func process_phase() -> void:
 			next_phase()
 
 		TurnPhase.BATTLE_END:
+			if reverse_label:
+				reverse_label.visible = false
 			print("⚡ Battle ended. Disabling everything.")
 			if rhythm_system:
 				rhythm_system.stop_rhythm()
@@ -187,7 +221,7 @@ func process_phase() -> void:
 
 			print("🏆 Battle finished.")
 
-	# Call singleton to return to overworld
+			# ✅ Go back to overworld with previous position
 			if BattleSceneHandler:
 				await battle_scene_handler.return_to_overworld()
 

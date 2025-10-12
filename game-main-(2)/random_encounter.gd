@@ -11,8 +11,6 @@ var _player_ref: CharacterBody2D
 var _steps_since_last_encounter: int = 0
 var _rng := RandomNumberGenerator.new()
 
-var saved_position: Vector2  # save player overworld position
-
 func _ready():
 	if player != NodePath(""):
 		_player_ref = get_node_or_null(player)
@@ -37,12 +35,13 @@ func _on_check_encounter() -> void:
 	if not _player_ref:
 		return
 
+	# Count steps when the player is moving
 	if _player_ref.velocity.length() > 0:
 		_steps_since_last_encounter += 1
 
 		if _steps_since_last_encounter >= min_steps_before_encounter:
 			if _rng.randf() < encounter_chance:
-				start_battle()
+				await start_battle()
 
 
 func start_battle() -> void:
@@ -52,15 +51,20 @@ func start_battle() -> void:
 	print("⚔️ Random Encounter Triggered!")
 	_steps_since_last_encounter = 0
 
-	# Save overworld position
-	saved_position = _player_ref.global_position
+	# ✅ Save overworld position globally before leaving
+	if BattleSceneHandler:
+		battle_scene_handler.saved_player_position = _player_ref.global_position
+		print("💾 Saved overworld position:", battle_scene_handler.saved_player_position)
 
 	# Stop player movement
-	_player_ref.can_move = false
+	if "can_move" in _player_ref:
+		_player_ref.can_move = false
 
-	# Fade out
-	if ZoomTransition:
-		await zoom_transition.play_transition()  # await the zoom/fade animation
+	# Fade out transition (optional)
+	if TransitionScreen:
+		await TransitionScreen.fade_out_and_wait()
+	elif ZoomTransition:
+		await zoom_transition.play_transition()
 
 	# Load battle scene
 	if ResourceLoader.exists(battle_scene_path):
