@@ -702,6 +702,7 @@ y_sort_enabled = true
 position = Vector2(9, 6)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="sort" groups=["player_top"]]
+modulate = Color(0.45106453, 0.24545285, 0.132422, 1)
 script = ExtResource("1_nyb65")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="sort/CharacterBody2D"]

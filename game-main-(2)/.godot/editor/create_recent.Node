@@ -1,5 +1,5 @@
-Label
 CanvasModulate
+Label
 PointLight2D
 TileMapLayer
 Node2D
@@ -12,4 +12,3 @@ TextureRect
 CanvasLayer
 Camera2D
 CharacterBody2D
-Sprite2D

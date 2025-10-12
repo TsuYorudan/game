@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://be6gemmpc43eo" path="res://Assets/spritesheet_ground.png" id="19_hatvd"]
 [ext_resource type="Script" uid="uid://cke620574v27d" path="res://Scripts/battle_node.gd" id="20_dndgb"]
 [ext_resource type="PackedScene" uid="uid://dahsxfj4yr7el" path="res://Scenes/bg.tscn" id="21_sk0lo"]
-[ext_resource type="Texture2D" uid="uid://crstu4ki35l1n" path="res://Flare_small.PNG" id="22_kcxpu"]
+[ext_resource type="Texture2D" uid="uid://b3xgvkifwhd07" path="res://Assets/light.png" id="22_kcxpu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i3g2w"]
 texture = ExtResource("19_hatvd")
@@ -550,7 +550,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_i3g2w")
 
 [sub_resource type="Gradient" id="Gradient_emx8f"]
-colors = PackedColorArray(0.27250156, 0.674886, 3.85046e-07, 1, 0.92789537, 0.37507954, 0.26642668, 1)
+colors = PackedColorArray(0.011806859, 0.65135014, 0.65766054, 1, 0.93036413, 0.9290705, 0.9324309, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_kcxpu"]
 gradient = SubResource("Gradient_emx8f")
@@ -563,7 +563,7 @@ gravity = Vector3(0, 0, 0)
 linear_accel_min = -2.2351742e-06
 linear_accel_max = 1.9999977
 scale_min = 0.0
-scale_max = 0.5
+scale_max = 0.07
 color_ramp = SubResource("GradientTexture1D_kcxpu")
 turbulence_enabled = true
 
@@ -838,6 +838,7 @@ don_sound = NodePath("../CanvasLayer/Audio/don")
 chaka_sound = NodePath("../CanvasLayer/Audio/chaka")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("16_b73yr")]
+modulate = Color(0.47896105, 0.35805485, 0.16751394, 1)
 position = Vector2(353, 616)
 scale = Vector2(12, 12)
 collision_mask = 3
