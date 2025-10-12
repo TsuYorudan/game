@@ -12,13 +12,15 @@ config_version=5
 
 config/name="Game-main-final"
 run/main_scene="res://Scenes/Main.tscn"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 TransitionScreen="*res://Scenes/transition_screen.tscn"
 SaveLoad="*res://Scenes/saver_loader.gd"
+zoom_transition="*res://zoom_transition.tscn"
+battle_scene_handler="*res://BattleSceneHandler.tscn"
 
 [display]
 

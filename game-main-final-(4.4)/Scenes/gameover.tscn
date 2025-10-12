@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://2hdhytfccgfx"]
+
+[ext_resource type="Script" uid="uid://dgu1tbidyy6xq" path="res://Scenes/gameover.gd" id="1_6kwjr"]
+[ext_resource type="Theme" uid="uid://b0gcejfk0lxpr" path="res://Assets/test.tres" id="2_bb3cs"]
+[ext_resource type="Theme" uid="uid://dyh0jb3hcieji" path="res://Assets/font.tres" id="3_a57xw"]
+[ext_resource type="Theme" uid="uid://jlyiwdw1q0ae" path="res://Assets/buttons.tres" id="4_qjy16"]
+[ext_resource type="PackedScene" uid="uid://dahsxfj4yr7el" path="res://Scenes/bg.tscn" id="5_26hfm"]
+
+[node name="Gameover" type="CanvasLayer"]
+script = ExtResource("1_6kwjr")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.5
+offset_top = -164.0
+offset_right = 345.5
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_bb3cs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.5
+offset_top = -77.5
+offset_right = 345.5
+offset_bottom = 77.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("3_a57xw")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 50
+text = "GAME OVER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("4_qjy16")
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "PLAY AGAIN"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="BG" parent="." instance=ExtResource("5_26hfm")]
+position = Vector2(-67, -531)

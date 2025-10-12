@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0mjplg44nya1"]
+
+[ext_resource type="PackedScene" uid="uid://br2k7cqi7cruf" path="res://Scenes/transition_screen.tscn" id="1_ouk20"]
+[ext_resource type="PackedScene" uid="uid://dgya4v7w3eyqb" path="res://Scenes/main_menu.tscn" id="2_mae5d"]
+
+[node name="menu" type="CanvasLayer"]
+
+[node name="TransitionScreen" parent="." instance=ExtResource("1_ouk20")]
+
+[node name="Main menu" parent="." instance=ExtResource("2_mae5d")]

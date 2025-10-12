@@ -35,7 +35,13 @@ func _ready():
 		countdown_label.visible = false
 	if turn_label:
 		turn_label.visible = true
+
+	# Play fade-in transition when battle starts
+	if TransitionScreen:
+		await TransitionScreen.fade_in()
+
 	start_battle()
+
 
 func start_battle():
 	phase = TurnPhase.PREBATTLE
@@ -171,13 +177,20 @@ func process_phase() -> void:
 				beatbar.end_phase()
 				beatbar.set_process(false)
 				beatbar.visible = false
-			if player and player.is_dead:
+
+			if player and player.sprite and player.is_dead:
 				while player.sprite.animation != "overwhelm":
 					await get_tree().process_frame
-			if enemy and enemy.is_dead:
+			if enemy and enemy.sprite and enemy.is_dead:
 				while enemy.sprite.animation != "dissolve":
 					await get_tree().process_frame
+
 			print("🏆 Battle finished.")
+
+	# Call singleton to return to overworld
+			if BattleSceneHandler:
+				await battle_scene_handler.return_to_overworld()
+
 			phase = TurnPhase.END
 
 		_:

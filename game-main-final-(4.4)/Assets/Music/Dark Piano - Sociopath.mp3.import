@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bnf01xarw1086"
+path="res://.godot/imported/Dark Piano - Sociopath.mp3-5f538af4c1d103893b998693d6aed30b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Dark Piano - Sociopath.mp3"
+dest_files=["res://.godot/imported/Dark Piano - Sociopath.mp3-5f538af4c1d103893b998693d6aed30b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,21 @@
+res://Assets/buttons.tres
+res://Assets/test.tres
+res://Assets/backButton.tres
+res://Scripts/player.gd
+res://Scenes/saver_loader.gd
+res://Scripts/save_game.gd
+res://Scenes/checkpoint.tscn
+res://Scenes/checkpoint.gd
+res://Scenes/gameplay.tscn
+res://Scenes/Main.tscn
+res://Scenes/new gameplay.tscn
+res://Scenes/player.tscn
+res://Scenes/enemy.tscn
+res://Scenes/SaverLoader.tscn
+res://Scenes/main_menu.tscn
+res://Scripts/main_menu.gd
+res://Scenes/gameover.tscn
+res://Assets/font.tres
+res://Scenes/gameover.gd
+res://Scripts/EnemyData.gd
+res://Scripts/gameplay.gd

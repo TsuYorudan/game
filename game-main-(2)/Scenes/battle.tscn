@@ -1,0 +1,867 @@
+[gd_scene load_steps=28 format=4 uid="uid://b4bf1umf3f2m"]
+
+[ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_emx8f"]
+[ext_resource type="Script" uid="uid://buahucf2kyd0q" path="res://Scripts/command_manager.gd" id="2_kcxpu"]
+[ext_resource type="AudioStream" uid="uid://d4bmchdhtwcpw" path="res://Assets/beats/pata.wav" id="3_hgaye"]
+[ext_resource type="AudioStream" uid="uid://du5qih0ee8lr0" path="res://Assets/beats/pon.wav" id="4_cwdtu"]
+[ext_resource type="AudioStream" uid="uid://biv0qm56523ma" path="res://Assets/beats/chaka.wav" id="5_ljaiu"]
+[ext_resource type="AudioStream" uid="uid://dw8qnm30yhk6s" path="res://Assets/beats/beat.wav" id="6_gpeip"]
+[ext_resource type="Script" uid="uid://bu4wyybftulg6" path="res://Scripts/turn_manager.gd" id="7_fg6fv"]
+[ext_resource type="Script" uid="uid://dss7hdl8v4j3x" path="res://Scenes/turnCamera.gd" id="8_f1sv4"]
+[ext_resource type="Script" uid="uid://rwusu201140i" path="res://Scenes/timeline.gd" id="9_cxwla"]
+[ext_resource type="Script" uid="uid://ct53lic783mtr" path="res://Scenes/beatbar.gd" id="10_knlfb"]
+[ext_resource type="Script" uid="uid://byua26he7e2fb" path="res://Scenes/charge_bar.gd" id="11_gvg88"]
+[ext_resource type="Script" uid="uid://bxe6mluiq6s5" path="res://Scenes/EnemyHealthBar.gd" id="12_8j2wq"]
+[ext_resource type="Script" uid="uid://dqr10fn0ctpj1" path="res://Scenes/healthbar.gd" id="13_6d6lb"]
+[ext_resource type="Script" uid="uid://b07i4rebght3m" path="res://Scenes/command_cheat_sheet.gd" id="14_rwop7"]
+[ext_resource type="PackedScene" uid="uid://c5hpdr18ongmj" path="res://Scenes/enemy.tscn" id="15_u4qsn"]
+[ext_resource type="PackedScene" uid="uid://co8xgbq66u62g" path="res://Scenes/player.tscn" id="16_b73yr"]
+[ext_resource type="Script" uid="uid://db1xlw6glheqh" path="res://Scripts/player.gd" id="17_s1dsa"]
+[ext_resource type="AudioStream" uid="uid://dwaihenpduyx0" path="res://Assets/Dramatic Piano Sound Effect.mp3" id="18_5gfn5"]
+[ext_resource type="Texture2D" uid="uid://be6gemmpc43eo" path="res://Assets/spritesheet_ground.png" id="19_hatvd"]
+[ext_resource type="Script" uid="uid://cke620574v27d" path="res://Scripts/battle_node.gd" id="20_dndgb"]
+[ext_resource type="PackedScene" uid="uid://dahsxfj4yr7el" path="res://Scenes/bg.tscn" id="21_sk0lo"]
+[ext_resource type="Texture2D" uid="uid://crstu4ki35l1n" path="res://Flare_small.PNG" id="22_kcxpu"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i3g2w"]
+texture = ExtResource("19_hatvd")
+texture_region_size = Vector2i(128, 128)
+48:0/0 = 0
+49:0/0 = 0
+50:0/0 = 0
+51:0/0 = 0
+52:0/0 = 0
+53:0/0 = 0
+54:0/0 = 0
+55:0/0 = 0
+48:1/0 = 0
+49:1/0 = 0
+50:1/0 = 0
+51:1/0 = 0
+52:1/0 = 0
+53:1/0 = 0
+54:1/0 = 0
+55:1/0 = 0
+48:2/0 = 0
+49:2/0 = 0
+50:2/0 = 0
+51:2/0 = 0
+52:2/0 = 0
+53:2/0 = 0
+54:2/0 = 0
+55:2/0 = 0
+48:3/0 = 0
+49:3/0 = 0
+50:3/0 = 0
+51:3/0 = 0
+52:3/0 = 0
+53:3/0 = 0
+54:3/0 = 0
+55:3/0 = 0
+48:4/0 = 0
+49:4/0 = 0
+50:4/0 = 0
+51:4/0 = 0
+52:4/0 = 0
+53:4/0 = 0
+54:4/0 = 0
+55:4/0 = 0
+48:8/0 = 0
+49:8/0 = 0
+50:8/0 = 0
+51:8/0 = 0
+52:8/0 = 0
+53:8/0 = 0
+54:8/0 = 0
+55:8/0 = 0
+48:9/0 = 0
+49:9/0 = 0
+50:9/0 = 0
+51:9/0 = 0
+52:9/0 = 0
+53:9/0 = 0
+54:9/0 = 0
+55:9/0 = 0
+48:10/0 = 0
+49:10/0 = 0
+50:10/0 = 0
+51:10/0 = 0
+52:10/0 = 0
+53:10/0 = 0
+54:10/0 = 0
+55:10/0 = 0
+48:11/0 = 0
+49:11/0 = 0
+50:11/0 = 0
+51:11/0 = 0
+52:11/0 = 0
+53:11/0 = 0
+54:11/0 = 0
+55:11/0 = 0
+48:12/0 = 0
+49:12/0 = 0
+50:12/0 = 0
+51:12/0 = 0
+52:12/0 = 0
+53:12/0 = 0
+54:12/0 = 0
+55:12/0 = 0
+48:16/0 = 0
+49:16/0 = 0
+50:16/0 = 0
+51:16/0 = 0
+52:16/0 = 0
+53:16/0 = 0
+54:16/0 = 0
+55:16/0 = 0
+48:17/0 = 0
+49:17/0 = 0
+50:17/0 = 0
+51:17/0 = 0
+52:17/0 = 0
+53:17/0 = 0
+54:17/0 = 0
+55:17/0 = 0
+48:18/0 = 0
+49:18/0 = 0
+50:18/0 = 0
+51:18/0 = 0
+52:18/0 = 0
+53:18/0 = 0
+54:18/0 = 0
+55:18/0 = 0
+48:19/0 = 0
+49:19/0 = 0
+50:19/0 = 0
+51:19/0 = 0
+52:19/0 = 0
+53:19/0 = 0
+54:19/0 = 0
+55:19/0 = 0
+48:20/0 = 0
+49:20/0 = 0
+50:20/0 = 0
+51:20/0 = 0
+52:20/0 = 0
+53:20/0 = 0
+54:20/0 = 0
+55:20/0 = 0
+48:24/0 = 0
+49:24/0 = 0
+50:24/0 = 0
+51:24/0 = 0
+52:24/0 = 0
+53:24/0 = 0
+54:24/0 = 0
+55:24/0 = 0
+48:25/0 = 0
+49:25/0 = 0
+50:25/0 = 0
+51:25/0 = 0
+52:25/0 = 0
+53:25/0 = 0
+54:25/0 = 0
+55:25/0 = 0
+48:26/0 = 0
+49:26/0 = 0
+50:26/0 = 0
+51:26/0 = 0
+52:26/0 = 0
+53:26/0 = 0
+54:26/0 = 0
+55:26/0 = 0
+48:27/0 = 0
+49:27/0 = 0
+50:27/0 = 0
+51:27/0 = 0
+52:27/0 = 0
+53:27/0 = 0
+54:27/0 = 0
+55:27/0 = 0
+48:28/0 = 0
+49:28/0 = 0
+50:28/0 = 0
+51:28/0 = 0
+52:28/0 = 0
+53:28/0 = 0
+54:28/0 = 0
+55:28/0 = 0
+48:29/0 = 0
+49:29/0 = 0
+50:29/0 = 0
+51:29/0 = 0
+52:29/0 = 0
+53:29/0 = 0
+54:29/0 = 0
+55:29/0 = 0
+48:30/0 = 0
+49:30/0 = 0
+50:30/0 = 0
+51:30/0 = 0
+52:30/0 = 0
+53:30/0 = 0
+54:30/0 = 0
+55:30/0 = 0
+48:31/0 = 0
+49:31/0 = 0
+50:31/0 = 0
+51:31/0 = 0
+52:31/0 = 0
+53:31/0 = 0
+54:31/0 = 0
+55:31/0 = 0
+48:32/0 = 0
+49:32/0 = 0
+50:32/0 = 0
+51:32/0 = 0
+52:32/0 = 0
+53:32/0 = 0
+54:32/0 = 0
+55:32/0 = 0
+48:33/0 = 0
+49:33/0 = 0
+50:33/0 = 0
+51:33/0 = 0
+52:33/0 = 0
+53:33/0 = 0
+54:33/0 = 0
+55:33/0 = 0
+48:34/0 = 0
+49:34/0 = 0
+50:34/0 = 0
+51:34/0 = 0
+52:34/0 = 0
+53:34/0 = 0
+54:34/0 = 0
+55:34/0 = 0
+48:35/0 = 0
+49:35/0 = 0
+50:35/0 = 0
+51:35/0 = 0
+52:35/0 = 0
+53:35/0 = 0
+54:35/0 = 0
+55:35/0 = 0
+48:36/0 = 0
+49:36/0 = 0
+50:36/0 = 0
+51:36/0 = 0
+52:36/0 = 0
+53:36/0 = 0
+54:36/0 = 0
+55:36/0 = 0
+48:37/0 = 0
+49:37/0 = 0
+50:37/0 = 0
+51:37/0 = 0
+52:37/0 = 0
+53:37/0 = 0
+54:37/0 = 0
+55:37/0 = 0
+48:38/0 = 0
+49:38/0 = 0
+50:38/0 = 0
+51:38/0 = 0
+52:38/0 = 0
+53:38/0 = 0
+54:38/0 = 0
+55:38/0 = 0
+48:39/0 = 0
+49:39/0 = 0
+50:39/0 = 0
+51:39/0 = 0
+52:39/0 = 0
+53:39/0 = 0
+54:39/0 = 0
+55:39/0 = 0
+48:40/0 = 0
+49:40/0 = 0
+50:40/0 = 0
+51:40/0 = 0
+52:40/0 = 0
+53:40/0 = 0
+54:40/0 = 0
+55:40/0 = 0
+48:41/0 = 0
+49:41/0 = 0
+50:41/0 = 0
+51:41/0 = 0
+52:41/0 = 0
+53:41/0 = 0
+54:41/0 = 0
+55:41/0 = 0
+48:42/0 = 0
+49:42/0 = 0
+50:42/0 = 0
+51:42/0 = 0
+52:42/0 = 0
+53:42/0 = 0
+54:42/0 = 0
+55:42/0 = 0
+48:43/0 = 0
+49:43/0 = 0
+50:43/0 = 0
+51:43/0 = 0
+52:43/0 = 0
+53:43/0 = 0
+54:43/0 = 0
+55:43/0 = 0
+48:44/0 = 0
+49:44/0 = 0
+50:44/0 = 0
+51:44/0 = 0
+52:44/0 = 0
+53:44/0 = 0
+54:44/0 = 0
+55:44/0 = 0
+48:45/0 = 0
+49:45/0 = 0
+50:45/0 = 0
+51:45/0 = 0
+52:45/0 = 0
+53:45/0 = 0
+54:45/0 = 0
+55:45/0 = 0
+48:46/0 = 0
+49:46/0 = 0
+50:46/0 = 0
+51:46/0 = 0
+52:46/0 = 0
+53:46/0 = 0
+54:46/0 = 0
+48:47/0 = 0
+49:47/0 = 0
+50:47/0 = 0
+51:47/0 = 0
+52:47/0 = 0
+48:48/0 = 0
+49:48/0 = 0
+50:48/0 = 0
+51:48/0 = 0
+52:48/0 = 0
+53:48/0 = 0
+54:48/0 = 0
+55:48/0 = 0
+48:49/0 = 0
+49:49/0 = 0
+50:49/0 = 0
+51:49/0 = 0
+52:49/0 = 0
+53:49/0 = 0
+54:49/0 = 0
+55:49/0 = 0
+48:50/0 = 0
+49:50/0 = 0
+50:50/0 = 0
+51:50/0 = 0
+52:50/0 = 0
+53:50/0 = 0
+54:50/0 = 0
+55:50/0 = 0
+48:51/0 = 0
+49:51/0 = 0
+50:51/0 = 0
+51:51/0 = 0
+52:51/0 = 0
+53:51/0 = 0
+54:51/0 = 0
+55:51/0 = 0
+48:52/0 = 0
+49:52/0 = 0
+50:52/0 = 0
+51:52/0 = 0
+52:52/0 = 0
+53:52/0 = 0
+54:52/0 = 0
+55:52/0 = 0
+48:53/0 = 0
+49:53/0 = 0
+50:53/0 = 0
+51:53/0 = 0
+52:53/0 = 0
+53:53/0 = 0
+54:53/0 = 0
+55:53/0 = 0
+49:54/0 = 0
+50:54/0 = 0
+51:54/0 = 0
+52:54/0 = 0
+53:54/0 = 0
+54:54/0 = 0
+55:54/0 = 0
+51:55/0 = 0
+52:55/0 = 0
+53:55/0 = 0
+54:55/0 = 0
+55:55/0 = 0
+48:56/0 = 0
+49:56/0 = 0
+50:56/0 = 0
+51:56/0 = 0
+52:56/0 = 0
+53:56/0 = 0
+54:56/0 = 0
+55:56/0 = 0
+48:57/0 = 0
+49:57/0 = 0
+50:57/0 = 0
+51:57/0 = 0
+52:57/0 = 0
+53:57/0 = 0
+54:57/0 = 0
+55:57/0 = 0
+48:58/0 = 0
+49:58/0 = 0
+50:58/0 = 0
+51:58/0 = 0
+52:58/0 = 0
+53:58/0 = 0
+54:58/0 = 0
+55:58/0 = 0
+48:59/0 = 0
+49:59/0 = 0
+50:59/0 = 0
+51:59/0 = 0
+52:59/0 = 0
+53:59/0 = 0
+54:59/0 = 0
+55:59/0 = 0
+48:60/0 = 0
+49:60/0 = 0
+50:60/0 = 0
+51:60/0 = 0
+52:60/0 = 0
+53:60/0 = 0
+54:60/0 = 0
+48:61/0 = 0
+49:61/0 = 0
+50:61/0 = 0
+51:61/0 = 0
+52:61/0 = 0
+48:62/0 = 0
+49:62/0 = 0
+50:62/0 = 0
+51:62/0 = 0
+48:63/0 = 0
+49:63/0 = 0
+48:64/0 = 0
+49:64/0 = 0
+50:64/0 = 0
+51:64/0 = 0
+52:64/0 = 0
+53:64/0 = 0
+54:64/0 = 0
+55:64/0 = 0
+48:65/0 = 0
+49:65/0 = 0
+50:65/0 = 0
+51:65/0 = 0
+52:65/0 = 0
+53:65/0 = 0
+54:65/0 = 0
+55:65/0 = 0
+48:66/0 = 0
+49:66/0 = 0
+50:66/0 = 0
+51:66/0 = 0
+52:66/0 = 0
+53:66/0 = 0
+54:66/0 = 0
+55:66/0 = 0
+48:67/0 = 0
+49:67/0 = 0
+50:67/0 = 0
+51:67/0 = 0
+52:67/0 = 0
+53:67/0 = 0
+54:67/0 = 0
+55:67/0 = 0
+50:68/0 = 0
+51:68/0 = 0
+52:68/0 = 0
+53:68/0 = 0
+54:68/0 = 0
+55:68/0 = 0
+51:69/0 = 0
+52:69/0 = 0
+53:69/0 = 0
+54:69/0 = 0
+55:69/0 = 0
+53:70/0 = 0
+54:70/0 = 0
+55:70/0 = 0
+3:7/0 = 0
+3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:8/0 = 0
+4:8/0 = 0
+4:7/0 = 0
+4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+5:7/0 = 0
+5:8/0 = 0
+4:9/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+6:10/0 = 0
+6:11/0 = 0
+5:11/0 = 0
+5:12/0 = 0
+3:6/0 = 0
+3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:5/0 = 0
+2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:0/0 = 0
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:5/0 = 0
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_kby1p"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_i3g2w")
+
+[sub_resource type="Gradient" id="Gradient_emx8f"]
+colors = PackedColorArray(0.27250156, 0.674886, 3.85046e-07, 1, 0.92789537, 0.37507954, 0.26642668, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kcxpu"]
+gradient = SubResource("Gradient_emx8f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hgaye"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(640, 360, 1)
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = 1.9999977
+scale_min = 0.0
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_kcxpu")
+turbulence_enabled = true
+
+[node name="battle" type="Node2D"]
+
+[node name="RhythmSystem" parent="." groups=["rhythm"] instance=ExtResource("1_emx8f")]
+
+[node name="BeatEffects" type="CanvasLayer" parent="RhythmSystem"]
+
+[node name="TopFlash" type="ColorRect" parent="RhythmSystem/BeatEffects"]
+anchors_preset = -1
+anchor_right = 0.993
+anchor_bottom = 1.0
+offset_right = 9.95996
+offset_bottom = -710.0
+
+[node name="BottomFlash" type="ColorRect" parent="RhythmSystem/BeatEffects"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = 710.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="CommandManager" type="Node" parent="." node_paths=PackedStringArray("pata_sound", "pon_sound", "don_sound", "chaka_sound")]
+script = ExtResource("2_kcxpu")
+pata_sound = NodePath("pata")
+pon_sound = NodePath("pon")
+don_sound = NodePath("don")
+chaka_sound = NodePath("chaka")
+
+[node name="pata" type="AudioStreamPlayer" parent="CommandManager"]
+stream = ExtResource("3_hgaye")
+
+[node name="pon" type="AudioStreamPlayer" parent="CommandManager"]
+stream = ExtResource("4_cwdtu")
+
+[node name="chaka" type="AudioStreamPlayer" parent="CommandManager"]
+stream = ExtResource("5_ljaiu")
+
+[node name="don" type="AudioStreamPlayer" parent="CommandManager"]
+stream = ExtResource("6_gpeip")
+
+[node name="QueueResetTimer" type="Timer" parent="CommandManager"]
+wait_time = 0.7
+one_shot = true
+
+[node name="BeatEffects" type="CanvasLayer" parent="CommandManager"]
+
+[node name="LeftFlash" type="ColorRect" parent="CommandManager/BeatEffects"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.0
+offset_right = -1264.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RightFlash" type="ColorRect" parent="CommandManager/BeatEffects"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1262.0
+offset_top = 10.0
+offset_right = 2.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TurnManager" type="Node" parent="."]
+script = ExtResource("7_fg6fv")
+
+[node name="Camera2D2" type="Camera2D" parent="."]
+position = Vector2(640, 475)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+drag_left_margin = 0.0
+script = ExtResource("8_f1sv4")
+normal_zoom = Vector2(1, 1)
+player_offset = Vector2(-100, 75)
+enemy_offset = Vector2(100, 75)
+center_offset = Vector2(0, 75)
+shake_duration = 0.7
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+position = Vector2(1059, 623)
+scale = Vector2(8, 8)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Audio" type="Node2D" parent="CanvasLayer"]
+
+[node name="pata" type="AudioStreamPlayer" parent="CanvasLayer/Audio"]
+stream = ExtResource("3_hgaye")
+
+[node name="pon" type="AudioStreamPlayer" parent="CanvasLayer/Audio"]
+stream = ExtResource("4_cwdtu")
+
+[node name="chaka" type="AudioStreamPlayer" parent="CanvasLayer/Audio"]
+stream = ExtResource("5_ljaiu")
+
+[node name="don" type="AudioStreamPlayer" parent="CanvasLayer/Audio"]
+stream = ExtResource("6_gpeip")
+
+[node name="timeline" type="Control" parent="CanvasLayer" groups=["timeline"]]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+script = ExtResource("9_cxwla")
+phases = ["Player", "Player Resolution", "Enemy", "Counter", "Enemy Resolution", null]
+bar_width = 400.0
+bar_height = 30.0
+line_thickness = 8.0
+
+[node name="beatbar" type="Control" parent="CanvasLayer" groups=["beatbar"]]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -182.0
+offset_top = -142.0
+offset_right = 185.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("10_knlfb")
+bar_height = 60.0
+line_thickness = 10.0
+mark_fade_time = 1.75
+shape_size = 40.0
+outline_thickness = 5.0
+
+[node name="ChargeBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 26.0
+offset_top = 87.0
+offset_right = 391.0
+offset_bottom = 93.0
+show_percentage = false
+script = ExtResource("11_gvg88")
+charge_height = 10.0
+fill_color = Color(0.160784, 0.333333, 0.960784, 1)
+
+[node name="ProgressBar2" type="ProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("enemy")]
+modulate = Color(0.392157, 1, 0.0823529, 1)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -406.0
+offset_top = 49.0
+offset_right = -41.0
+offset_bottom = 80.0
+grow_horizontal = 0
+value = 100.0
+show_percentage = false
+script = ExtResource("12_8j2wq")
+enemy = NodePath("../../Enemy")
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+modulate = Color(0.392157, 1, 0.0823529, 1)
+offset_left = 26.0
+offset_top = 49.0
+offset_right = 391.0
+offset_bottom = 80.0
+value = 100.0
+rounded = true
+show_percentage = false
+script = ExtResource("13_6d6lb")
+player = NodePath("../../Player")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TurnLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -622.0
+offset_top = 41.0
+offset_right = -502.0
+offset_bottom = 120.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 2
+
+[node name="CountdownLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.0
+offset_top = 31.0
+offset_right = 98.0
+offset_bottom = 164.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 75
+horizontal_alignment = 1
+uppercase = true
+
+[node name="CommandCheatSheet" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -604.0
+offset_top = -174.0
+offset_right = 628.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("14_rwop7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CommandCheatSheet"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -606.5
+offset_top = -201.0
+offset_right = 626.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CommandCheatSheet/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/CommandCheatSheet/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/CommandCheatSheet/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("pata_sound", "pon_sound", "don_sound", "chaka_sound") groups=["enemy"] instance=ExtResource("15_u4qsn")]
+position = Vector2(983, 630)
+scale = Vector2(1.5, 1.5)
+pata_sound = NodePath("../CanvasLayer/Audio/pata")
+pon_sound = NodePath("../CanvasLayer/Audio/pon")
+don_sound = NodePath("../CanvasLayer/Audio/don")
+chaka_sound = NodePath("../CanvasLayer/Audio/chaka")
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("16_b73yr")]
+position = Vector2(353, 616)
+scale = Vector2(12, 12)
+collision_mask = 3
+script = ExtResource("17_s1dsa")
+
+[node name="MarchTimer" type="Timer" parent="Player"]
+wait_time = 1.25
+one_shot = true
+
+[node name="gameover" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("18_5gfn5")
+
+[node name="Layer0" type="TileMapLayer" parent="."]
+modulate = Color(0, 0, 0, 1)
+use_parent_material = true
+position = Vector2(5.96046e-08, 0)
+scale = Vector2(0.7, 0.7)
+tile_map_data = PackedByteArray("AAAAAAgAAAACAAIAAAABAAgAAAACAAIAAAACAAgAAAACAAIAAAADAAgAAAACAAIAAAAEAAgAAAACAAIAAAAFAAgAAAACAAIAAAAGAAgAAAACAAIAAAAHAAgAAAACAAIAAAAIAAgAAAACAAIAAAAJAAgAAAACAAIAAAAKAAgAAAACAAIAAAALAAgAAAACAAIAAAAMAAgAAAACAAIAAAANAAgAAAACAAIAAAAOAAgAAAACAAIAAAAPAAgAAAACAAIAAAAQAAgAAAACAAIAAAARAAgAAAACAAIAAAD//wgAAAACAAIAAAD+/wgAAAACAAIAAAD9/wgAAAACAAIAAAD9/wkAAAACAAIAAAD+/wkAAAACAAIAAAD//wkAAAACAAIAAAAAAAkAAAACAAIAAAABAAkAAAACAAIAAAACAAkAAAACAAIAAAADAAkAAAACAAIAAAAEAAkAAAACAAIAAAAFAAkAAAACAAIAAAAGAAkAAAACAAIAAAAHAAkAAAACAAIAAAAIAAkAAAACAAIAAAAJAAkAAAACAAIAAAAKAAkAAAACAAIAAAALAAkAAAACAAIAAAAMAAkAAAACAAIAAAANAAkAAAACAAIAAAAOAAkAAAACAAIAAAAPAAkAAAACAAIAAAAQAAkAAAACAAIAAAARAAkAAAACAAIAAAARAAoAAAACAAIAAAAQAAoAAAACAAIAAAAPAAoAAAACAAIAAAAOAAoAAAACAAIAAAANAAoAAAACAAIAAAAMAAoAAAACAAIAAAALAAoAAAACAAIAAAAKAAoAAAACAAIAAAAIAAoAAAACAAIAAAAHAAoAAAACAAIAAAAGAAoAAAACAAIAAAAFAAoAAAACAAIAAAAEAAoAAAACAAIAAAADAAoAAAACAAIAAAACAAoAAAACAAIAAAABAAoAAAACAAIAAAAAAAoAAAACAAIAAAD//woAAAACAAIAAAD+/woAAAACAAIAAAD9/woAAAACAAIAAAAJAAoAAAACAAIAAAA=")
+tile_set = SubResource("TileSet_kby1p")
+
+[node name="battle_node" type="Node" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("20_dndgb")
+character = NodePath("../Player")
+
+[node name="BG" parent="." instance=ExtResource("21_sk0lo")]
+visible = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(656, 354)
+amount = 150
+texture = ExtResource("22_kcxpu")
+lifetime = 30.0
+process_material = SubResource("ParticleProcessMaterial_hgaye")
+
+[connection signal="timeout" from="CommandManager/QueueResetTimer" to="CommandManager" method="_on_queue_reset_timer_timeout"]
+[connection signal="timeout" from="Player/MarchTimer" to="Player" method="_on_march_timer_timeout"]

@@ -1,0 +1,14 @@
+VBoxContainer
+Button
+RichTextLabel
+HBoxContainer
+Panel
+CanvasLayer
+Marker2D
+CollisionShape2D
+AnimatedSprite2D
+Area2D
+Sprite2D
+Node
+ProgressBar
+Label

@@ -19,7 +19,6 @@
 [node name="BG" type="Node2D"]
 
 [node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
-visible = false
 scale = Vector2(0.8, 0.8)
 transform = Transform2D(0.8, 0, 0, 0.8, 0, 0)
 
@@ -117,6 +116,7 @@ texture = ExtResource("2_gtuxm")
 offset = Vector2(0, 0.145)
 
 [node name="ParallaxBackground3" type="ParallaxBackground" parent="."]
+visible = false
 scale = Vector2(0.8, 0.8)
 transform = Transform2D(0.8, 0, 0, 0.8, 0, 0)
 
