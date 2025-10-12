@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 TransitionScreen="*res://Scenes/transition_screen.tscn"
+SaveLoad="*res://Scenes/saver_loader.gd"
 
 [display]
 

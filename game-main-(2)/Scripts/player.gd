@@ -4,8 +4,10 @@ class_name Player
 signal hpchange
 signal charges_changed  # 🔹 NEW: signal for UI updates (optional)
 
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D2
 @onready var enemy: Enemy = get_tree().get_first_node_in_group("enemy")
+@onready var enemies = get_tree().get_nodes_in_group("enemies")
 
 @export var speed: float = 500.0
 @export var jump_velocity: float = -500.0
@@ -27,9 +29,23 @@ var is_dead: bool = false
 var current_command_effectiveness: float = 1.0
 
 func _ready():
-	current_hp = max_hp
+	
+	var saved_game = SaveLoad.load_game(self, enemies)
+	
+	if saved_game != null:
+		global_position = saved_game.player_position
+		current_hp = saved_game.player_hp
+		
+	else:
+		current_hp = max_hp
+
 	current_charges = max_charges / 2  # start at half or set to 0 if you want
+	
 	emit_signal("charges_changed", current_charges)
+
+
+func on_cp_reached(enemies:Array):
+	SaveLoad.saved_game(self, enemies)
 
 # ==========================
 # Command actions
@@ -183,7 +199,7 @@ func die() -> void:
 	TransitionScreen.fade_out()
 	await TransitionScreen.on_fade_out_finished
 
-	get_tree().change_scene_to_file("res://Scenes/new gameplay.tscn")
+	get_tree().change_scene_to_file("res://Scenes/gameover.tscn")
 
 	TransitionScreen.fade_in()
 	await TransitionScreen.on_fade_in_finished

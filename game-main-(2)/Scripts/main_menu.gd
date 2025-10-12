@@ -4,6 +4,8 @@ extends Control
 @onready var main_buttons: VBoxContainer = $MarginContainer/mainButtons
 @onready var settings_menu: Panel = $settingsMenu
 @onready var start_music: AudioStreamPlayer = $start
+@onready var play: Button = $MarginContainer/mainButtons/HBoxContainer3/Play
+
 
 var _quit_after_transition := false
 
@@ -11,6 +13,11 @@ func _ready():
 	$MarginContainer/mainButtons/HBoxContainer3/Play.grab_focus()
 	main_buttons.visible = true
 	settings_menu.visible = false
+	
+	if SaveLoad.existing_file():
+		play.text = "CONTINUE"
+	else: 
+		play.text = "NEW GAME"
 
 func _on_play_pressed() -> void:
 	start_music.play()
@@ -20,7 +27,13 @@ func _on_play_pressed() -> void:
 
 	await start_music.finished
 
-	get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
+	if SaveLoad.existing_file():
+		SaveLoad.load_game()
+		get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
+
+	else:
+		SaveLoad.reset_game()
+		get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
 
 	TransitionScreen.fade_in()
 	await TransitionScreen.on_fade_in_finished

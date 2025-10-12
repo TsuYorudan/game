@@ -5,6 +5,7 @@ extends Node
 @onready var settings_menu: Control = $UI2/pause
 @onready var resume_button: Button = settings_menu.get_node("back")
 @onready var main_menu_button: Button = settings_menu.get_node("MarginContainer/VBoxContainer/HBoxContainer3/Leave")
+@onready var enemies = get_tree().get_nodes_in_group("enemies")
 
 func _ready() -> void:
 	TransitionScreen.fade_in()
@@ -47,4 +48,11 @@ func _on_main_menu_pressed() -> void:
 	await TransitionScreen.on_fade_out_finished
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 	TransitionScreen.fade_in()
-	await TransitionScreen.on_fade_in_finished 
+	await TransitionScreen.on_fade_in_finished
+	
+func _on_reset_pressed() -> void:
+	get_tree().paused = false
+	
+	SaveLoad.reset_game()
+	
+	get_tree().reload_current_scene()

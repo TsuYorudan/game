@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://ds5tsettalepx"]
+[gd_scene load_steps=37 format=4 uid="uid://ds5tsettalepx"]
 
 [ext_resource type="PackedScene" uid="uid://bj74kaevi1j5f" path="res://Scenes/rhythm_system.tscn" id="1_2em84"]
 [ext_resource type="Script" uid="uid://bl654k0s22e2y" path="res://Scripts/gameplay.gd" id="1_gb8q7"]
@@ -18,9 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://dahsxfj4yr7el" path="res://Scenes/bg.tscn" id="17_j6kuv"]
 [ext_resource type="Texture2D" uid="uid://be6gemmpc43eo" path="res://Assets/spritesheet_ground.png" id="18_s35uu"]
 [ext_resource type="PackedScene" uid="uid://co8xgbq66u62g" path="res://Scenes/player.tscn" id="19_5a717"]
-[ext_resource type="PackedScene" uid="uid://by72ia5sh3cd5" path="res://attack.tscn" id="25_bsu20"]
+[ext_resource type="PackedScene" uid="uid://by72ia5sh3cd5" path="res://Scenes/attack.tscn" id="25_bsu20"]
 [ext_resource type="Script" uid="uid://c8o0ud8fv3e85" path="res://Scenes/goal.gd" id="25_f0fbv"]
+[ext_resource type="PackedScene" uid="uid://bfcvdf2gocwd0" path="res://Scenes/checkpoint.tscn" id="25_lavkw"]
 [ext_resource type="Script" uid="uid://db1xlw6glheqh" path="res://Scripts/player.gd" id="26_bsu20"]
+[ext_resource type="PackedScene" uid="uid://v1lqi4hvjy5q" path="res://Scenes/SaverLoader.tscn" id="26_fhel8"]
 [ext_resource type="PackedScene" uid="uid://c5hpdr18ongmj" path="res://Scenes/enemy.tscn" id="26_lavkw"]
 [ext_resource type="Texture2D" uid="uid://b3xgvkifwhd07" path="res://Assets/light.png" id="26_oocbu"]
 [ext_resource type="AudioStream" uid="uid://dwaihenpduyx0" path="res://Assets/Dramatic Piano Sound Effect.mp3" id="29_j1o6k"]
@@ -937,6 +939,13 @@ collision_mask = 3
 position = Vector2(2984, 662)
 collision_layer = 2
 collision_mask = 3
+
+[node name="Checkpoint" parent="." instance=ExtResource("25_lavkw")]
+position = Vector2(2326, 706)
+
+[node name="utils" type="Node" parent="."]
+
+[node name="SaverLoader" parent="utils" instance=ExtResource("26_fhel8")]
 
 [connection signal="value_changed" from="UI2/pause/MarginContainer/VBoxContainer/HBoxContainer/volumecontrol" to="UI2/pause/MarginContainer/VBoxContainer/HBoxContainer/volumecontrol" method="_on_value_changed"]
 [connection signal="timeout" from="CommandManager/QueueResetTimer" to="CommandManager" method="_on_queue_reset_timer_timeout"]
