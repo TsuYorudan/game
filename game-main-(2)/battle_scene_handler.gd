@@ -2,6 +2,8 @@ extends Node
 
 @export var overworld_scene_path: String = "res://overworld.tscn"
 @export var player_group_name: String = "player_top"
+@export var battle_scene_path: String = "res://Scenes/battle.tscn"
+
 
 var saved_player_position: Vector2 = Vector2.ZERO
 

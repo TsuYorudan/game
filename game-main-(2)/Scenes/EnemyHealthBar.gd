@@ -5,7 +5,7 @@ class_name EnemyHealthBar
 @export var delay_speed: float = 60.0
 @export var heal_speed: float = 100.0
 @export var delay_color: Color = Color(1, 0, 0, 0.7)
-@export var main_color: Color = Color(0, 1, 0)
+@export var main_color: Color = Color(0.1, 1.0, 0.1)
 @export var shake_magnitude: float = 5.0
 @export var shake_duration: float = 0.3
 @export var shake_ease: float = 8.0  # higher = faster smoothing
