@@ -3,7 +3,3 @@ res://Assets/buttons.tres
 res://Assets/test.tres
 res://Assets/backButton.tres
 res://Assets/font.tres
-res://battle_scene_handler.gd
-res://Scenes/EnemyHealthBar.gd
-res://Scenes/timeline.gd
-res://Scripts/player.gd
