@@ -18,6 +18,15 @@ class_name TimelineBar
 @export var marker_color: Color = Color(1, 1, 0)
 @export var marker_width: float = 3.0
 
+@export var phase_colors: Array[Color] = [
+	Color(0.0, 0.8, 0.0, 0.35),  # Player Input (green)
+	Color(1.0, 1.0, 0.0, 0.35),  # Player Resolution (yellow)
+	Color(0.9, 0.1, 0.1, 0.35),  # Enemy Input (red)
+	Color(1.0, 0.5, 0.0, 0.35),  # Counter (orange)
+	Color(1.0, 1.0, 0.0, 0.35)   # Enemy Resolution (yellow)
+]
+
+
 # Rhythm / marker
 var rhythm_system: Node
 var beat_interval: float = 1.0
@@ -93,13 +102,22 @@ func _draw() -> void:
 	if count < 2:
 		return
 
-	# Draw phase dividers
+	# --- Draw phase colored sections ---
+	for i in range(count):
+		var start_x := (i / float(count - 1)) * bar_width
+		var end_x := ((i + 1) / float(count - 1)) * bar_width
+		var rect := Rect2(start_x, 0, end_x - start_x, bar_height)
+
+		var col: Color = phase_colors[i] if i < phase_colors.size() else Color(1,1,1,0.2)
+		draw_rect(rect, col)
+
+	# --- Draw phase dividers ---
 	for i in range(count):
 		var x: float = (i / float(count - 1)) * bar_width
 		var col: Color = active_color if i == current_phase else divider_color
 		draw_line(Vector2(x, 0), Vector2(x, bar_height), col, line_thickness)
 
-	# Draw sliding marker
+	# --- Draw sliding marker ---
 	if marker_active:
 		var section_start: float = (current_phase / float(count - 1)) * bar_width
 		var section_end: float = ((current_phase + 1) / float(count - 1)) * bar_width

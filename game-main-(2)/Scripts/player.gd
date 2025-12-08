@@ -25,6 +25,17 @@ var is_retreating: bool = false
 var is_attacking: bool = false
 var is_dead: bool = false
 
+var despair_debuff_active: bool = false
+var despair_turns_left: int = 0
+var despair_attack_cost: int = 2
+var despair_heal_cost: int = 3
+
+func apply_despair_debuff(turns: int):
+	despair_debuff_active = true
+	despair_turns_left = turns
+	print("💀 Player afflicted with DESPAIR for", turns, "turns!")
+
+
 # Effectiveness multiplier (set externally by CommandManager)
 var current_command_effectiveness: float = 1.0
 
@@ -59,17 +70,27 @@ func start_retreat():
 	sprite.play("retreat")
 	sprite.flip_h = true
 
+	# Wait for a short time before returning to overworld
+	var retreat_duration := 1.25  # seconds (adjust as needed)
+	await get_tree().create_timer(retreat_duration).timeout
+
+	if battle_scene_handler:
+		await battle_scene_handler.return_to_overworld()
+
+
 func attack():
 	if is_attacking or is_dead:
 		return
 	# 🔹 Check charge cost (2)
-	if current_charges < 2:
+	var cost = 4 if despair_debuff_active else 2
+
+	if current_charges < cost:
 		print("❌ Not enough charges to attack!")
 		return
 
-	# spend 2 charges
-	current_charges -= 2
+	current_charges -= cost
 	emit_signal("charges_changed", current_charges)
+
 
 	print("Character attacking.")
 	is_attacking = true
@@ -94,13 +115,14 @@ func heal(amount: int = 2) -> void:
 	if is_dead:
 		return
 	# 🔹 Check charge cost (3)
-	if current_charges < 3:
+	var cost = 5 if despair_debuff_active else 3
+
+	if current_charges < cost:
 		print("❌ Not enough charges to heal!")
 		return
-
-	# spend 3 charges
-	current_charges -= 3
+	current_charges -= cost
 	emit_signal("charges_changed", current_charges)
+
 
 	sprite.play("heal")
 	var heal_amount = max(1, int(round(amount * current_command_effectiveness)))
