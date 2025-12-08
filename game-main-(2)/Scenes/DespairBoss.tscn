@@ -830,9 +830,13 @@ layout_mode = 2
 [node name="Label2" type="Label" parent="CanvasLayer/CommandCheatSheet/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="DespairBoss" parent="." groups=["enemy"] instance=ExtResource("15_nqlpr")]
+[node name="DespairBoss" parent="." node_paths=PackedStringArray("pata_sound", "pon_sound", "don_sound", "chaka_sound") groups=["enemy"] instance=ExtResource("15_nqlpr")]
 position = Vector2(995, 579)
 scale = Vector2(2, 2)
+pata_sound = NodePath("../CanvasLayer/Audio/pata")
+pon_sound = NodePath("../CanvasLayer/Audio/pon")
+don_sound = NodePath("../CanvasLayer/Audio/don")
+chaka_sound = NodePath("../CanvasLayer/Audio/chaka")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("16_s5we1")]
 modulate = Color(0.47896105, 0.35805485, 0.16751394, 1)

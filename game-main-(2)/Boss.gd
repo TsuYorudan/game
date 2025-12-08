@@ -2,13 +2,17 @@ extends Enemy
 class_name Boss
 
 @export var max_charges: int = 6
+@export var boss_max_hp: int = 50 
 var current_charges: int = 0
+
 
 signal boss_charges_changed(current: int)
 
 func _ready():
 	super._ready()
 	current_charges = 0
+	max_hp = boss_max_hp
+	current_hp = max_hp
 	emit_signal("boss_charges_changed", current_charges)
 
 func gain_charge(amount: int = 1) -> void:

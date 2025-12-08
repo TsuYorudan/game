@@ -14,7 +14,7 @@ signal hpchange  # signal for health changes
 # =====================
 # Stats
 # =====================
-@export var max_hp: int = 10
+@export var max_hp: int = 15
 var current_hp: int
 
 @export var attack_power: int = 1  # can be used for future damage calculations

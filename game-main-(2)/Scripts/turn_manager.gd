@@ -227,7 +227,8 @@ func process_phase() -> void:
 			if enemy and enemy.sprite and enemy.is_dead:
 				while enemy.sprite.animation != "dissolve":
 					await get_tree().process_frame
-
+					
+			await get_tree().create_timer(3.0).timeout
 			print("🏆 Battle finished.")
 
 			# ✅ Go back to overworld with previous position

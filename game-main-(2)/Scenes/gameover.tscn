@@ -14,25 +14,32 @@
 [ext_resource type="Texture2D" uid="uid://c8xd5eahbgfg5" path="res://Assets/stars/Stars Small_2.png" id="12_7ymoh"]
 
 [node name="Gameover" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("1_6kwjr")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -345.5
-offset_top = -164.0
-offset_right = 345.5
-offset_bottom = 164.0
+offset_left = 274.5
+offset_top = 176.0
+offset_right = 965.5
+offset_bottom = 504.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_bb3cs")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -47,12 +54,12 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Panel/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(500, 50)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -65,7 +72,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 6
@@ -73,15 +80,15 @@ theme = ExtResource("4_qjy16")
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Button" type="Button" parent="Panel/VBoxContainer/HBoxContainer2"]
+[node name="Button" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "PLAY AGAIN"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="Button2" type="Button" parent="Panel/VBoxContainer/HBoxContainer2"]
+[node name="Button2" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "MAIN MENU"
 
@@ -139,3 +146,6 @@ position = Vector2(951.25, 184.015)
 scale = Vector2(0.459595, 0.0894335)
 texture = ExtResource("12_7ymoh")
 offset = Vector2(0, 0.145)
+
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer2/Button" to="Control" method="_on_play_again_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer2/Button2" to="Control" method="_on_main_menu_pressed"]

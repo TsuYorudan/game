@@ -1,12 +1,10 @@
-<<<<<<< HEAD
-TileMap
 TileMapLayer
-=======
 CollisionShape2D
 Area2D
+Control
+TileMap
 CharacterBody2D
 AnimatedSprite2D
->>>>>>> 1b184fe3888317e5a8391536e94077b2389fe24d
 CanvasModulate
 Label
 PointLight2D
@@ -14,11 +12,3 @@ Node2D
 Node
 GPUParticles2D
 AnimationPlayer
-Control
-ColorRect
-TextureRect
-<<<<<<< HEAD
-CanvasLayer
-Camera2D
-=======
->>>>>>> 1b184fe3888317e5a8391536e94077b2389fe24d

@@ -1,16 +1,12 @@
-extends CanvasLayer
+class_name gameOver
+extends Control
 
 func _on_play_again_pressed() -> void:
 	TransitionScreen.fade_out()
 	await TransitionScreen.on_fade_out_finished
-	
-	if SaveLoad.existing_file():
-		get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
 
-	else:
-		SaveLoad.reset_game()
-		get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
-	
+	get_tree().change_scene_to_file("res://overworld.tscn")
+
 	TransitionScreen.fade_in()
 	await TransitionScreen.on_fade_in_finished 
 
@@ -27,3 +23,7 @@ func _on_main_menu_pressed() -> void:
 	
 		
 	
+
+
+func _on_button_2_pressed() -> void:
+	pass # Replace with function body.

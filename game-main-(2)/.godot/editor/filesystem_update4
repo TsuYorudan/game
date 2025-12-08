@@ -10,3 +10,10 @@ res://Scripts/main_menu.gd
 res://menu.tscn
 res://Scripts/turn_manager.gd
 res://Scenes/gameover.tscn
+res://Scenes/gameover.gd
+res://Scenes/control.gd
+res://Scenes/battle.tscn
+res://Boss.gd
+res://Scenes/enemy.gd
+res://Scenes/beatbar.gd
+res://Scenes/DespairBoss.tscn

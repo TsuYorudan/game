@@ -16,6 +16,8 @@ class_name BeatBar
 @export var shape_size: float = 16.0
 @export var outline_thickness: float = 4.0
 
+@export_enum("PlayStation", "Xbox") var symbol_style: String = "PlayStation"
+
 
 var current_beat: int = 0
 var beat_positions: Array = []
