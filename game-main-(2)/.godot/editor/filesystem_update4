@@ -1,5 +1,12 @@
-res://overworld.tscn
+res://fog.tscn
 res://Assets/buttons.tres
 res://Assets/test.tres
 res://Assets/backButton.tres
 res://Assets/font.tres
+res://fog.gdshader
+res://overworld.tscn
+res://Scenes/Main.tscn
+res://Scripts/main_menu.gd
+res://menu.tscn
+res://Scripts/turn_manager.gd
+res://Scenes/gameover.tscn

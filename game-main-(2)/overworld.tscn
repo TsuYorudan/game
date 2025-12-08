@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://lldmnt5kngli"]
+[gd_scene load_steps=52 format=3 uid="uid://lldmnt5kngli"]
 
 [ext_resource type="Script" uid="uid://dg20m3p4bblha" path="res://topdown_movement.gd" id="1_nyb65"]
 [ext_resource type="Texture2D" uid="uid://dlcqscvgesk4c" path="res://Assets/player.png" id="2_824ie"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bnw6f7m4xts5a" path="res://zoom_transition.tscn" id="4_824ie"]
 [ext_resource type="Script" uid="uid://ctc6on2dmivka" path="res://overworld_manager.gd" id="5_omswd"]
 [ext_resource type="Texture2D" uid="uid://b3xgvkifwhd07" path="res://Assets/light.png" id="6_p0ssl"]
+[ext_resource type="PackedScene" uid="uid://23cek8odysjk" path="res://fog.tscn" id="8_5xcxp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87uyu"]
 texture = ExtResource("3_lgqhf")
@@ -1073,6 +1074,7 @@ layer_1/tile_data = PackedInt32Array(-917504, 458752, 3, -917503, 458752, 3, -91
 [node name="CharacterBody2D" type="CharacterBody2D" parent="sort" groups=["player_top"]]
 modulate = Color(0.45106453, 0.24545285, 0.132422, 1)
 z_index = 10
+position = Vector2(202, 620)
 script = ExtResource("1_nyb65")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="sort/CharacterBody2D"]
@@ -1090,7 +1092,7 @@ position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="sort/CharacterBody2D"]
-position = Vector2(-75, -27)
+position = Vector2(0, -2)
 energy = 0.5
 shadow_enabled = true
 texture = ExtResource("6_p0ssl")
@@ -1102,7 +1104,7 @@ player = NodePath("../sort/CharacterBody2D")
 encounter_chance = 100.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(377, -129)
+position = Vector2(345, 131)
 scale = Vector2(2, 2)
 amount = 5000
 texture = ExtResource("6_p0ssl")
@@ -1117,3 +1119,5 @@ script = ExtResource("5_omswd")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(24, 3)
 color = Color(0.06358197, 0.20557946, 0.41093633, 1)
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("8_5xcxp")]

@@ -68,7 +68,19 @@ func roll_first_turn():
 
 func next_phase():
 	# Check for death
-	if (player and player.is_dead) or (enemy and enemy.is_dead):
+	if (player and player.is_dead):
+		if reverse_label:
+			reverse_label.visible = false
+		print("⚡ Battle ended. Disabling everything.")
+		if rhythm_system:
+			rhythm_system.stop_rhythm()
+		var beatbar = get_tree().get_first_node_in_group("beatbar")
+		if beatbar:
+			beatbar.end_phase()
+			beatbar.set_process(false)
+			beatbar.visible = false
+				
+	if(enemy and enemy.is_dead):
 		phase = TurnPhase.BATTLE_END
 	else:
 		match phase:
@@ -211,10 +223,7 @@ func process_phase() -> void:
 				beatbar.end_phase()
 				beatbar.set_process(false)
 				beatbar.visible = false
-
-			if player and player.sprite and player.is_dead:
-				while player.sprite.animation != "overwhelm":
-					await get_tree().process_frame
+				
 			if enemy and enemy.sprite and enemy.is_dead:
 				while enemy.sprite.animation != "dissolve":
 					await get_tree().process_frame

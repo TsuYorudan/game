@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://2hdhytfccgfx"]
+[gd_scene load_steps=13 format=3 uid="uid://2hdhytfccgfx"]
 
 [ext_resource type="Script" uid="uid://dgu1tbidyy6xq" path="res://Scenes/gameover.gd" id="1_6kwjr"]
 [ext_resource type="Theme" uid="uid://b0gcejfk0lxpr" path="res://Assets/test.tres" id="2_bb3cs"]
 [ext_resource type="Theme" uid="uid://dyh0jb3hcieji" path="res://Assets/font.tres" id="3_a57xw"]
 [ext_resource type="Theme" uid="uid://jlyiwdw1q0ae" path="res://Assets/buttons.tres" id="4_qjy16"]
-[ext_resource type="PackedScene" uid="uid://dahsxfj4yr7el" path="res://Scenes/bg.tscn" id="5_26hfm"]
+[ext_resource type="Script" uid="uid://dkh3r70jme3j2" path="res://Scripts/menu_parallax4.gd" id="5_wxkdt"]
+[ext_resource type="Texture2D" uid="uid://dt7w285o0i570" path="res://Assets/stars/Nebula Blue.png" id="6_rdsaq"]
+[ext_resource type="Script" uid="uid://buxgfk25wtt4x" path="res://Scripts/menu_parallax.gd" id="7_06880"]
+[ext_resource type="Texture2D" uid="uid://da1wjhur4r4b8" path="res://Assets/stars/Nebula Aqua-Pink.png" id="8_awesd"]
+[ext_resource type="Script" uid="uid://d050rjhc1r4u0" path="res://Scripts/menu_parallax2.gd" id="9_krx2d"]
+[ext_resource type="Texture2D" uid="uid://bdswgalbqqc3" path="res://Assets/stars/Stars-Big_1_1_PC.png" id="10_xwpmx"]
+[ext_resource type="Script" uid="uid://bq4ypisw104le" path="res://Scripts/menu_parallax3.gd" id="11_lamgj"]
+[ext_resource type="Texture2D" uid="uid://c8xd5eahbgfg5" path="res://Assets/stars/Stars Small_2.png" id="12_7ymoh"]
 
 [node name="Gameover" type="CanvasLayer"]
 script = ExtResource("1_6kwjr")
@@ -78,5 +85,57 @@ layout_mode = 2
 layout_mode = 2
 text = "MAIN MENU"
 
-[node name="BG" parent="." instance=ExtResource("5_26hfm")]
-position = Vector2(-67, -531)
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(2.00006, 0)
+scale = Vector2(1, 2.0736)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+script = ExtResource("5_wxkdt")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
+position = Vector2(800, 188.561)
+scale = Vector2(0.46875, 0.12592)
+texture = ExtResource("6_rdsaq")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer9" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(1, 1, 1, 0.596078)
+position = Vector2(2.00006, 0)
+scale = Vector2(1, 2.0736)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+script = ExtResource("7_06880")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2(800, 188.561)
+scale = Vector2(0.46875, 0.12592)
+texture = ExtResource("8_awesd")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(2, 0)
+scale = Vector2(1, 1.44)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+script = ExtResource("9_krx2d")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
+position = Vector2(951.25, 184.015)
+scale = Vector2(0.459595, 0.0894335)
+texture = ExtResource("10_xwpmx")
+offset = Vector2(0, 0.145)
+
+[node name="ParallaxLayer8" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(2, 0)
+scale = Vector2(1, 2.0736)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1920, 0)
+script = ExtResource("11_lamgj")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer8"]
+position = Vector2(951.25, 184.015)
+scale = Vector2(0.459595, 0.0894335)
+texture = ExtResource("12_7ymoh")
+offset = Vector2(0, 0.145)

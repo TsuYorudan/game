@@ -27,13 +27,14 @@ func _on_play_pressed() -> void:
 
 	await start_music.finished
 
-	if SaveLoad.existing_file():
-		SaveLoad.load_game()
-		get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
+	get_tree().change_scene_to_file("res://overworld.tscn")
+	#if SaveLoad.existing_file():
+		#SaveLoad.load_game()
+		#get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
 
-	else:
-		SaveLoad.reset_game()
-		get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
+	#else:
+		#SaveLoad.reset_game()
+		#get_tree().change_scene_to_file("res://Scenes/gameplay.tscn")
 
 	TransitionScreen.fade_in()
 	await TransitionScreen.on_fade_in_finished
