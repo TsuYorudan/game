@@ -1,7 +1,8 @@
+TileMap
+TileMapLayer
 CanvasModulate
 Label
 PointLight2D
-TileMapLayer
 Node2D
 Node
 GPUParticles2D
@@ -11,4 +12,3 @@ ColorRect
 TextureRect
 CanvasLayer
 Camera2D
-CharacterBody2D

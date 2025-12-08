@@ -1,21 +1,5 @@
+res://overworld.tscn
 res://Assets/buttons.tres
 res://Assets/test.tres
 res://Assets/backButton.tres
-res://player_topdown.tscn
-res://topdown_movement.gd
-res://Scenes/new gameplay.tscn
-res://Scenes/battle.tscn
-res://random_encounter.gd
-res://overworld.tscn
-res://TransitionScreen.gd
-res://BattleTransition.gd
-res://Scenes/Main.tscn
-res://Scripts/transition_screen.gd
-res://ZoomTransition.gd
-res://Scripts/turn_manager.gd
-res://zoom_transition.tscn
-res://overworld_manager.gd
-res://battle_scene_handler.gd
-res://BattleSceneHandler.tscn
-res://Scenes/bg.tscn
-res://Scenes/command_cheat_sheet.gd
+res://Assets/font.tres
