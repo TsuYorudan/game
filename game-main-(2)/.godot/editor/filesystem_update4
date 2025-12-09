@@ -17,3 +17,4 @@ res://Boss.gd
 res://Scenes/enemy.gd
 res://Scenes/beatbar.gd
 res://Scenes/DespairBoss.tscn
+res://Scenes/command_cheat_sheet.gd

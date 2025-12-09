@@ -710,6 +710,11 @@ line_thickness = 10.0
 mark_fade_time = 1.75
 shape_size = 40.0
 outline_thickness = 5.0
+symbol_style = "Xbox"
+xbox_color_a = Color(0, 0.8627451, 0, 1)
+xbox_color_b = Color(0.93333334, 0, 0, 1)
+xbox_color_x = Color(0, 0.60784316, 0.8509804, 1)
+xbox_color_y = Color(0.8627451, 0.85490197, 0, 1)
 
 [node name="ChargeBar" type="ProgressBar" parent="CanvasLayer"]
 offset_left = 26.0
@@ -807,6 +812,11 @@ offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("14_rwop7")
+controller_style = "Xbox"
+xbox_color_x = Color(0, 0.8862745, 0, 1)
+xbox_color_b = Color(0.93333334, 0, 0, 1)
+xbox_color_a = Color(0, 0.7176471, 0.85490197, 1)
+xbox_color_y = Color(0.95686275, 0.88235295, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CommandCheatSheet"]
 layout_mode = 1

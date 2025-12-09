@@ -18,6 +18,13 @@ class_name BeatBar
 
 @export_enum("PlayStation", "Xbox") var symbol_style: String = "PlayStation"
 
+# --- Xbox color overrides (editable in Inspector) ---
+@export var xbox_color_a: Color = Color.hex(0x107C10) # A = green
+@export var xbox_color_b: Color = Color.hex(0xD83B01) # B = red
+@export var xbox_color_x: Color = Color.hex(0x0050EF) # X = blue
+@export var xbox_color_y: Color = Color.hex(0xF2D01F) # Y = yellow
+
+
 
 var current_beat: int = 0
 var beat_positions: Array = []
@@ -144,52 +151,70 @@ func _draw():
 
 
 func draw_input_mark(mark: Dictionary):
-	var color = Color.RED if mark.is_enemy else Color.CYAN
+	var is_ps = symbol_style == "PlayStation"
+	var base_color = Color.RED if mark.is_enemy else Color.CYAN
 	var age = Time.get_ticks_msec() / 1000.0 - mark.timestamp
 	var fade = clamp(1.0 - age / mark_fade_time, 0.0, 1.0)
-	var alpha_color = Color(color.r, color.g, color.b, fade)
-	var white_fill = Color(1, 1, 1, fade)
+	var alpha_color = Color(base_color.r, base_color.g, base_color.b, fade)
 
 	var x = mark.x
 	var y = bar_height / 2
-	var s = shape_size  # configurable shape size
+	var s = shape_size
+
+	# ---------------- PLAYSTATION SYMBOLS (unchanged) ----------------
+	if is_ps:
+		match mark.input_type:
+			"pata": # Square
+				draw_rect(Rect2(x - s/2, y - s/2, s, s), Color(1, 1, 1, fade))
+				draw_rect(Rect2(x - s/2, y - s/2, s, s), alpha_color, false, outline_thickness)
+
+			"pon": # Circle
+				draw_circle(Vector2(x, y), s/2, Color(1, 1, 1, fade))
+				draw_circle(Vector2(x, y), s/2, alpha_color, false, outline_thickness)
+
+			"don": # Cross
+				var o = s / 2
+				draw_line(Vector2(x - o, y - o), Vector2(x + o, y + o), alpha_color, outline_thickness)
+				draw_line(Vector2(x - o, y + o), Vector2(x + o, y - o), alpha_color, outline_thickness)
+
+			"chaka": # Triangle
+				var pts = [
+					Vector2(x, y - s/2),
+					Vector2(x - s/2, y + s/2),
+					Vector2(x + s/2, y + s/2)
+				]
+				draw_colored_polygon(pts, Color(1, 1, 1, fade))
+				draw_polyline(pts + [pts[0]], alpha_color, outline_thickness)
+
+			_:
+				draw_circle(Vector2(x, y), 3, alpha_color)
+		return
+
+	# ---------------- XBOX SYMBOLS (TEXT ONLY, configurable colors) ----------------
+	var font: Font = get_theme_default_font()
+	var font_size: int = int(round(s * 2.0))
+	var pos := Vector2(x - font_size * 0.35, y + font_size * 0.35)
 
 	match mark.input_type:
-		"pata":
-			# square
-			draw_rect(Rect2(x - s/2, y - s/2, s, s), white_fill)
-			draw_rect(Rect2(x - s/2, y - s/2, s, s), alpha_color, false, outline_thickness)
+		"pata": # X button (uses xbox_color_x)
+			var col = xbox_color_x
+			col.a = fade
+			draw_string(font, pos, "X", HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, col)
 
-		"pon":
-			# circle
-			draw_circle(Vector2(x, y), s/2, white_fill)
-			draw_circle(Vector2(x, y), s/2, alpha_color, false, outline_thickness)
+		"pon": # B button (uses xbox_color_b)
+			var col = xbox_color_b
+			col.a = fade
+			draw_string(font, pos, "B", HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, col)
 
-		"don":
-		# X shape (thickened)
-			var offset = s / 2
-			var p1 = Vector2(x - offset, y - offset)
-			var p2 = Vector2(x + offset, y + offset)
-			var p3 = Vector2(x - offset, y + offset)
-			var p4 = Vector2(x + offset, y - offset)
+		"don": # A button (uses xbox_color_a)
+			var col = xbox_color_a
+			col.a = fade
+			draw_string(font, pos, "A", HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, col)
 
-			# white fill layer
-			draw_line(p1, p2, white_fill, outline_thickness)
-			draw_line(p3, p4, white_fill, outline_thickness)
-
-			# colored outline layer (slightly thicker for glow-like effect)
-			draw_line(p1, p2, alpha_color, outline_thickness + 1)
-			draw_line(p3, p4, alpha_color, outline_thickness + 1)
-
-		"chaka":
-			# triangle
-			var points = [
-				Vector2(x, y - s/2),
-				Vector2(x - s/2, y + s/2),
-				Vector2(x + s/2, y + s/2)
-			]
-			draw_colored_polygon(points, white_fill)
-			draw_polyline(points + [points[0]], alpha_color, outline_thickness)
+		"chaka": # Y button (uses xbox_color_y)
+			var col = xbox_color_y
+			col.a = fade
+			draw_string(font, pos, "Y", HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, col)
 
 		_:
-			draw_circle(Vector2(x, y), 3, alpha_color)
+			draw_string(font, pos, "?", HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, alpha_color)
